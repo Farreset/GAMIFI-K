@@ -22,7 +22,7 @@ import { APP_BASE_HREF } from '@angular/common';
     LoginComponent,
     ProfileProfeComponent,
     ProfileAlumnoComponent
-  ],
+    ],
   imports: [
   BrowserModule,
   ReactiveFormsModule,
@@ -30,6 +30,6 @@ import { APP_BASE_HREF } from '@angular/common';
   Routing
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
