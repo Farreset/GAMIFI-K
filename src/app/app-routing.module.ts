@@ -9,7 +9,7 @@ import { ProfileProfeComponent } from './components/profile-profe/profile-profe.
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent, pathMatch: 'full'},
-    { path: 'home', component: HomeComponent, pathMatch: 'full'},
+    { path: '', component: HomeComponent, pathMatch: 'full'},
     { path: 'ralumno', component: RegisterAlumnoComponent, pathMatch: 'full'},
     { path: 'rprofe', component: RegisterProfeComponent, pathMatch: 'full'},
     { path: 'palumno', component: ProfileAlumnoComponent, pathMatch: 'full'},
