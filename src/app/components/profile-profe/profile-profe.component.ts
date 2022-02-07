@@ -12,13 +12,14 @@ export class ProfileProfeComponent implements OnInit {
   router: Router; 
   route: ActivatedRoute;
   profe:Profe = {
-    id: 0,
+    id_profesor: 0,
     nick: '',
     fname: "",
     lname: "",
     mail: "",
     centro: "",
-    pssw: ""
+    pssw: "",
+    psswConf: "",
     
   } 
    
@@ -31,17 +32,19 @@ export class ProfileProfeComponent implements OnInit {
 
   ngOnInit(): void {
     this.profe = {
-            id: Number(this.route.snapshot.paramMap.get('id')),
+            id_profesor: Number(this.route.snapshot.paramMap.get('id')),
             fname: String(this.route.snapshot.paramMap.get('fname')),
             lname: String(this.route.snapshot.paramMap.get('lname')),
             nick: String(this.route.snapshot.paramMap.get('nick')),
             mail: String(this.route.snapshot.paramMap.get('mail')),
             centro: String(this.route.snapshot.paramMap.get('centro')),
-            pssw: String(this.route.snapshot.paramMap.get('pssw'))
+            pssw: String(this.route.snapshot.paramMap.get('pssw')),
+            psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
+
           } 
       }
       volver(){
         
-        this.router.navigate(['home']);
+        this.router.navigate(['']);
       }
     }

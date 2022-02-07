@@ -5,9 +5,11 @@ import { RegisterAlumnoComponent } from './components/register-alumno/register-a
 import { RegisterProfeComponent } from './components/register-profe/register-profe.component';
 import { ProfileAlumnoComponent } from './components/profile-alumno/profile-alumno.component';
 import { ProfileProfeComponent } from './components/profile-profe/profile-profe.component';
+import { RankingsComponent } from './components/rankings/rankings.component';
 
 
 const routes: Routes = [
+  { path: 'ranking', component: RankingsComponent, pathMatch: 'full'},
     { path: 'login', component: LoginComponent, pathMatch: 'full'},
     { path: '', component: HomeComponent, pathMatch: 'full'},
     { path: 'ralumno', component: RegisterAlumnoComponent, pathMatch: 'full'},

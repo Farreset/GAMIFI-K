@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Alumno } from 'src/app/interfaces/interfaz';
+import { Alumno,Profe } from 'src/app/interfaces/interfaz';
 import { ServiceService } from 'src/app/server/service.service';
 @Component({
   selector: 'app-login',
@@ -15,14 +15,25 @@ export class LoginComponent implements OnInit {
   alumno!:FormGroup;
   ServiceService: any;
   alumnos:Alumno = {
-    id: 0,
+    id_alumno: 0,
     nick: "",
     fname:"" ,
     lname:"" ,
     year:"" ,
     mail:"" ,
-    pssw:""  
+    pssw:"", 
+    psswConf:"", 
   } 
+  profes:Profe = {
+    id_profesor: 0,
+    nick: "",
+    fname:"" ,
+    lname:"" ,
+    centro:"" ,
+    mail:"" ,
+    pssw:"", 
+    psswConf:"", 
+  }  
   constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute, ServiceService: ServiceService){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
@@ -33,7 +44,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() : void {
     this.alumno =  this.formBuilder.group({
       mail: ['', [Validators.required, Validators.email]],
-      pssw: ['', [Validators.required]],
+      pssw: ['', [Validators.required,Validators.minLength(8)]],
     });
     console.log(this.ServiceService)
   }
@@ -42,26 +53,16 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {   
 
-    if(this.alumnos.fname.trim().length === 0){
-      return;
-    }
-    if(this.alumnos.lname.trim().length === 0){
-      return;
-    }
-    if(this.alumnos.year.trim().length === 0){
-      return;
-    }
+
     if(this.alumnos.mail.trim().length === 0){
       return;
     }
-    if(this.alumnos.nick.trim().length === 0){
-      return;
-    }
+  
     if(this.alumnos.pssw.trim().length === 0){
       return;
     }
  
-     this.router.navigate(['home', this.alumnos]);
+     this.router.navigate(['palumno', this.alumnos]);
   }
 
   volver(){
@@ -70,7 +71,5 @@ export class LoginComponent implements OnInit {
   register(){
     this.router.navigate(['rprofe']);
   }
-  pprofe(){
-    this.router.navigate(['pprofe']);
-  }
+ 
 }

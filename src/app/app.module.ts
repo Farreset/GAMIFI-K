@@ -12,6 +12,8 @@ import { ProfileProfeComponent } from './components/profile-profe/profile-profe.
 import { LoginComponent } from './components/login/login.component';
 
 import { APP_BASE_HREF } from '@angular/common';
+import { RankingsComponent } from './components/rankings/rankings.component';
+import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { APP_BASE_HREF } from '@angular/common';
     RegisterProfeComponent,
     LoginComponent,
     ProfileProfeComponent,
-    ProfileAlumnoComponent
+    ProfileAlumnoComponent,
+    RankingsComponent,
+    RankingAdminComponent
     ],
   imports: [
   BrowserModule,

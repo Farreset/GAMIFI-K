@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { Profe } from 'src/app/interfaces/interfaz';
 import { ServiceService } from 'src/app/server/service.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { PasswordValidator } from 'src/app/validator/password.validator';
 
 @Component({
   selector: 'app-register-profe',
@@ -12,16 +14,20 @@ import { Router } from '@angular/router';
 export class RegisterProfeComponent implements OnInit {
   profesArray = [];
   profe!:FormGroup;
+  submitted = false;
   ServiceService: any;
+  isValidFormSubmitted = false;
   profes:Profe = {
-    id: 0,
+    id_profesor: 0,
     nick: "",
     fname:"" ,
     lname:"" ,
     centro:"" ,
     mail:"" ,
-    pssw:""  
+    pssw:"" ,
+    psswConf: ""
   } 
+
   constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
@@ -29,41 +35,26 @@ export class RegisterProfeComponent implements OnInit {
   };
   ngOnInit(): void {
     this.profe =  this.formBuilder.group( {
-      nick:['', [Validators.required, Validators.minLength(2)]],
-      fname:['', [Validators.required, Validators.minLength(2)]],
-      lname:['', [Validators.required, Validators.minLength(2)]],
-      centro:['', [Validators.required, Validators.minLength(2)]],
-      mail:['', [Validators.required, Validators.minLength(2)]],
-      pssw:['', [Validators.required, Validators.minLength(2)]],
+      nick:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
+      fname:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z]+$')]],
+      lname:['', [Validators.required,Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z]+$') ]],
+      centro:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
+      mail:['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
+      pssw:['', [Validators.required, Validators.minLength(8)]],
+      psswConf:['', [Validators.required, Validators.minLength(8)]]
+    }, {
+      validator: PasswordValidator('pssw', 'psswConf')
     });
-    console.log(this.ServiceService)
-  }
 
+  }
+  
   get data() { return this.profe.controls; }
 
   onSubmit() {   
+    this.router.navigate(['pprofe', this.profes]);
+}
 
-    if(this.profes.fname.trim().length === 0){
-      return;
-    }
-    if(this.profes.lname.trim().length === 0){
-      return;
-    }
-    if(this.profes.centro.trim().length === 0){
-      return;
-    }
-    if(this.profes.mail.trim().length === 0){
-      return;
-    }
-    if(this.profes.nick.trim().length === 0){
-      return;
-    }
-    if(this.profes.pssw.trim().length === 0){
-      return;
-    }
- 
-     this.router.navigate(['login', this.profes]);
-  }
+  
   volver(){
     
     this.router.navigate(['']);
@@ -73,3 +64,5 @@ export class RegisterProfeComponent implements OnInit {
     this.router.navigate(['login']);
   }
 }
+
+

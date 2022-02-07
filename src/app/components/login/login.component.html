@@ -46,7 +46,7 @@
                 </div>
              </form>
     
-                <button (click)="pprofe()" class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar Sesion</button>
+                <button (click)="onSubmit()" [disabled]="!alumno.valid" class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar Sesion</button>
                 
 
               </div>

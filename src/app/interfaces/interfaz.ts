@@ -1,22 +1,24 @@
 export interface Profe {
-    id :number;
+    id_profesor :number;
     nick :string;
     fname :string;
     lname :string;
     mail :string;
     centro :string;
     pssw :string;
-    
+    psswConf :string;
     }
 
 export interface Alumno {
-    id :number;
+    id_alumno :number;
     nick :string;
     fname :string;
     lname :string;
     year :string;
     mail :string;
     pssw :string;
+    psswConf :string;
+   
     
     }
   

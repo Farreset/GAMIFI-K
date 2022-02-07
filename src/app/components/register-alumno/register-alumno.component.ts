@@ -11,30 +11,32 @@ import { Router } from '@angular/router';
 })
 export class RegisterAlumnoComponent implements OnInit {
   alumnosArray = [];
-  alumno:FormGroup;
+  alumno!:FormGroup;
   ServiceService: any;
   alumnos:Alumno = {
-    id: 0,
+    id_alumno: 0,
     nick: "",
-    fname:"" ,
-    lname:"" ,
-    year:"" ,
-    mail:"" ,
-    pssw:""  
+    fname: "",
+    lname: "",
+    year: "",
+    mail: "",
+    pssw: "",
+    psswConf: ""
   } 
   constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
-    this.alumno = new FormGroup({
-      nick: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      fname: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      lname: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      year: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      mail: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      pssw: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    });
+  
   };
-  ngOnInit() {
+   ngOnInit(): void {
+      this.alumno =  this.formBuilder.group( {
+        nick:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
+        fname:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z]+$')]],
+        lname:['', [Validators.required,Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z]+$') ]],
+        year:['', [Validators.required ]],
+        mail:['', [Validators.required, Validators.email]],
+        pssw:['', [Validators.required, Validators.minLength(8)]],
+      });
     console.log(this.ServiceService)
   }
 
@@ -66,5 +68,9 @@ export class RegisterAlumnoComponent implements OnInit {
   volver(){
     
     this.router.navigate(['home']);
+  }
+  login(){
+
+    this.router.navigate(['login']);
   }
 }
