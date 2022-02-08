@@ -22,14 +22,8 @@ import { APP_BASE_HREF } from '@angular/common';
     RegisterProfeComponent,
     LoginComponent,
     ProfileProfeComponent,
-<<<<<<< Updated upstream
     ProfileAlumnoComponent
   ],
-=======
-    ProfileAlumnoComponent,
-    // RegistrarProfesorServiceComponent
-    ],
->>>>>>> Stashed changes
   imports: [
   BrowserModule,
   ReactiveFormsModule,

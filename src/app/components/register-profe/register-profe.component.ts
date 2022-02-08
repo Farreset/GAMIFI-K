@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< Updated upstream
-=======
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Profe } from 'src/app/interfaces/interfaz';
 import { ServiceService } from 'src/app/server/service.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
->>>>>>> Stashed changes
+import { RegistrarProfesorService } from 'src/app/server/registrar-profesor.service';
 
 @Component({
   selector: 'app-register-profe',
@@ -15,12 +12,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./register-profe.component.css']
 })
 export class RegisterProfeComponent implements OnInit {
-<<<<<<< Updated upstream
-
-  constructor() { }
-
-  ngOnInit(): void {
-=======
   profesArray = [];
   profe!:FormGroup;
   ServiceService: any;
@@ -34,7 +25,8 @@ export class RegisterProfeComponent implements OnInit {
     pssw:""
   }
 
-  profesores = null;
+  //No se si esta variable tiene que ser asi
+  profesores: Object | undefined;
 
   constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private registrarProfesorService: RegistrarProfesorService, private http: HttpClient){
     this.formBuilder = formBuilder;
@@ -60,7 +52,7 @@ export class RegisterProfeComponent implements OnInit {
   registrarProfesor(){
     // this.administrarRankingService.listarRankings.()subscribe(  );
     this.registrarProfesorService.registrarProfesor().subscribe(
-      (datos: null) => this.profesores = datos
+      datos  => this.profesores = datos
     );
 
   }
@@ -94,12 +86,6 @@ export class RegisterProfeComponent implements OnInit {
   volver(){
 
     this.router.navigate(['']);
->>>>>>> Stashed changes
   }
 
-<<<<<<< Updated upstream
-=======
-    this.router.navigate(['login']);
-  }
->>>>>>> Stashed changes
 }

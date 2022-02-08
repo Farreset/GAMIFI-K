@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrarProfesorServiceService {
+export class RegistrarProfesorService {
 
   URL = 'http://localhost/';
 
@@ -13,6 +13,10 @@ export class RegistrarProfesorServiceService {
   registrarProfesor(){
 
     return this.http.get('${this.URL}registrarProfesor.php');
+
   }
 
+
+
 }
+
