@@ -12,6 +12,7 @@ import { ProfileProfeComponent } from './components/profile-profe/profile-profe.
 import { LoginComponent } from './components/login/login.component';
 
 import { APP_BASE_HREF } from '@angular/common';
+// import { RegistrarProfesorServiceComponent } from './server/registrar-profesor-service/registrar-profesor-service.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,14 @@ import { APP_BASE_HREF } from '@angular/common';
     RegisterProfeComponent,
     LoginComponent,
     ProfileProfeComponent,
+<<<<<<< Updated upstream
     ProfileAlumnoComponent
   ],
+=======
+    ProfileAlumnoComponent,
+    // RegistrarProfesorServiceComponent
+    ],
+>>>>>>> Stashed changes
   imports: [
   BrowserModule,
   ReactiveFormsModule,
