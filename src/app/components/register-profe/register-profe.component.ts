@@ -5,6 +5,8 @@ import { ServiceService } from 'src/app/server/service.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { PasswordValidator } from 'src/app/validator/password.validator';
+import { HttpClient } from '@angular/common/http';
+import { RegistrarProfesorService } from 'src/app/server/registrar-profesor.service';
 
 @Component({
   selector: 'app-register-profe',
@@ -26,12 +28,15 @@ export class RegisterProfeComponent implements OnInit {
     mail:"" ,
     pssw:"" ,
     psswConf: ""
-  } 
+  }
 
-  constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService){
+  //No se si esta variable tiene que ser asi (@AndresXW5)
+  profesores: Object | undefined;
+
+  constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private registrarProfesorService: RegistrarProfesorService, private http: HttpClient){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
-    
+
   };
   ngOnInit(): void {
     this.profe =  this.formBuilder.group( {
@@ -46,17 +51,27 @@ export class RegisterProfeComponent implements OnInit {
       validator: PasswordValidator('pssw', 'psswConf')
     });
 
+    //Se llama a la funcion registrarProfesor
+    this.registrarProfesor();
+
   }
-  
+
+  //Funcion para conectar con el php
+  registrarProfesor(){
+    this.registrarProfesorService.registrarProfesor().subscribe(
+      datos  => this.profesores = datos
+    );
+
+  }
   get data() { return this.profe.controls; }
 
-  onSubmit() {   
+  onSubmit() {
     this.router.navigate(['pprofe', this.profes]);
 }
 
-  
+
   volver(){
-    
+
     this.router.navigate(['']);
   }
   login(){
