@@ -66,7 +66,7 @@ export class RegisterProfeComponent implements OnInit {
   get data() { return this.profe.controls; }
 
   onSubmit() {
-    this.router.navigate(['pprofe', this.profes]);
+    this.router.navigate(['login', this.profes]);
 }
 
 
