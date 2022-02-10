@@ -25,7 +25,7 @@ import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.
     ProfileProfeComponent,
     ProfileAlumnoComponent,
     RankingsComponent,
-    RankingAdminComponent
+    RankingAdminComponent,
     ],
   imports: [
   BrowserModule,
