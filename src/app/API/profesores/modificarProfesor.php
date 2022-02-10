@@ -9,7 +9,9 @@
   $conexion = conexion(); // CREA LA CONEXION
 
   // REALIZA LA QUERY A LA DB
-  mysqli_query($conexion, "UPDATE a_rankings SET nombre_ranking = 'R_$_GET[nuevoNombre]' WHERE nombre_ranking ='$_GET[nombreRanking]';");
+  mysqli_query($conexion, "UPDATE profesores SET nick = 'R_$_GET[nick]', fname = 'R_$_GET[fname]', lname = 'R_$_GET[lname]', mail = 'R_$_GET[mail]', centro = 'R_$_GET[centro]', 
+  pssw = 'R_$_GET[pssw]', psswConf = 'R_$_GET[psswConf]' WHERE id_profesor ='$_GET[id_profesor]';");
+
 
 
 

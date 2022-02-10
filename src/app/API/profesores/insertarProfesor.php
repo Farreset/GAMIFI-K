@@ -13,7 +13,8 @@
 
 
   // REALIZA LA QUERY A LA DB
- $registros = mysqli_query($conexion, "INSERT INTO `profesores` (`id_profesor`, `nick`, `fname`, `lname`, `mail`, `centro`, `pssw`, `psswConf`) VALUES (NULL, '$_GET[id_profesor]', '$_GET[nick]', '$_GET[fname]', '$_GET[lname]', '$_GET[mail]', '$_GET[centro]', '$_GET[pssw]', '$_GET[psswConf]');");
+ $registros = mysqli_query($conexion, "INSERT INTO `profesores` (`id_profesor`, `nick`, `fname`, `lname`, `mail`, `centro`, `pssw`, `psswConf`)  
+ VALUES (NULL, '$_GET[id_profesor]', '$_GET[nick]', '$_GET[fname]', '$_GET[lname]', '$_GET[mail]', '$_GET[centro]', '$_GET[pssw]', '$_GET[psswConf]');");
 
 
   class Result {}
