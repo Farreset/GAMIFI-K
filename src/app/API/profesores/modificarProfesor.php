@@ -9,8 +9,8 @@
   $conexion = conexion(); // CREA LA CONEXION
 
   // REALIZA LA QUERY A LA DB
-  mysqli_query($conexion, "UPDATE profesores SET nick = 'R_$_GET[nick]', fname = 'R_$_GET[fname]', lname = 'R_$_GET[lname]', mail = 'R_$_GET[mail]', centro = 'R_$_GET[centro]', 
-  pssw = 'R_$_GET[pssw]', psswConf = 'R_$_GET[psswConf]' WHERE id_profesor ='$_GET[id_profesor]';");
+  mysqli_query($conexion, "UPDATE profesores SET nick = '$_GET[nick]', fname = '$_GET[fname]', lname = '$_GET[lname]', mail = '$_GET[mail]', centro = '$_GET[centro]', 
+  pssw = '$_GET[pssw]', psswConf = '$_GET[psswConf]' WHERE id_profesor ='$_GET[id_profesor]';");
 
 
 
@@ -21,7 +21,7 @@
   // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
   $response->resultado = 'OK';
-  $response->mensaje = 'EL USUARIO SE MODIFICO EXITOSAMENTE';
+  $response->mensaje = 'EL PROFESOR SE MODIFICO EXITOSAMENTE';
 
   header('Content-Type: application/json');
 

@@ -13,7 +13,7 @@
 
 
   // REALIZA LA QUERY A LA DB
- $registros = mysqli_query($conexion, "INSERT INTO `a_rankings` (`nombre_ranking`, `estilo`, `equipos`, `num_bonus`) VALUES ('R_$_GET[nombreRanking]', 'Clasico', 0, 6);");
+ $registros = mysqli_query($conexion, "INSERT INTO `ranking` (`id_r`, `name_r`, `cont_r`) VALUES (NULL, '$_GET[name_r]', '$_GET[cont_r]');");
 
 
   class Result {}
@@ -21,7 +21,7 @@
   // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
   $response->resultado = 'OK';
-  $response->mensaje = 'EL USUARIO SE ELIMINO EXITOSAMENTE';
+  $response->mensaje = 'EL RANKING SE ELIMINO EXITOSAMENTE';
 
   header('Content-Type: application/json');
 

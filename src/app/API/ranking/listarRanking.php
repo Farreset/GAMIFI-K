@@ -13,7 +13,7 @@
 
 
   // REALIZA LA QUERY A LA DB
-  $registros = mysqli_query($conexion, "SELECT * FROM a_rankings");
+  $registros = mysqli_query($conexion, "SELECT * FROM ranking");
 
 
   // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY

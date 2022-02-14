@@ -16,7 +16,7 @@
   // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
   $response->resultado = 'OK';
-  $response->mensaje = 'EL USUARIO SE ELIMINO EXITOSAMENTE';
+  $response->mensaje = 'EL ALUMNO SE ELIMINO EXITOSAMENTE';
 
   header('Content-Type: application/json');
 

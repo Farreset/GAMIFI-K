@@ -14,7 +14,7 @@ export interface Alumno {
     nick :string;
     fname :string;
     lname :string;
-    year :string;
+    fecha :string;
     mail :string;
     pssw :string;
     psswConf :string;

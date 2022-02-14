@@ -22,7 +22,7 @@
   // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
   $response->resultado = 'OK';
-  $response->mensaje = 'EL PORFESOR SE AÑADIO EXITOSAMENTE';
+  $response->mensaje = 'EL PROFESOR SE AÑADIO EXITOSAMENTE';
 
   header('Content-Type: application/json');
 

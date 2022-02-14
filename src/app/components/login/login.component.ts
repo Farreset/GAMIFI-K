@@ -11,15 +11,15 @@ import { ServiceService } from 'src/app/server/service.service';
 export class LoginComponent implements OnInit {
    
   route: ActivatedRoute;
-  alumnosArray = [];
-  alumno!:FormGroup;
+  profeArray = [];
+  profe!:FormGroup;
   ServiceService: any;
   alumnos:Alumno = {
     id_alumno: 0,
     nick: "",
     fname:"" ,
     lname:"" ,
-    year:"" ,
+    fecha:"" ,
     mail:"" ,
     pssw:"", 
     psswConf:"", 
@@ -42,27 +42,27 @@ export class LoginComponent implements OnInit {
   };
   
   ngOnInit() : void {
-    this.alumno =  this.formBuilder.group({
+    this.profe =  this.formBuilder.group({
       mail: ['', [Validators.required, Validators.email]],
       pssw: ['', [Validators.required,Validators.minLength(8)]],
     });
     console.log(this.ServiceService)
   }
 
-  get data() { return this.alumno.controls; }
+  get data() { return this.profe.controls; }
 
   onSubmit() {   
 
 
-    if(this.alumnos.mail.trim().length === 0){
-      return;
-    }
+    // if(this.profe.mail.trim().length === 0){
+    //   return;
+    // }
   
-    if(this.alumnos.pssw.trim().length === 0){
-      return;
-    }
+    // if(this.profe.pssw.trim().length === 0){
+    //   return;
+    // }
  
-     this.router.navigate(['palumno', this.alumnos]);
+     this.router.navigate(['pprofe', this.profes]);
   }
 
   volver(){
