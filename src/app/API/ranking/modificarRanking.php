@@ -9,7 +9,7 @@
   $conexion = conexion(); // CREA LA CONEXION
 
   // REALIZA LA QUERY A LA DB
-  mysqli_query($conexion, "UPDATE a_rankings SET nombre_ranking = 'R_$_GET[nuevoNombre]' WHERE nombre_ranking ='$_GET[nombreRanking]';");
+  mysqli_query($conexion, "UPDATE ranking SET name_r = '$_GET[name_r]' WHERE id_r ='$_GET[id_r]';");
 
 
 
@@ -19,7 +19,7 @@
   // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
   $response->resultado = 'OK';
-  $response->mensaje = 'EL USUARIO SE MODIFICO EXITOSAMENTE';
+  $response->mensaje = 'EL RANKING SE MODIFICO EXITOSAMENTE';
 
   header('Content-Type: application/json');
 

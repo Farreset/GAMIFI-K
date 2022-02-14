@@ -13,15 +13,15 @@
 
 
   // REALIZA LA QUERY A LA DB
- $registros = mysqli_query($conexion, " INSERT INTO `alumnos` (`id_alumno`, `nick`, `fname`, `lname`, `mail`, `year`, `pssw`, `psswConf`)  
- VALUES (NULL, '$_GET[id_alumno]', '$_GET[nick]', '$_GET[fname]', '$_GET[lname]', '$_GET[mail]', '$_GET[year]', '$_GET[pssw]', '$_GET[psswConf]');");
+ $registros = mysqli_query($conexion, " INSERT INTO `alumnos` (`id_alumno`, `nick`, `fname`, `lname`, `mail`, `fecha`, `pssw`, `psswConf`)  
+ VALUES (NULL, '$_GET[id_alumno]', '$_GET[nick]', '$_GET[fname]', '$_GET[lname]', '$_GET[mail]', '$_GET[fecha]', '$_GET[pssw]', '$_GET[psswConf]');");
 
   class Result {}
 
   // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
   $response->resultado = 'OK';
-  $response->mensaje = 'EL USUARIO SE ELIMINO EXITOSAMENTE';
+  $response->mensaje = 'EL ALUMNO SE ELIMINO EXITOSAMENTE';
 
   header('Content-Type: application/json');
 
