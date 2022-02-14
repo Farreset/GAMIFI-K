@@ -12,7 +12,13 @@ import { ProfileProfeComponent } from './components/profile-profe/profile-profe.
 import { LoginComponent } from './components/login/login.component';
 
 import { APP_BASE_HREF } from '@angular/common';
+<<<<<<< Updated upstream
 // import { RegistrarProfesorServiceComponent } from './server/registrar-profesor-service/registrar-profesor-service.component';
+=======
+import { RankingsComponent } from './components/rankings/rankings.component';
+import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -28,9 +34,15 @@ import { APP_BASE_HREF } from '@angular/common';
   BrowserModule,
   ReactiveFormsModule,
   FormsModule,
-  Routing
+  Routing,
+  HttpClientModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
+<<<<<<< Updated upstream
   bootstrap: [AppComponent]
+=======
+  bootstrap: [AppComponent],
+
+>>>>>>> Stashed changes
 })
 export class AppModule { }
