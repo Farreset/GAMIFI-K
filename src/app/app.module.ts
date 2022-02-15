@@ -14,7 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { RankingsComponent } from './components/rankings/rankings.component';
 import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ProfileProfeComponent,
     ProfileAlumnoComponent,
     RankingsComponent,
-    RankingAdminComponent,
+    RankingAdminComponent
     ],
   imports: [
   BrowserModule,

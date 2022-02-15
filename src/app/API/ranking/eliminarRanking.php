@@ -8,7 +8,7 @@
   $conexion = conexion(); // CREA LA CONEXION
 
   // REALIZA LA QUERY A LA DB
-  mysqli_query($conexion, "DELETE FROM ranking WHERE id_r='$_GET[id_r]'");
+  mysqli_query($conexion, "DELETE FROM a_rankings WHERE nombre_ranking='$_GET[nombreRanking]'");
 
 
   class Result {}
@@ -16,7 +16,7 @@
   // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
   $response->resultado = 'OK';
-  $response->mensaje = 'EL RANKING SE ELIMINO EXITOSAMENTE';
+  $response->mensaje = 'EL USUARIO SE ELIMINO EXITOSAMENTE';
 
   header('Content-Type: application/json');
 

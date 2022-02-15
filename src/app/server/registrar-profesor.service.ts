@@ -12,7 +12,7 @@ export class RegistrarProfesorService {
 
   registrarProfesor(){
 
-    return this.http.get('${this.URL}insertarProfesor.php');
+    return this.http.get(`${this.URL}insertarProfesor.php`);
 
   }
 
