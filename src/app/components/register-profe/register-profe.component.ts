@@ -16,6 +16,7 @@ export class RegisterProfeComponent implements OnInit {
   profe!:FormGroup;
   ServiceService: any;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   profes:Profe = {
     id: 0,
     nick: "",
@@ -32,12 +33,36 @@ export class RegisterProfeComponent implements OnInit {
 
   //No se si esta variable tiene que ser asi
   profesores: Object | undefined;
+=======
+  isValidFormSubmitted = false;
+  // profes:Profe = {
+  //   id_profesor: 0,
+  //   nick: "",
+  //   fname:"" ,
+  //   lname:"" ,
+  //   centro:"" ,
+  //   mail:"" ,
+  //   pssw:"" ,
+  //   psswConf: ""
+  // }
 
-  constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private registrarProfesorService: RegistrarProfesorService, private http: HttpClient){
+  //No se si esta variable tiene que ser asi (@AndresXW5)
+  profes: any;
+
+  //vvvvvvvvvvvvvvvv
+  art={
+    codigo:0,
+    descripcion:"",
+    precio:0
+  }
+>>>>>>> Stashed changes
+
+  constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private registrarProfesorService: RegistrarProfesorService){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
 
   };
+
   ngOnInit(): void {
     this.profe =  this.formBuilder.group( {
       nick:['', [Validators.required, Validators.minLength(2)]],
@@ -50,19 +75,40 @@ export class RegisterProfeComponent implements OnInit {
     console.log(this.ServiceService)
 
     //Se llama a la funcion registrarProfesor
-    this.registrarProfesor();
-
+    // this.registrarProfesor();
+    this.recuperarTodos();
   }
 
+<<<<<<< Updated upstream
   registrarProfesor(){
     // this.administrarRankingService.listarRankings.()subscribe(  );
     this.registrarProfesorService.registrarProfesor().subscribe(
       datos  => this.profesores = datos
     );
+=======
+  //Funcion para conectar con el php
+  // registrarProfesor(){
+  //   this.registrarProfesorService.registrarProfesor().subscribe( (result:any) => this.profes = result );
+  // }
+>>>>>>> Stashed changes
 
+  recuperarTodos() {
+    this.registrarProfesorService.recuperarTodos().subscribe((result:any) => this.profes = result);
   }
 
 
+<<<<<<< Updated upstream
+=======
+  RegistrarProfesor(){
+    this.registrarProfesorService.registrarProfesor(this.art).subscribe((datos:any)=> {
+      if (datos['resultado']=='OK') {
+        alert(datos['mensaje']);
+        this.recuperarTodos();
+      }
+    });
+  }
+
+>>>>>>> Stashed changes
   get data() { return this.profe.controls; }
 
   onSubmit() {
