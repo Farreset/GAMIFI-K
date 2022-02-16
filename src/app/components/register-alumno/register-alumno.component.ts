@@ -18,7 +18,7 @@ export class RegisterAlumnoComponent implements OnInit {
     nick: "",
     fname: "",
     lname: "",
-    fecha: "",
+    year: "",
     mail: "",
     pssw: "",
     psswConf: ""
@@ -33,7 +33,7 @@ export class RegisterAlumnoComponent implements OnInit {
         nick:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
         fname:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z]+$')]],
         lname:['', [Validators.required,Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z]+$') ]],
-        fecha:['', [Validators.required ]],
+        year:['', [Validators.required ]],
         mail:['', [Validators.required, Validators.email]],
         pssw:['', [Validators.required, Validators.minLength(8)]],
       });
@@ -50,7 +50,7 @@ export class RegisterAlumnoComponent implements OnInit {
     if(this.alumnos.lname.trim().length === 0){
       return;
     }
-    if(this.alumnos.fecha.trim().length === 0){
+    if(this.alumnos.year.trim().length === 0){
       return;
     }
     if(this.alumnos.mail.trim().length === 0){

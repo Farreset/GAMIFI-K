@@ -11,19 +11,22 @@ import { ServiceService } from 'src/app/server/service.service';
 export class LoginComponent implements OnInit {
    
   route: ActivatedRoute;
-  profeArray = [];
-  profe!:FormGroup;
+  alumnosArray = [];
+  alumno!:FormGroup;
   ServiceService: any;
   alumnos:Alumno = {
     id_alumno: 0,
     nick: "",
     fname:"" ,
     lname:"" ,
-    fecha:"" ,
+    year:"" ,
     mail:"" ,
     pssw:"", 
     psswConf:"", 
   } 
+  profesArray = [];
+  profe!:FormGroup;
+
   profes:Profe = {
     id_profesor: 0,
     nick: "",
@@ -42,7 +45,7 @@ export class LoginComponent implements OnInit {
   };
   
   ngOnInit() : void {
-    this.profe =  this.formBuilder.group({
+    this.alumno =  this.formBuilder.group({
       mail: ['', [Validators.required, Validators.email]],
       pssw: ['', [Validators.required,Validators.minLength(8)]],
     });
@@ -55,6 +58,7 @@ export class LoginComponent implements OnInit {
 
   }
   get data() { return this.profe.controls; }
+  get data1() { return this.alumno.controls; }
 
   onSubmit() {   
 

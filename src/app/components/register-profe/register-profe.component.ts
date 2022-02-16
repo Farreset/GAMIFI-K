@@ -19,6 +19,7 @@ export class RegisterProfeComponent implements OnInit {
   submitted = false;
   ServiceService: any;
   isValidFormSubmitted = false;
+
   profes:Profe = {
     id_profesor: 0,
     nick: "",
@@ -29,9 +30,8 @@ export class RegisterProfeComponent implements OnInit {
     pssw:"" ,
     psswConf: ""
   }
+  profesores: any;
 
-  //No se si esta variable tiene que ser asi (@AndresXW5)
-  profesores: Object | undefined;
 
   constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private registrarProfesorService: RegistrarProfesorService, private http: HttpClient){
     this.formBuilder = formBuilder;
@@ -68,8 +68,6 @@ export class RegisterProfeComponent implements OnInit {
 
   }
   get data() { return this.profe.controls; }
-
- 
 
 
   volver(){

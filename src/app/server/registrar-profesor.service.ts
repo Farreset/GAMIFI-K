@@ -13,9 +13,9 @@ export class RegistrarProfesorService {
   constructor(private http: HttpClient) { }
 
 
-  listarProfesor() {
 
-    return this.http.get(`${this.URL}listarProfesor.php`);
+  listarProfesor() {
+    // return this.http.post(`${this.URL}profesores/listarProfesor.php`);
   }
   
   

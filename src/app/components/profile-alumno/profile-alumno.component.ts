@@ -17,7 +17,7 @@ export class ProfileAlumnoComponent implements OnInit {
     fname: "",
     lname: "",
     mail: "",
-    fecha: "",
+    year: "",
     pssw: "",
     psswConf: ""
     
@@ -37,7 +37,7 @@ export class ProfileAlumnoComponent implements OnInit {
             lname: String(this.route.snapshot.paramMap.get('lname')),
             nick: String(this.route.snapshot.paramMap.get('nick')),
             mail: String(this.route.snapshot.paramMap.get('mail')),
-            fecha: String(this.route.snapshot.paramMap.get('fecha')),
+            year: String(this.route.snapshot.paramMap.get('year')),
             pssw: String(this.route.snapshot.paramMap.get('pssw')),
             psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
           } 
