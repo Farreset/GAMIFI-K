@@ -48,28 +48,29 @@ export class LoginComponent implements OnInit {
     });
     console.log(this.ServiceService)
   }
+ loginProfesor(){
+    // this.loginService.listarProfesor(this.profes.mail).subscribe(
+    //   datos  => this.profesores = datos
+    // );
 
+  }
   get data() { return this.profe.controls; }
 
   onSubmit() {   
 
 
-    // if(this.profe.mail.trim().length === 0){
-    //   return;
-    // }
-  
-    // if(this.profe.pssw.trim().length === 0){
-    //   return;
-    // }
- 
-     this.router.navigate(['pprofe', this.profes]);
+   
+     this.router.navigate(['pprofe']);
   }
 
   volver(){
     this.router.navigate(['']);
   }
-  register(){
+  registerProfe(){
     this.router.navigate(['rprofe']);
+  }
+  registerAlumno(){
+    this.router.navigate(['ralumno']);
   }
  
 }

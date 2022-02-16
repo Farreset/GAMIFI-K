@@ -52,22 +52,24 @@ export class RegisterProfeComponent implements OnInit {
     });
 
     //Se llama a la funcion registrarProfesor
-    this.registrarProfesor();
+   
 
   }
+   onSubmit() {
+    this.registrarProfesor();
+    this.router.navigate(['login']);
+}
 
   //Funcion para conectar con el php
   registrarProfesor(){
-    this.registrarProfesorService.registrarProfesor().subscribe(
+    this.registrarProfesorService.insertarProfesor(this.profes.id_profesor,this.profes.nick, this.profes.fname, this.profes.lname, this.profes.mail, this.profes.centro, this.profes.pssw, this.profes.psswConf).subscribe(
       datos  => this.profesores = datos
     );
 
   }
   get data() { return this.profe.controls; }
 
-  onSubmit() {
-    this.router.navigate(['login', this.profes]);
-}
+ 
 
 
   volver(){
