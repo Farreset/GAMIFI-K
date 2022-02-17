@@ -44,30 +44,13 @@ export class RegisterAlumnoComponent implements OnInit {
 
   onSubmit() {   
 
-    if(this.alumnos.fname.trim().length === 0){
-      return;
-    }
-    if(this.alumnos.lname.trim().length === 0){
-      return;
-    }
-    if(this.alumnos.year.trim().length === 0){
-      return;
-    }
-    if(this.alumnos.mail.trim().length === 0){
-      return;
-    }
-    if(this.alumnos.nick.trim().length === 0){
-      return;
-    }
-    if(this.alumnos.pssw.trim().length === 0){
-      return;
-    }
+    
  
      this.router.navigate(['login', this.alumnos]);
   }
   volver(){
     
-    this.router.navigate(['home']);
+    this.router.navigate(['']);
   }
   login(){
 

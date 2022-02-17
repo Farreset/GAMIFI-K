@@ -47,4 +47,10 @@ export class ProfileProfeComponent implements OnInit {
         
         this.router.navigate(['']);
       }
+
+      editar(){
+        this.router.navigate(['']);
+      }
+
+
     }
