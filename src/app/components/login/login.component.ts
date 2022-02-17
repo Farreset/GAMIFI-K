@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alumno,Profe } from 'src/app/interfaces/interfaz';
 import { ServiceService } from 'src/app/server/service.service';
+import { ServerProfesorService } from 'src/app/server/server-profesor.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
@@ -11,19 +13,20 @@ import { ServiceService } from 'src/app/server/service.service';
 export class LoginComponent implements OnInit {
    
   route: ActivatedRoute;
-  alumnosArray = [];
-  alumno!:FormGroup;
-  ServiceService: any;
-  alumnos:Alumno = {
-    id_alumno: 0,
-    nick: "",
-    fname:"" ,
-    lname:"" ,
-    year:"" ,
-    mail:"" ,
-    pssw:"", 
-    psswConf:"", 
-  } 
+  // alumnosArray = [];
+  // alumno!:FormGroup;
+  // ServiceService: any;
+  // alumnos:Alumno = {
+  //   id_alumno: 0,
+  //   nick: "",
+  //   fname:"" ,
+  //   lname:"" ,
+  //   year:"" ,
+  //   mail:"" ,
+  //   pssw:"", 
+  //   psswConf:"", 
+  // } 
+
   profesArray = [];
   profe!:FormGroup;
 
@@ -37,7 +40,8 @@ export class LoginComponent implements OnInit {
     pssw:"", 
     psswConf:"", 
   }  
-  constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute, ServiceService: ServiceService){
+  profesores :any;
+  constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute,ServiceService: ServiceService,private serverProfesorService: ServerProfesorService){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
     this.route = route;
@@ -45,28 +49,29 @@ export class LoginComponent implements OnInit {
   };
   
   ngOnInit() : void {
-    this.alumno =  this.formBuilder.group({
+    this.profes =  this.formBuilder.group({
       mail: ['', [Validators.required, Validators.email]],
       pssw: ['', [Validators.required,Validators.minLength(8)]],
     });
-    console.log(this.ServiceService)
+    // console.log(this.ServiceService)
   }
- loginProfesor(){
-    // this.loginService.listarProfesor(this.profes.mail).subscribe(
-    //   datos  => this.profesores = datos
-    // );
 
-  }
   get data() { return this.profe.controls; }
-  get data1() { return this.alumno.controls; }
-
-  onSubmit() {   
+  // get data1() { return this.alumno.controls; }
 
 
-   
-     this.router.navigate(['pprofe']);
+   onSubmit() {
+    this.listarProfesor();
+    this.router.navigate(['pprofe'],this.profesores);
+}
+
+  //Funcion para conectar con el php
+  listarProfesor(){
+    this.serverProfesorService.listarProfesor(this.profes.mail, this.profes.pssw).subscribe(
+      datos  => this.profesores = datos
+    );
+
   }
-
   volver(){
     this.router.navigate(['']);
   }

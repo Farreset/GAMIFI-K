@@ -18,7 +18,7 @@
 
 
   // REALIZA LA QUERY A LA DB
-  $registros = mysqli_query($conexion, "SELECT * FROM profesores WHERE  `mail`=`$profesores->mail` ");
+  $registros = mysqli_query($conexion, "SELECT * FROM profesores WHERE  `mail`=`$profesores->mail`AND  `pssw`=`$profesores->pssw`  ");
 
 
   // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
@@ -28,13 +28,13 @@
     $datos[] = $resultado;
    }
 
-   for ($i=0;$i<sizeof($datos);$i++){
-     if($datos[$i]['equipos']==0){
-      $datos[$i]['equipos']=false;
-     }else{
-      $datos[$i]['equipos']=true;
-     }
-   }
+  //  for ($i=0;$i<sizeof($datos);$i++){
+  //    if($datos[$i]['equipos']==0){
+  //     $datos[$i]['equipos']=false;
+  //    }else{
+  //     $datos[$i]['equipos']=true;
+  //    }
+  //  }
 
 
   $json = json_encode($datos); // GENERA EL JSON CON LOS DATOS OBTENIDOS
