@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { PasswordValidator } from 'src/app/validator/password.validator';
 import { HttpClient } from '@angular/common/http';
-import { RegistrarProfesorService } from 'src/app/server/registrar-profesor.service';
+import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 
 @Component({
   selector: 'app-register-profe',
@@ -33,7 +33,7 @@ export class RegisterProfeComponent implements OnInit {
   profesores: any;
 
 
-  constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private registrarProfesorService: RegistrarProfesorService, private http: HttpClient){
+  constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private serverProfesorService: ServerProfesorService, private http: HttpClient){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
 
@@ -62,7 +62,7 @@ export class RegisterProfeComponent implements OnInit {
 
   //Funcion para conectar con el php
   registrarProfesor(){
-    this.registrarProfesorService.insertarProfesor(this.profes.id_profesor,this.profes.nick, this.profes.fname, this.profes.lname, this.profes.mail, this.profes.centro, this.profes.pssw, this.profes.psswConf).subscribe(
+    this.serverProfesorService.insertarProfesor(this.profes.id_profesor,this.profes.nick, this.profes.fname, this.profes.lname, this.profes.mail, this.profes.centro, this.profes.pssw, this.profes.psswConf).subscribe(
       datos  => this.profesores = datos
     );
 

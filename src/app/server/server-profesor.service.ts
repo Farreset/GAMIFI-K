@@ -6,7 +6,7 @@ import { Profe } from '../interfaces/interfaz';
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrarProfesorService {
+export class ServerProfesorService {
 
   URL = 'http://localhost:8080/';
 
@@ -22,9 +22,19 @@ export class RegistrarProfesorService {
   // eliminarProfesor(nombreProfesor) {
   //   return this.http.get(`${this.URL}eliminarProfesor.php?nombreProfesor=${nombreProfesor}`);
   // }
-  // modificarProfesor(nombreProfesor, nuevoNombre) {
-  //   return this.http.get(`${this.URL}modificarProfesor.php?nombreProfesor=${nombreProfesor}&nuevoNombre=${nuevoNombre}`);
-  // }
+  modificarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any, pssw: any, psswConf: any) {
+    let profes: Profe = {
+      id_profesor: id_profesor,
+      nick: nick,
+      fname: fname,
+      lname: lname,
+      centro: centro,
+      mail: mail,
+      pssw: pssw,
+      psswConf: psswConf
+    }
+    return this.http.post(`${this.URL}profesores/insertarProfesor.php`,JSON.stringify(profes));
+  }
   // insertarProfesor(nombreProfesor) {
   //   return this.http.get(`${this.URL}insertarProfesor.php?nombreProfesor=${nombreProfesor}`);
   // }
