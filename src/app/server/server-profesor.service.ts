@@ -60,9 +60,9 @@ export class ServerProfesorService {
   
   // }
 
-  editarProfesor(){
-    return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
-  }
+  // modificarProfesor(){
+  //   return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
+  // }
 
 
 }
