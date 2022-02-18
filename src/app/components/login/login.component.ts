@@ -11,11 +11,11 @@ import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 
 })
 export class LoginComponent implements OnInit {
-   
+  ServiceService: any;
   route: ActivatedRoute;
   // alumnosArray = [];
   // alumno!:FormGroup;
-  // ServiceService: any;
+
   // alumnos:Alumno = {
   //   id_alumno: 0,
   //   nick: "",
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     psswConf:"", 
   }  
   profesores :any;
-  constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute,ServiceService: ServiceService,private serverProfesorService: ServerProfesorService){
+  constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute, ServiceService: ServiceService,private serverProfesorService: ServerProfesorService){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
     this.route = route;
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   };
   
   ngOnInit() : void {
-    this.profes =  this.formBuilder.group({
+    this.profe =  this.formBuilder.group({
       mail: ['', [Validators.required, Validators.email]],
       pssw: ['', [Validators.required,Validators.minLength(8)]],
     });
