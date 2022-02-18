@@ -4,10 +4,12 @@
     header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Headers: Authorization');
-    header('Content-Type application/json; charset=utf-8');
+
+    header('Content-Type text/html; charset=utf-8');
+    header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
    
-    $json =file_get_contents('php://input');
-    $profesores =json_decode($json);
+    $json = file_get_contents('php://input');
+    $profesores = json_decode($json);
 
   global $datos;
 
@@ -17,16 +19,13 @@
   $conexion = conexion(); // CREA LA CONEXION
 
 
-  // REALIZA LA QUERY A LA DB
-  $registros = mysqli_query($conexion, "SELECT * FROM profesores WHERE  `mail`=`$profesores->mail`AND  `pssw`=`$profesores->pssw`  ");
+  // REALIZA LA QUERY A LA BD
+  $registros = mysqli_query($conexion, "SELECT * FROM profesores WHERE mail='$profesores->mail' AND pssw='$profesores->pssw'");
 
 
   // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
 
-  while ($resultado = mysqli_fetch_array($registros))
-  {
-    $datos[] = $resultado;
-   }
+  $resultado = $registros->fetch_assoc();
 
   //  for ($i=0;$i<sizeof($datos);$i++){
   //    if($datos[$i]['equipos']==0){
@@ -37,11 +36,7 @@
   //  }
 
 
-  $json = json_encode($datos); // GENERA EL JSON CON LOS DATOS OBTENIDOS
-
-
-  header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
-
+  $json = json_encode($resultado); // GENERA EL JSON CON LOS DATOS OBTENIDOS
 
   echo $json; // MUESTRA EL JSON GENERADO AL EJECUTAR DIRECTAMENTE EL LOCALHOST
 

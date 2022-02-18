@@ -32,7 +32,7 @@ export class ProfileProfeComponent implements OnInit {
 
   ngOnInit(): void {
     this.profe = {
-            id_profesor: Number(this.route.snapshot.paramMap.get('id')),
+            id_profesor: Number(this.route.snapshot.paramMap.get('id_profesor')),
             fname: String(this.route.snapshot.paramMap.get('fname')),
             lname: String(this.route.snapshot.paramMap.get('lname')),
             nick: String(this.route.snapshot.paramMap.get('nick')),

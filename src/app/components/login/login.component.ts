@@ -40,7 +40,11 @@ export class LoginComponent implements OnInit {
     pssw:"", 
     psswConf:"", 
   }  
-  profesores :any;
+  profesorInicio = {
+    mail:"" ,
+    pssw:""
+  }  
+  profesores: any;
   constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute, ServiceService: ServiceService,private serverProfesorService: ServerProfesorService){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
@@ -62,14 +66,19 @@ export class LoginComponent implements OnInit {
 
    onSubmit() {
     this.listarProfesor();
-    this.router.navigate(['pprofe'],this.profesores);
-}
+    //
+    }
 
   //Funcion para conectar con el php
   listarProfesor(){
-    this.serverProfesorService.listarProfesor(this.profes.mail, this.profes.pssw).subscribe(
-      datos  => this.profesores = datos
+    this.profesorInicio.mail =  this.profes.mail;
+    this.profesorInicio.pssw = this.profes.pssw;
+    this.serverProfesorService.listarProfesor(this.profesorInicio).subscribe(
+      datos  => {
+        this.router.navigate(['pprofe', datos]);
+      } 
     );
+    
 
   }
   volver(){
