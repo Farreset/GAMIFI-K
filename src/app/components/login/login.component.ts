@@ -71,8 +71,10 @@ export class LoginComponent implements OnInit {
 
   //Funcion para conectar con el php
   listarProfesor(){
+    
     this.profesorInicio.mail =  this.profes.mail;
     this.profesorInicio.pssw = this.profes.pssw;
+    
     this.serverProfesorService.listarProfesor(this.profesorInicio).subscribe(
       datos  => {
         this.router.navigate(['pprofe', datos]);
