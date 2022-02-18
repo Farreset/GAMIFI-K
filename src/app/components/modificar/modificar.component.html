@@ -1,0 +1,30 @@
+<table class="table" id="tabla">
+    <thead>
+         <tr class="d-flex">
+              <th class="col-3">Bloque</th>
+              <th class="col-3">Orden</th>
+              <th class="col-3">Guardar</th>
+              <th class="col-3">Ingresar a Bloque</th>
+          </tr>
+     </thead>
+     <tbody>
+          <tr class="d-flex" *ngFor="let bloque of configuracioncvService.bloques">
+               <td class="col-md-3">{{bloque.nombre}}</td>
+               <td class="col-md-3">
+                    <mat-form-field>
+                         <input type="number" matInput placeholder="Orden" [value]="bloque.ordenCompleto" [(ngModel)]="bloque.ordenCompleto">                                             
+                    </mat-form-field>
+               </td>
+               <td class="col-md-3">
+                    <button class="btn btn-secundary" (click)="editBloque(bloque)">
+                         <i class="material-icons">save</i>
+                    </button>
+               </td>
+               <td class="col-md-3">
+                    <button mat-raised-button color="primary" [routerLink]="['/bloque-completo/', bloque.nombre]">
+                         <i class="material-icons">east</i>
+                    </button>
+               </td>
+          </tr>
+     </tbody>
+</table>

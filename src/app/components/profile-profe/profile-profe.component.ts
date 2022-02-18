@@ -52,5 +52,7 @@ export class ProfileProfeComponent implements OnInit {
         this.router.navigate(['']);
       }
 
+     
+
 
     }
