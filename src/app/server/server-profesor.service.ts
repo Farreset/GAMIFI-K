@@ -52,17 +52,19 @@ export class ServerProfesorService {
     }
     return this.http.post(`${this.URL}profesores/insertarProfesor.php`,JSON.stringify(profes));
   }
-
-
   
   // modificarProfesorEquipos(nombreProfesor, modoEquipos){
   //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
   
   // }
 
+<<<<<<< Updated upstream
   // modificarProfesor(){
   //   return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
   // }
+=======
+
+>>>>>>> Stashed changes
 
 
 }
