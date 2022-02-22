@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Alumno } from 'src/app/interfaces/interfaz';
+import { Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { Alumno, Profe } from 'src/app/interfaces/interfaz';
 import { ServiceService } from 'src/app/server/service.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -8,9 +8,9 @@ import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
 import { PasswordValidator } from 'src/app/validator/password.validator';
 
 @Component({
-  selector: 'app-register-alumno',
-  templateUrl: './register-alumno.component.html',
-  styleUrls: ['./register-alumno.component.css']
+  selector: 'app-register-profe',
+  templateUrl: './register-profe.component.html',
+  styleUrls: ['./register-profe.component.css']
 })
 export class RegisterAlumnoComponent implements OnInit {
   alumnosArray = [];
@@ -21,18 +21,18 @@ export class RegisterAlumnoComponent implements OnInit {
   alumnos:Alumno = {
     id_alumno: 0,
     nick: "",
-    fname: "",
-    lname: "",
-    year: "",
-    mail: "",
-    pssw: "",
+    fname:"" ,
+    lname:"" ,
+    year:"" ,
+    mail:"" ,
+    pssw:"" ,
     psswConf: ""
   } 
   alumnoParam: any;
   constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private serverAlumnoService: ServerAlumnoService, private http: HttpClient){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
-  
+
   };
    ngOnInit(): void {
       this.alumno =  this.formBuilder.group( {
@@ -49,7 +49,7 @@ export class RegisterAlumnoComponent implements OnInit {
 
   
   }
-
+   
   onSubmit() {
     this.registrarAlumno();
    
@@ -66,7 +66,7 @@ export class RegisterAlumnoComponent implements OnInit {
 
 
   volver(){
-    
+
     this.router.navigate(['']);
   }
   login(){
