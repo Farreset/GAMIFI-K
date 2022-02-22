@@ -15,7 +15,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { RankingsComponent } from './components/rankings/rankings.component';
 import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ModificarComponent } from './modificar/modificar.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { ModificarComponent } from './modificar/modificar.component';
     ProfileAlumnoComponent,
     RankingsComponent,
     RankingAdminComponent,
-    ModificarComponent
+   
     ],
   imports: [
   BrowserModule,

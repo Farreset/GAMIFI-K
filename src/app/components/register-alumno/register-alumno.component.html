@@ -79,24 +79,24 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-outline form-white mb-4">
-                      <label class="form-label" for="typePasswordX">Contraseña</label>
-                      <input type="password" id="typePasswordX" class="form-control form-control-lg"
+                      <label class="form-label" for="pssw">Contraseña</label>
+                      <input type="password" id="pssw" class="form-control form-control-lg"
                         placeholder="********" formControlName="pssw" [(ngModel)]="alumnos.pssw">
                     </div>
                   </div>
                   <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-outline form-white mb-4">
-                      <label class="form-label" for="typePasswordX">Confirmar Contraseña</label>
-                      <input type="password" id="typePasswordX" class="form-control form-control-lg"
-                        placeholder="********" formControlName="psswConf" [(ngModel)]="alumnos.pssw">
+                      <label class="form-label" for="psswConf">Confirmar Contraseña</label>
+                      <input type="password" id="psswConf" class="form-control form-control-lg"
+                        placeholder="********" formControlName="psswConf" [(ngModel)]="alumnos.psswConf">
                     </div>
                   </div>
                 </div>
-              </form>
+              
 
-              <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrase</button>
+              <button class="btn btn-outline-light btn-lg px-5" type="submit" [disabled]="!alumno.valid">Registrase</button>
 
-
+</form>
             </div>
 
             <div>

@@ -33,7 +33,7 @@ export class ServerProfesorService {
       pssw: pssw,
       psswConf: psswConf
     }
-    return this.http.post(`${this.URL}profesores/insertarProfesor.php`,JSON.stringify(profes));
+    return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
   }
   // insertarProfesor(nombreProfesor) {
   //   return this.http.get(`${this.URL}insertarProfesor.php?nombreProfesor=${nombreProfesor}`);

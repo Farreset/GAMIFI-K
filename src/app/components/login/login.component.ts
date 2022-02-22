@@ -4,6 +4,8 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Alumno,Profe } from 'src/app/interfaces/interfaz';
 import { ServiceService } from 'src/app/server/service.service';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
+import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
+
 
 @Component({
   selector: 'app-login',
@@ -13,19 +15,24 @@ import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 export class LoginComponent implements OnInit {
   ServiceService: any;
   route: ActivatedRoute;
-  // alumnosArray = [];
-  // alumno!:FormGroup;
+  alumnosArray = [];
+  alumno!:FormGroup;
 
-  // alumnos:Alumno = {
-  //   id_alumno: 0,
-  //   nick: "",
-  //   fname:"" ,
-  //   lname:"" ,
-  //   year:"" ,
-  //   mail:"" ,
-  //   pssw:"", 
-  //   psswConf:"", 
-  // } 
+  alumnos:Alumno = {
+    id_alumno: 0,
+    nick: "",
+    fname:"" ,
+    lname:"" ,
+    year:"" ,
+    mail:"" ,
+    pssw:"", 
+    psswConf:"", 
+  } 
+  alumnoInicio = {
+    mail:"" ,
+    pssw:""
+  }  
+  alumnoParam: any;
 
   profesArray = [];
   profe!:FormGroup;
@@ -45,7 +52,8 @@ export class LoginComponent implements OnInit {
     pssw:""
   }  
   profesores: any;
-  constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute, ServiceService: ServiceService,private serverProfesorService: ServerProfesorService){
+
+  constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute, ServiceService: ServiceService,private serverProfesorService: ServerProfesorService, private serverAlumnoService: ServerAlumnoService){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
     this.route = route;
@@ -57,16 +65,27 @@ export class LoginComponent implements OnInit {
       mail: ['', [Validators.required, Validators.email]],
       pssw: ['', [Validators.required,Validators.minLength(8)]],
     });
+    this.alumno =  this.formBuilder.group({
+      mail: ['', [Validators.required, Validators.email]],
+      pssw: ['', [Validators.required,Validators.minLength(8)]],
+    });
     // console.log(this.ServiceService)
   }
 
-  get data() { return this.profe.controls; }
-  // get data1() { return this.alumno.controls; }
+  get data() { if(this.profe){
+    return this.profe.controls;}
+  else{
+    return this.alumno.controls;
+  } }
+  
 
 
    onSubmit() {
+    if(this.profe){
     this.listarProfesor();
-    //
+    }else{
+    this.listarAlumno();
+    }
     }
 
   //Funcion para conectar con el php
@@ -80,7 +99,18 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['pprofe', datos]);
       } 
     );
+
+  }
+  listarAlumno(){
     
+    this.alumnoInicio.mail =  this.alumnos.mail;
+    this.alumnoInicio.pssw = this.alumnos.pssw;
+
+    this.serverAlumnoService.listarAlumno(this.alumnoInicio).subscribe(
+      datos  => {
+        this.router.navigate(['palumno', datos]);
+      } 
+    );
 
   }
   volver(){
