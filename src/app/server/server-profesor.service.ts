@@ -58,13 +58,9 @@ export class ServerProfesorService {
   
   // }
 
-<<<<<<< Updated upstream
   // modificarProfesor(){
   //   return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
   // }
-=======
-
->>>>>>> Stashed changes
 
 
 }
