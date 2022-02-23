@@ -22,6 +22,7 @@ export class ServerProfesorService {
   // eliminarProfesor(nombreProfesor) {
   //   return this.http.get(`${this.URL}eliminarProfesor.php?nombreProfesor=${nombreProfesor}`);
   // }
+  
   modificarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any, pssw: any, psswConf: any) {
     let profes: Profe = {
       id_profesor: id_profesor,
@@ -35,9 +36,7 @@ export class ServerProfesorService {
     }
     return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
   }
-  // insertarProfesor(nombreProfesor) {
-  //   return this.http.get(`${this.URL}insertarProfesor.php?nombreProfesor=${nombreProfesor}`);
-  // }
+
   
   insertarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any, pssw: any, psswConf: any){
     let profes: Profe = {
