@@ -1,7 +1,19 @@
 <?php
+<<<<<<< Updated upstream
   header('Access-Control-Allow-Origin: *');
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: text/html; charset=UTF-8');
+=======
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Headers: Authorization');
+    header('Content-Type application/json; charset=utf-8');
+
+    $json =file_get_contents('php://input');
+    $profesores =json_decode($json);
+>>>>>>> Stashed changes
 
   echo "Se abre el php";
   global $datos;
@@ -27,6 +39,7 @@
   echo $json;
 
   // REALIZA LA QUERY A LA DB
+<<<<<<< Updated upstream
 //  $registros = mysqli_query($con, "INSERT INTO `profesores` (`id_profesor`, `nick`, `fname`, `lname`, `mail`, `centro`, `pssw`, `psswConf`)
 //  VALUES (NULL, '$_GET[id_profesor]', '$_GET[nick]', '$_GET[fname]', '$_GET[lname]', '$_GET[mail]', '$_GET[centro]', '$_GET[pssw]', '$_GET[psswConf]');");
 
@@ -50,6 +63,17 @@
 >>>>>>> Stashed changes
 
   header('Content-Type: application/json');
+=======
+ $registros = mysqli_query($conexion, "INSERT INTO `profesores` (`id_profesor`, `nick`, `fname`, `lname`, `mail`, `centro`, `pssw`, `psswConf`)
+ VALUES (NULL, '$profesores->nick', '$profesores->fname', '$profesores->lname', '$profesores->mail', '$profesores->centro', '$profesores->pssw', '$profesores->psswConf')");
+
+if($registros){
+  $resultado = 'OK';
+}else{
+  $resultado = 'NO';
+}
+header('Content-Type: application/json');
+>>>>>>> Stashed changes
 
   echo json_encode($response); // MUESTRA EL JSON GENERADO
 

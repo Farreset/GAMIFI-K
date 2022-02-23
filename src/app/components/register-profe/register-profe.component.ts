@@ -74,9 +74,12 @@ export class RegisterProfeComponent implements OnInit {
     });
     console.log(this.ServiceService)
 
+<<<<<<< Updated upstream
     //Se llama a la funcion registrarProfesor
     // this.registrarProfesor();
     this.recuperarTodos();
+=======
+>>>>>>> Stashed changes
   }
 
 <<<<<<< Updated upstream
