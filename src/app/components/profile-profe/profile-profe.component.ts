@@ -53,6 +53,9 @@ export class ProfileProfeComponent implements OnInit {
 editar(){
   this.router.navigate(['']);
 }
+addRank(){
+  this.router.navigate(['']);
+}
       
 
     }
