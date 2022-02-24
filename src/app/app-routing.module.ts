@@ -6,10 +6,12 @@ import { RegisterProfeComponent } from './components/register-profe/register-pro
 import { ProfileAlumnoComponent } from './components/profile-alumno/profile-alumno.component';
 import { ProfileProfeComponent } from './components/profile-profe/profile-profe.component';
 import { RankingsComponent } from './components/rankings/rankings.component';
+import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.component';
 
 
 const routes: Routes = [
   { path: 'ranking', component: RankingsComponent, pathMatch: 'full'},
+  { path: 'adminRank', component: RankingAdminComponent, pathMatch: 'full'},
     { path: 'login', component: LoginComponent, pathMatch: 'full'},
     { path: '', component: HomeComponent, pathMatch: 'full'},
     { path: 'ralumno', component: RegisterAlumnoComponent, pathMatch: 'full'},

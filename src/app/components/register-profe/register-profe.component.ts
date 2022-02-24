@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Profe } from 'src/app/interfaces/interfaz';
 import { ServiceService } from 'src/app/server/service.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { PasswordValidator } from 'src/app/validator/password.validator';
 import { HttpClient } from '@angular/common/http';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
@@ -57,7 +56,7 @@ export class RegisterProfeComponent implements OnInit {
   }
    onSubmit() {
     this.registrarProfesor();
-   
+
 }
 
   //Funcion para conectar con el php

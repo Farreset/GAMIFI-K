@@ -27,8 +27,7 @@
  VALUES (NULL, '$profesores->nick', '$profesores->fname', '$profesores->lname', '$profesores->mail', '$profesores->centro', '$profesores->pssw', '$profesores->psswConf')");
 
 
-  echo "
-";
+  echo "$registros";
   // GENERA LOS DATOS DE RESPUESTA
     if($registros){
       $resultado = 'OK';  
