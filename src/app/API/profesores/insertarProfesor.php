@@ -38,4 +38,10 @@
 
   echo json_encode($resultado); // MUESTRA EL JSON GENERADO
 
+
+ 
+
 ?>
+
+
+
