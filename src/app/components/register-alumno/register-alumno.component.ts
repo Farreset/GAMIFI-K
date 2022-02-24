@@ -8,9 +8,9 @@ import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
 import { PasswordValidator } from 'src/app/validator/password.validator';
 
 @Component({
-  selector: 'app-register-profe',
-  templateUrl: './register-profe.component.html',
-  styleUrls: ['./register-profe.component.css']
+  selector: 'app-register-alumno',
+  templateUrl: './register-alumno.component.html',
+  styleUrls: ['./register-alumno.component.css']
 })
 export class RegisterAlumnoComponent implements OnInit {
   alumnosArray = [];

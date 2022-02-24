@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Profe } from 'src/app/interfaces/interfaz';
+import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 
 @Component({
   selector: 'app-profile-profe',
@@ -11,7 +12,7 @@ export class ProfileProfeComponent implements OnInit {
   public profes:Profe[] = [] ;
   router: Router; 
   route: ActivatedRoute;
-  profe:Profe = {
+  profe: Profe = {
     id_profesor: 0,
     nick: '',
     fname: "",
@@ -22,11 +23,13 @@ export class ProfileProfeComponent implements OnInit {
     psswConf: "",
     
   } 
-   
-  constructor(router: Router, route: ActivatedRoute) {
+  serverProfesorService: any;
+  constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService) {
 
     this.route = route;
     this.router = router;
+    this.serverProfesorService = serverProfesorService;
+
   }
 
 
@@ -47,10 +50,9 @@ export class ProfileProfeComponent implements OnInit {
         
         this.router.navigate(['']);
       }
-
-      editar(){
-        this.router.navigate(['']);
-      }
-
+editar(){
+  this.router.navigate(['']);
+}
+      
 
     }

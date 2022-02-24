@@ -51,4 +51,8 @@ export class ProfileAlumnoComponent implements OnInit {
         
         this.router.navigate(['ranking']);
       }
+
+      modificar(){
+        
+      }
     }
