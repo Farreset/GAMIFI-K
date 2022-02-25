@@ -51,7 +51,7 @@ export class RegisterProfeComponent implements OnInit {
     });
 
     //Se llama a la funcion registrarProfesor
-   
+
 
   }
    onSubmit() {

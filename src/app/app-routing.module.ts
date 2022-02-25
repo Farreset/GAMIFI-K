@@ -1,3 +1,4 @@
+import { EditProfileProfeComponent } from './components/edit-profile-profe/edit-profile-profe.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -18,7 +19,9 @@ const routes: Routes = [
     { path: 'rprofe', component: RegisterProfeComponent, pathMatch: 'full'},
     { path: 'palumno', component: ProfileAlumnoComponent, pathMatch: 'full'},
     { path: 'pprofe', component: ProfileProfeComponent, pathMatch: 'full'},
-   { path: '**', redirectTo: '/register' }
+    { path: 'editar-profe', component: EditProfileProfeComponent, pathMatch: 'full'},
+
+  { path: '**', redirectTo: '/register' } //Dejar la ultima
   ];
 
 export const Routing = RouterModule.forRoot(routes);

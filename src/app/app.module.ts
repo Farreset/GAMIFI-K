@@ -16,6 +16,8 @@ import { RankingsComponent } from './components/rankings/rankings.component';
 import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModificarComponent } from './components/modificar/modificar.component';
+import { EditProfileProfeComponent } from './components/edit-profile-profe/edit-profile-profe.component';
+import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edit-profile-alumno.component';
  
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ModificarComponent } from './components/modificar/modificar.component';
     ProfileAlumnoComponent,
     RankingsComponent,
     RankingAdminComponent,
-    ModificarComponent
+    ModificarComponent,
+    EditProfileProfeComponent,
+    EditProfileAlumnoComponent
     
     
     ],
