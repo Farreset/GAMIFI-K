@@ -69,7 +69,6 @@ export class ModificarComponent implements OnInit {
     this.modificarProfesor();
 
   }
-  volver(){}
   modificarProfesor() {
     this.serverProfesorService.modificarProfesor(this.profe.id_profesor, this.profe.nick, this.profe.fname,
       this.profe.lname, this.profe.mail, this.profe.centro, this.profe.pssw, this.profe.psswConf).subscribe(
@@ -80,6 +79,11 @@ export class ModificarComponent implements OnInit {
   get data() {
     return this.profesGroup.controls;
   }
+  // get data() { return this.profe.controls; }
 
+  volver(){
+
+    this.router.navigate(['']);
+  }
 
 }

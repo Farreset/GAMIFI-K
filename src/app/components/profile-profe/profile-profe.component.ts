@@ -10,7 +10,7 @@ import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 })
 export class ProfileProfeComponent implements OnInit {
   public profes:Profe[] = [] ;
-  router: Router; 
+  router: Router;
   route: ActivatedRoute;
   profe: Profe = {
     id_profesor: 0,
@@ -21,8 +21,8 @@ export class ProfileProfeComponent implements OnInit {
     centro: "",
     pssw: "",
     psswConf: "",
-    
-  } 
+
+  }
   serverProfesorService: any;
   constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService) {
 
@@ -44,10 +44,10 @@ export class ProfileProfeComponent implements OnInit {
             pssw: String(this.route.snapshot.paramMap.get('pssw')),
             psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
 
-          } 
+          }
       }
       volver(){
-        
+
         this.router.navigate(['']);
       }
 editar(){
