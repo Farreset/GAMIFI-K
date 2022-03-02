@@ -1,5 +1,4 @@
 export interface Profe {
-    // controls: any;
     id_profesor :number;
     nick :string;
     fname :string;
