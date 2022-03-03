@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Profe } from 'src/app/interfaces/interfaz';
+import { HttpClient } from '@angular/common/http';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 
 @Component({
@@ -24,11 +25,12 @@ profe:Profe = {
   psswConf: "",
 
 }
+
 serverProfesorService: any;
   myGroup: any;
 
-constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService) {
-
+// constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private serverProfesorService: ServerProfesorService, private http: HttpClient)
+constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService, private http: HttpClient) {
   this.route = route;
   this.router = router;
   this.serverProfesorService = serverProfesorService;
@@ -60,7 +62,7 @@ modificarProfesor(){
   this.serverProfesorService.modificarProfesor(this.profe.id_profesor,this.profe.nick, this.profe.fname, this.profe.lname, this.profe.mail, this.profe.centro, this.profe.pssw, this.profe.psswConf).subscribe(
     (      datos: Profe)  => this.profe = datos
   );
-this.router.navigate(['login']);
+this.router.navigate(['pprofe',this.profe]);
 }
 // get data() { return this.profe.controls; }
 
