@@ -70,7 +70,7 @@ editar(){
 
 volver(){
 
-  this.router.navigate(['pprofe']);
+  this.router.navigate(['pprofe',this.profe]);
 }
 
 }
