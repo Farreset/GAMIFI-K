@@ -24,6 +24,7 @@ export class ProfileProfeComponent implements OnInit {
 
   }
   serverProfesorService: any;
+  profesorInicio: any;
   constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService) {
 
     this.route = route;
@@ -46,13 +47,18 @@ export class ProfileProfeComponent implements OnInit {
 
           }
       }
+    
       volver(){
 
         this.router.navigate(['']);
       }
       editar(){
-        this.router.navigate(['editar-profe']);
+            this.router.navigate(['editar-profe', this.profe]);
+       
       }
+      
+
+
       addRank(){
 
       }
