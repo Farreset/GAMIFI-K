@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Profe } from 'src/app/interfaces/interfaz';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
@@ -24,6 +25,7 @@ profe:Profe = {
 
 }
 serverProfesorService: any;
+  myGroup: any;
 
 constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService) {
 
@@ -44,6 +46,9 @@ ngOnInit(): void {
     pssw: String(this.route.snapshot.paramMap.get('pssw')),
     psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
 }
+this.myGroup = new FormGroup({
+  firstName: new FormControl()
+});
 }
 
 onSubmit() {
@@ -59,9 +64,13 @@ this.router.navigate(['login']);
 }
 // get data() { return this.profe.controls; }
 
+editar(){
+  this.router.navigate(['editar-profe']);
+}
+
 volver(){
 
-  this.router.navigate(['']);
+  this.router.navigate(['pprofe']);
 }
 
 }
