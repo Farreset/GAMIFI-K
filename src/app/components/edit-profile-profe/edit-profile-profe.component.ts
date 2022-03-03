@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< Updated upstream
-=======
+import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Profe } from 'src/app/interfaces/interfaz';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-edit-profile-profe',
@@ -12,20 +10,22 @@ import { ServerProfesorService } from 'src/app/server/server-profesor.service';
   styleUrls: ['./edit-profile-profe.component.css']
 })
 export class EditProfileProfeComponent implements OnInit {
+// public profes:Profe[] = [] ;
+router: Router;
+route: ActivatedRoute;
+profe:Profe = {
+  id_profesor: 0,
+  nick: '',
+  fname: "",
+  lname: "",
+  mail: "",
+  centro: "",
+  pssw: "",
+  psswConf: "",
 
-<<<<<<< Updated upstream
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-=======
 }
-profesorInicio = {
-  mail:"" ,
-  pssw:""
-}
-
 serverProfesorService: any;
+  myGroup: any;
 
 constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService) {
 
@@ -46,44 +46,31 @@ ngOnInit(): void {
     pssw: String(this.route.snapshot.paramMap.get('pssw')),
     psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
 }
+this.myGroup = new FormGroup({
+  firstName: new FormControl()
+});
 }
 
 onSubmit() {
-  // this.modificarProfesor();
-  if(this.profe){
-    this.listarProfesor();
-    }
+  this.modificarProfesor();
+
 }
 
-  listarProfesor(){
-    this.profesorInicio.mail =  this.profe.mail;
-    this.profesorInicio.pssw = this.profe.pssw;
+modificarProfesor(){
+  this.serverProfesorService.modificarProfesor(this.profe.id_profesor,this.profe.nick, this.profe.fname, this.profe.lname, this.profe.mail, this.profe.centro, this.profe.pssw, this.profe.psswConf).subscribe(
+    (      datos: Profe)  => this.profe = datos
+  );
+this.router.navigate(['login']);
+}
+// get data() { return this.profe.controls; }
 
-    this.serverProfesorService.listarProfesor(this.profesorInicio).subscribe(
-      (      datos: any) => {
-        this.router.navigate(['pprofe', datos]);
-      }
-    );
+editar(){
+  this.router.navigate(['editar-profe']);
+}
 
-  }
+volver(){
 
-  modificarProfesor(){
-    this.serverProfesorService.modificarProfesor(this.profe.id_profesor,this.profe.nick, this.profe.fname, this.profe.lname, this.profe.mail, this.profe.centro, this.profe.pssw, this.profe.psswConf).subscribe(
-      (      datos: Profe)  => this.profe = datos
-    );
-  this.router.navigate(['login']);
-  }
-  // get data() { return this.profe.controls; }
+  this.router.navigate(['pprofe']);
+}
 
-  volver(){
-    this.router.navigate(['pprofe']);
-  }
-
-  editar(){
-    this.router.navigate(['editar-profe']);
-  }
-  addRank(){
->>>>>>> Stashed changes
-
-  }
 }

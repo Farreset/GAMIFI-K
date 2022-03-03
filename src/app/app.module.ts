@@ -12,26 +12,13 @@ import { ProfileProfeComponent } from './components/profile-profe/profile-profe.
 import { LoginComponent } from './components/login/login.component';
 
 import { APP_BASE_HREF } from '@angular/common';
-<<<<<<< Updated upstream
-// import { RegistrarProfesorServiceComponent } from './server/registrar-profesor-service/registrar-profesor-service.component';
-=======
 import { RankingsComponent } from './components/rankings/rankings.component';
 import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.component';
-<<<<<<< Updated upstream
-import { HttpClient, HttpClientModule } from '@angular/common/http';
->>>>>>> Stashed changes
-=======
 import { HttpClientModule } from '@angular/common/http';
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
+import { ModificarComponent } from './components/modificar/modificar.component';
 import { EditProfileProfeComponent } from './components/edit-profile-profe/edit-profile-profe.component';
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edit-profile-alumno.component';
->>>>>>> Stashed changes
-
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,24 +27,15 @@ import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edi
     RegisterProfeComponent,
     LoginComponent,
     ProfileProfeComponent,
-<<<<<<< Updated upstream
-    ProfileAlumnoComponent
-  ],
-=======
     ProfileAlumnoComponent,
     RankingsComponent,
     RankingAdminComponent,
-<<<<<<< Updated upstream
-    EditProfileProfeComponent
-=======
     ModificarComponent,
     EditProfileProfeComponent,
     EditProfileAlumnoComponent
-
-
->>>>>>> Stashed changes
+    
+    
     ],
->>>>>>> Stashed changes
   imports: [
   BrowserModule,
   ReactiveFormsModule,
@@ -66,11 +44,6 @@ import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edi
   HttpClientModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
-<<<<<<< Updated upstream
-  bootstrap: [AppComponent]
-=======
   bootstrap: [AppComponent],
-
->>>>>>> Stashed changes
 })
 export class AppModule { }

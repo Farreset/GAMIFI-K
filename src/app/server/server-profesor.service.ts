@@ -1,40 +1,43 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Profe } from 'src/app/interfaces/interfaz';
+import { Profe } from '../interfaces/interfaz';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrarProfesorService {
+export class ServerProfesorService {
 
-  URL = 'http://localhost/';
+  URL = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
 
-<<<<<<< Updated upstream
-  registrarProfesor(){
-    return this.http.get(`${this.URL}insertarProfesor.php`);
-    // return this.http.get(`${this.URL}registrarProfesor.php?id_profesor=${id_profesor}`);
+
+
+  listarProfesor(profesor: any) {
+    return this.http.post(`${this.URL}profesores/listarProfesor.php`,JSON.stringify(profesor));
   }
-=======
-
-
-  listarProfesor() {
-
-    return this.http.get(`${this.URL}listarProfesor.php`);
-  }
-
-
+  
+  
   // eliminarProfesor(nombreProfesor) {
   //   return this.http.get(`${this.URL}eliminarProfesor.php?nombreProfesor=${nombreProfesor}`);
   // }
-  // modificarProfesor(nombreProfesor, nuevoNombre) {
-  //   return this.http.get(`${this.URL}modificarProfesor.php?nombreProfesor=${nombreProfesor}&nuevoNombre=${nuevoNombre}`);
-  // }
-  // insertarProfesor(nombreProfesor) {
-  //   return this.http.get(`${this.URL}insertarProfesor.php?nombreProfesor=${nombreProfesor}`);
-  // }
+  
+  modificarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any, pssw: any, psswConf: any) {
+    let profes: Profe = {
+      id_profesor: id_profesor,
+      nick: nick,
+      fname: fname,
+      lname: lname,
+      centro: centro,
+      mail: mail,
+      pssw: pssw,
+      psswConf: psswConf
+    }
+    return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
+  }
 
+  
   insertarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any, pssw: any, psswConf: any){
     let profes: Profe = {
       id_profesor: id_profesor,
@@ -48,14 +51,15 @@ export class RegistrarProfesorService {
     }
     return this.http.post(`${this.URL}profesores/insertarProfesor.php`,JSON.stringify(profes));
   }
-
+  
   // modificarProfesorEquipos(nombreProfesor, modoEquipos){
   //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
-
+  
   // }
 
->>>>>>> Stashed changes
-
+  // modificarProfesor(){
+  //   return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
+  // }
 
 
 }

@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-<p>register-profe works!</p>
-=======
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +37,7 @@
                       <label class="form-label" for="nick">Apodo</label>
                       <input type="text" id="nick" class="form-control form-control-lg" placeholder="Apodo"
                         formControlName="nick" [(ngModel)]="profes.nick">
-
+                    
                     <div *ngIf="data.nick.errors">
                       <div *ngIf="data.nick.errors?.required">
                         Se requiere un apodo
@@ -56,7 +53,7 @@
                       <label class="form-label" for="fname">Nombre</label>
                       <input type="text" id="fname" class="form-control form-control-lg" placeholder="Nombre"
                         formControlName="fname" [(ngModel)]="profes.fname">
-
+                   
                     <div *ngIf="data.fname.errors">
                       <div *ngIf="data.fname.errors.required">
                         Se requiere un nombre
@@ -72,7 +69,7 @@
                       <label class="form-label" for="lname">Apellido</label>
                       <input type="text" id="lname" class="form-control form-control-lg" placeholder="Apellido"
                         formControlName="lname" [(ngModel)]="profes.lname">
-
+                    
 
                     <div *ngIf="data.lname.errors">
                       <div *ngIf="data.lname.errors.required">
@@ -89,7 +86,7 @@
                       <label class="form-label" for="centro">Centro</label>
                       <input type="text" id="centro" class="form-control form-control-lg" placeholder="Centro"
                         formControlName="centro" [(ngModel)]="profes.centro">
-
+                  
 
                     <div *ngIf="data.centro.errors">
                       <div *ngIf="data.centro.errors.required">
@@ -100,12 +97,12 @@
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-outline form-white mb-4">
-
+                      
                       <label class="form-label" for="mail">Email</label>
                       <input type="mail" id="mail" class="form-control form-control-lg" placeholder="ejemplo@mail.com"
                         formControlName="mail" [(ngModel)]="profes.mail">
 
-
+                   
                    <div *ngIf="data.mail.errors">
                       <div *ngIf="data.mail.errors.required">
                         Se requiere un apodo
@@ -121,7 +118,7 @@
                       <label class="form-label" for="typePassword">Contraseña</label>
                       <input type="password" id="typePassword" class="form-control form-control-lg"
                         placeholder="********" formControlName="pssw" [(ngModel)]="profes.pssw">
-
+                    
 
                     <div *ngIf="data.pssw.errors">
                       <div *ngIf="data.pssw.errors.required">
@@ -135,7 +132,7 @@
                       <label class="form-label" for="typePasswordConf">Confirmar Contraseña</label>
                       <input type="password" id="typePasswordConf" class="form-control form-control-lg"
                         placeholder="********" formControlName="psswConf" [(ngModel)]="profes.psswConf">
-
+                   
 
                     <div *ngIf="data.psswConf.errors">
                       <div *ngIf="data.psswConf.errors.required">
@@ -150,7 +147,7 @@
                 </div>
                 <button class="btn btn-outline-light btn-lg px-5"    type="submit"  [disabled]="!profe.valid" >Registrase</button>
               </form>
-
+            
             </div>
             <div>
               <p class="mb-0">Ya estas registrado? <a (click)="login()" class="text-white-50 fw-bold">Iniciar Sesion</a>
@@ -165,4 +162,3 @@
 </section>
 
 </html>
->>>>>>> Stashed changes

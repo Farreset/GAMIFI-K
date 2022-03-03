@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-<p>register-alumno works!</p>
-=======
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,8 +38,8 @@
                       <input type="text" id="nick" class="form-control form-control-lg" placeholder="Apodo"
                         formControlName="nick" [(ngModel)]="alumnos.nick">
                     </div>
-
-                    <!-- <div *ngIf="nick.errors?.required">
+                
+                    <!-- <div *ngIf="nick.errors?.required"> 
                       Se requiere un apodo
                     </div>  -->
                   </div>
@@ -70,36 +67,36 @@
 
                     </div>
                   </div>
-
-
+               
+                
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                       <div class="form-outline form-white mb-4">
                         <label class="form-label" for="mail">Email</label>
                         <input type="mail" id="mail" class="form-control form-control-lg" placeholder="ejemplo@mail.com"
                           formControlName="mail" [(ngModel)]="alumnos.mail">
-
+  
                       </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-outline form-white mb-4">
-                      <label class="form-label" for="typePasswordX">Contraseña</label>
-                      <input type="password" id="typePasswordX" class="form-control form-control-lg"
+                      <label class="form-label" for="pssw">Contraseña</label>
+                      <input type="password" id="pssw" class="form-control form-control-lg"
                         placeholder="********" formControlName="pssw" [(ngModel)]="alumnos.pssw">
                     </div>
                   </div>
                   <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-outline form-white mb-4">
-                      <label class="form-label" for="typePasswordX">Confirmar Contraseña</label>
-                      <input type="password" id="typePasswordX" class="form-control form-control-lg"
-                        placeholder="********" formControlName="psswConf" [(ngModel)]="alumnos.pssw">
+                      <label class="form-label" for="psswConf">Confirmar Contraseña</label>
+                      <input type="password" id="psswConf" class="form-control form-control-lg"
+                        placeholder="********" formControlName="psswConf" [(ngModel)]="alumnos.psswConf">
                     </div>
                   </div>
                 </div>
-              </form>
+              
 
               <button class="btn btn-outline-light btn-lg px-5" type="submit" [disabled]="!alumno.valid">Registrase</button>
 
-
+</form>
             </div>
 
             <div>
@@ -114,4 +111,3 @@
 </section>
 
 </html>
->>>>>>> Stashed changes

@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< Updated upstream
-=======
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Alumno } from 'src/app/interfaces/interfaz';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Alumno} from 'src/app/interfaces/interfaz';
 import { ServiceService } from 'src/app/server/service.service';
 import { Router } from '@angular/router';
-import { PasswordValidator } from 'src/app/validator/password.validator';
 import { HttpClient } from '@angular/common/http';
-// import { ServiceAlumnoService } from 'src/app/server/service-alumno.service';
-import { ServiceAlumnoService } from './../../server/service-alumno.service';
-
->>>>>>> Stashed changes
+import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
+import { PasswordValidator } from 'src/app/validator/password.validator';
 
 @Component({
   selector: 'app-register-alumno',
@@ -18,39 +13,29 @@ import { ServiceAlumnoService } from './../../server/service-alumno.service';
   styleUrls: ['./register-alumno.component.css']
 })
 export class RegisterAlumnoComponent implements OnInit {
-<<<<<<< Updated upstream
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-=======
   alumnosArray = [];
   alumno!:FormGroup;
   submitted = false;
   ServiceService: any;
   isValidFormSubmitted = false;
-
   alumnos:Alumno = {
     id_alumno: 0,
     nick: "",
-    fname: "",
-    lname: "",
-    year: "",
-    mail: "",
-    pssw: "",
+    fname:"" ,
+    lname:"" ,
+    year:"",
+    mail:"" ,
+    pssw:"" ,
     psswConf: ""
-  }
+  } 
+  
+  alumnoParam: any;
 
-  alumnosTS:any;
-
-  constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private serviceAlumnoService:ServiceAlumnoService , private http: HttpClient){
+  constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private serverAlumnoService: ServerAlumnoService, private http: HttpClient){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
 
   };
-
    ngOnInit(): void {
       this.alumno =  this.formBuilder.group( {
         nick:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
@@ -59,25 +44,30 @@ export class RegisterAlumnoComponent implements OnInit {
         year:['', [Validators.required ]],
         mail:['', [Validators.required, Validators.email]],
         pssw:['', [Validators.required, Validators.minLength(8)]],
-      },{
-        validator: PasswordValidator('pssw', 'psswConf')
-      });
-    console.log(this.ServiceService)
+        psswConf:['', [Validators.required, Validators.minLength(8)]]
+    }, {
+      validator: PasswordValidator('pssw', 'psswConf')
+    });
+
+  
+  }
+   
+  onSubmit() {
+    this.registrarAlumno();
+  }
+
+  //Funcion para conectar con el php
+  registrarAlumno(){
+
+    this.serverAlumnoService.insertarAlumnos(this.alumnos.id_alumno,this.alumnos.nick, this.alumnos.fname, this.alumnos.lname, this.alumnos.mail, this.alumnos.year, this.alumnos.pssw, this.alumnos.psswConf).subscribe(
+      datos  => this.alumnoParam = datos
+     
+      ); 
+    this.router.navigate(['login']);
   }
 
   get data() { return this.alumno.controls; }
 
-  onSubmit() {
-
-     this.router.navigate(['login']);
-  }
-
-  registrarProfesor(){
-    this.serviceAlumnoService.insertarAlumno(this.alumnosTS.id_alumno,this.alumnosTS.nick, this.alumnosTS.fname, this.alumnosTS.lname, this.alumnosTS.mail, this.alumnosTS.year, this.alumnosTS.pssw, this.alumnosTS.psswConf).subscribe(
-      datos  => this.alumnosTS = datos
-    );
-
-  }
 
   volver(){
 
@@ -87,5 +77,4 @@ export class RegisterAlumnoComponent implements OnInit {
 
     this.router.navigate(['login']);
   }
->>>>>>> Stashed changes
 }

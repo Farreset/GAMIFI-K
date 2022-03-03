@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Alumno,Profe } from 'src/app/interfaces/interfaz';
+import { ServiceService } from 'src/app/server/service.service';
+import { ServerProfesorService } from 'src/app/server/server-profesor.service';
+import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
+
 
 @Component({
   selector: 'app-login',
@@ -6,8 +13,6 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class LoginComponent implements OnInit {
-<<<<<<< Updated upstream
-=======
   ServiceService: any;
   route: ActivatedRoute;
   alumnosArray = [];
@@ -20,13 +25,13 @@ export class LoginComponent implements OnInit {
     lname:"" ,
     year:"" ,
     mail:"" ,
-    pssw:"",
-    psswConf:"",
-  }
+    pssw:"", 
+    psswConf:"", 
+  } 
   alumnoInicio = {
     mail:"" ,
     pssw:""
-  }
+  }  
   alumnoParam: any;
 
   profesArray = [];
@@ -39,13 +44,13 @@ export class LoginComponent implements OnInit {
     lname:"" ,
     centro:"" ,
     mail:"" ,
-    pssw:"",
-    psswConf:"",
-  }
+    pssw:"", 
+    psswConf:"", 
+  }  
   profesorInicio = {
     mail:"" ,
     pssw:""
-  }
+  }  
   profesores: any;
 
   constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute, ServiceService: ServiceService,private serverProfesorService: ServerProfesorService, private serverAlumnoService: ServerAlumnoService){
@@ -54,7 +59,7 @@ export class LoginComponent implements OnInit {
     this.route = route;
     this.router = router;
   };
-
+  
   ngOnInit() : void {
     this.profe =  this.formBuilder.group({
       mail: ['', [Validators.required, Validators.email]],
@@ -72,16 +77,9 @@ export class LoginComponent implements OnInit {
   else{
     return this.alumno.controls;
   } }
+  
 
->>>>>>> Stashed changes
 
-  constructor() { }
-
-<<<<<<< Updated upstream
-  ngOnInit(): void {
-  }
-
-=======
    onSubmit() {
     if(this.profe){
     this.listarProfesor();
@@ -92,26 +90,26 @@ export class LoginComponent implements OnInit {
 
   //Funcion para conectar con el php
   listarProfesor(){
-
+    
     this.profesorInicio.mail =  this.profes.mail;
     this.profesorInicio.pssw = this.profes.pssw;
-
+    
     this.serverProfesorService.listarProfesor(this.profesorInicio).subscribe(
       datos  => {
         this.router.navigate(['pprofe', datos]);
-      }
+      } 
     );
 
   }
   listarAlumno(){
-
+    
     this.alumnoInicio.mail =  this.alumnos.mail;
     this.alumnoInicio.pssw = this.alumnos.pssw;
 
     this.serverAlumnoService.listarAlumno(this.alumnoInicio).subscribe(
       datos  => {
         this.router.navigate(['palumno', datos]);
-      }
+      } 
     );
 
   }
@@ -124,6 +122,5 @@ export class LoginComponent implements OnInit {
   registerAlumno(){
     this.router.navigate(['ralumno']);
   }
-
->>>>>>> Stashed changes
+ 
 }
