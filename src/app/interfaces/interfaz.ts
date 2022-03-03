@@ -1,5 +1,10 @@
 export interface Profe {
+<<<<<<< Updated upstream
     id :number;
+=======
+    // controls: any;
+    id_profesor :number;
+>>>>>>> Stashed changes
     nick :string;
     fname :string;
     lname :string;

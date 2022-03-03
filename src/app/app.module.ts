@@ -26,6 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
 >>>>>>> Stashed changes
 =======
 import { EditProfileProfeComponent } from './components/edit-profile-profe/edit-profile-profe.component';
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edit-profile-alumno.component';
 >>>>>>> Stashed changes
 
 @NgModule({
@@ -43,7 +47,15 @@ import { EditProfileProfeComponent } from './components/edit-profile-profe/edit-
     ProfileAlumnoComponent,
     RankingsComponent,
     RankingAdminComponent,
+<<<<<<< Updated upstream
     EditProfileProfeComponent
+=======
+    ModificarComponent,
+    EditProfileProfeComponent,
+    EditProfileAlumnoComponent
+
+
+>>>>>>> Stashed changes
     ],
 >>>>>>> Stashed changes
   imports: [

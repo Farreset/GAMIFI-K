@@ -21,8 +21,13 @@ export class ProfileProfeComponent implements OnInit {
     psswConf: "",
 
   }
+<<<<<<< Updated upstream
 
   constructor(router: Router, route: ActivatedRoute) {
+=======
+  serverProfesorService: any;
+  constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService) {
+>>>>>>> Stashed changes
 
     this.route = route;
     this.router = router;
@@ -43,8 +48,15 @@ export class ProfileProfeComponent implements OnInit {
 
         this.router.navigate(['']);
       }
+<<<<<<< Updated upstream
 
       edit(){
+=======
+      editar(){
+        this.router.navigate(['editar-profe', this.profe]);
+      }
+      addRank(){
+>>>>>>> Stashed changes
 
         this.router.navigate(['edit']);
       }
