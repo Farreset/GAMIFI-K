@@ -23,11 +23,6 @@ profe:Profe = {
   psswConf: "",
 
 }
-profesorInicio = {
-  mail:"" ,
-  pssw:""
-}
-
 serverProfesorService: any;
 
 constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService) {
@@ -52,40 +47,21 @@ ngOnInit(): void {
 }
 
 onSubmit() {
-  // this.modificarProfesor();
-  if(this.profe){
-    this.listarProfesor();
-    }
+  this.modificarProfesor();
+
 }
 
-  listarProfesor(){
-    this.profesorInicio.mail =  this.profe.mail;
-    this.profesorInicio.pssw = this.profe.pssw;
+modificarProfesor(){
+  this.serverProfesorService.modificarProfesor(this.profe.id_profesor,this.profe.nick, this.profe.fname, this.profe.lname, this.profe.mail, this.profe.centro, this.profe.pssw, this.profe.psswConf).subscribe(
+    (      datos: Profe)  => this.profe = datos
+  );
+this.router.navigate(['login']);
+}
+// get data() { return this.profe.controls; }
 
-    this.serverProfesorService.listarProfesor(this.profesorInicio).subscribe(
-      (      datos: any) => {
-        this.router.navigate(['pprofe', datos]);
-      }
-    );
+volver(){
 
-  }
+  this.router.navigate(['']);
+}
 
-  modificarProfesor(){
-    this.serverProfesorService.modificarProfesor(this.profe.id_profesor,this.profe.nick, this.profe.fname, this.profe.lname, this.profe.mail, this.profe.centro, this.profe.pssw, this.profe.psswConf).subscribe(
-      (      datos: Profe)  => this.profe = datos
-    );
-  this.router.navigate(['login']);
-  }
-  // get data() { return this.profe.controls; }
-
-  volver(){
-    this.router.navigate(['pprofe']);
-  }
-
-  editar(){
-    this.router.navigate(['editar-profe']);
-  }
-  addRank(){
-
-  }
 }
