@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms'; //ReactiveFormsModule ¿?
 import { ActivatedRoute, Router } from '@angular/router';
 import { Profe } from 'src/app/interfaces/interfaz';
 import { HttpClient } from '@angular/common/http';
