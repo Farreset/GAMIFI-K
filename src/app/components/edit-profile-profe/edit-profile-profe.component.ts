@@ -25,12 +25,16 @@ profe:Profe = {
   psswConf: "",
 
 }
+profesorEditar = {
+  mail:"" ,
+  pssw:""
+}
 
 serverProfesorService: any;
   myGroup: any;
 
 // constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private serverProfesorService: ServerProfesorService, private http: HttpClient)
-constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService, private http: HttpClient) {
+constructor(FormGroup: FormGroup, router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService, private http: HttpClient) {
   this.route = route;
   this.router = router;
   this.serverProfesorService = serverProfesorService;
@@ -59,10 +63,25 @@ onSubmit() {
 }
 
 modificarProfesor(){
-  this.serverProfesorService.modificarProfesor(this.profe.id_profesor,this.profe.nick, this.profe.fname, this.profe.lname, this.profe.mail, this.profe.centro, this.profe.pssw, this.profe.psswConf).subscribe(
-    (      datos: Profe)  => this.profe = datos
-  );
-this.router.navigate(['pprofe',this.profe]);
+//   this.serverProfesorService.modificarProfesor(this.profe.id_profesor,this.profe.nick, this.profe.fname, this.profe.lname, this.profe.mail, this.profe.centro, this.profe.pssw, this.profe.psswConf).subscribe(
+//     (      datos: Profe)  => this.profe = datos
+//   );
+// this.router.navigate(['pprofe',this.profe]);
+
+/////////////////////////////////////////////////
+
+this.profesorEditar.mail =  this.profe.mail;
+this.profesorEditar.pssw = this.profe.pssw;
+
+this.serverProfesorService.modificarProfesor(this.profesorEditar).subscribe(
+  (  datos: any)  => {
+    this.router.navigate(['pprofe', datos]);
+  }
+);
+
+
+
+
 }
 // get data() { return this.profe.controls; }
 

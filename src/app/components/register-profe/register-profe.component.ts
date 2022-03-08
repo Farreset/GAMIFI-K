@@ -50,11 +50,10 @@ export class RegisterProfeComponent implements OnInit {
       validator: PasswordValidator('pssw', 'psswConf')
     });
 
-    //Se llama a la funcion registrarProfesor
-
 
   }
    onSubmit() {
+     //Se llama a la funcion registrarProfesor
     this.registrarProfesor();
 
 }

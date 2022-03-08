@@ -5,7 +5,7 @@
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Headers: Authorization');
     header('Content-Type application/json; charset=utf-8');
-   
+
     $json =file_get_contents('php://input');
     $alumnoParam =json_decode($json);
 
@@ -23,14 +23,14 @@
   echo $json;
 
   // REALIZA LA QUERY A LA DB
- $registros = mysqli_query($conexion, "INSERT INTO `alumnos` (`id_profesor`, `nick`, `fname`, `lname`, `mail`, `year`, `pssw`, `psswConf`)  
+ $registros = mysqli_query($conexion, "INSERT INTO `alumnos` (`id_alumno`, `nick`, `fname`, `lname`, `mail`, `year`, `pssw`, `psswConf`)
  VALUES (NULL, '$alumnoParam->nick', '$alumnoParam->fname', '$alumnoParam->lname', '$alumnoParam->mail', '$alumnoParam->year', '$alumnoParam->pssw', '$alumnoParam->psswConf')");
 
 
   echo "$registros";
   // GENERA LOS DATOS DE RESPUESTA
     if($registros){
-      $resultado = 'OK';  
+      $resultado = 'OK';
     }else{
       $resultado = 'NO';
     }
