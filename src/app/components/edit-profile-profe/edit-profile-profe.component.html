@@ -3,15 +3,16 @@
     <div class="main-body">
       <div class="row gutters">
         <div class="col-md-12 ">
+          <form [formGroup]="profes" (ngSubmit)="onSubmit()">
           <div class="card">
             <div class="card-body">
               <div class="row">
                 <div class="col-3">
                   <h6 class="mt-3">Nombre</h6>
                 </div>
-                <div class="col-7 text-secondary">
-                  <input type="fname" id="fname" class="form-control form-control-lg" placeholder="{{ profe.fname }}"
-                          formControlName="fname" [(ngModel)]="profe.fname">
+                <div class="col-7 text-secondary"> 
+                  <input type="fname" id="fname" class="form-control form-control-lg" 
+                          formControlName="fname" [(ngModel)]="profe.fname" name="profe.fname">
                 </div>
               </div>
               <hr>
@@ -48,14 +49,15 @@
     
               <div class="row">
               <div class="col-6">
-                <a class="btn btn-outline-info ">Aplicar cambios</a>
+                <button type="submit"class="btn btn-outline-info ">Aplicar cambios</button>
               </div>
               <div class="col-6">
-                <a (click)="volver()" class="btn btn-outline-danger ">Cancelar</a>
+                <button action="volver()" class="btn btn-outline-danger ">Cancelar</button>
               </div>
             </div>
           </div>
           </div>
+        </form>
         </div>
       </div>
     </div>

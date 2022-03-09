@@ -7,8 +7,8 @@
     header('Access-Control-Allow-Headers: Authorization');
     header('Content-Type application/json; charset=utf-8');
    
-    $json =file_get_contents('php://input');
-    $profesores =json_decode($json);
+    
+ 
 
   global $datos;
  
@@ -17,15 +17,15 @@
 
   //Documentacion https://www.php.net/manual/es/wrappers.php.php
   $json = file_get_contents('php://input');
-
-  $params = json_decode($json);
-
-  echo "Php abierto correctamente";
-  echo $json;
+   $profesores =json_decode($json);
+ 
+  echo($profesores);
+  // echo "Php abierto correctamente";
+  // echo $json;
 
   // REALIZA LA QUERY A LA DB
- $registros = mysqli_query($conexion, "UPDATE `profesores` SET nick = '$profesores->nick', fname = '$profesores->fnam', lname = '$profesores->lnam', mail = '$profesores->mail', centro = '$profesores->cento', 
-  pssw = '$profesores->pssw' WHERE id_profesor ='$profesores->id_pofesor';");
+ $registros = mysqli_query($conexion, "UPDATE `profesores` SET nick = '$profesores->nick', fname = '$profesores->fname', lname = '$profesores->lname', mail = '$profesores->mail', centro = '$profesores->centro', 
+   WHERE id_profesor ='$profesores->id_profesor';");
 
 
   echo "

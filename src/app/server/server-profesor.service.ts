@@ -23,18 +23,19 @@ export class ServerProfesorService {
   //   return this.http.get(`${this.URL}eliminarProfesor.php?nombreProfesor=${nombreProfesor}`);
   // }
   
-  modificarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any, pssw: any, psswConf: any) {
-    let profes: Profe = {
+  modificarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any) {
+    let profe: Profe = {
       id_profesor: id_profesor,
       nick: nick,
       fname: fname,
       lname: lname,
       centro: centro,
       mail: mail,
-      pssw: pssw,
-      psswConf: psswConf
+      pssw: '',
+      psswConf: ''
     }
-    return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
+    console.log(profe);
+    return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profe));
   }
 
   

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Profe } from 'src/app/interfaces/interfaz';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-profe',
@@ -12,6 +13,7 @@ export class ProfileProfeComponent implements OnInit {
   public profes:Profe[] = [] ;
   router: Router;
   route: ActivatedRoute;
+  profesGrup!:FormGroup;
   profe: Profe = {
     id_profesor: 0,
     nick: '',
@@ -55,7 +57,10 @@ export class ProfileProfeComponent implements OnInit {
       editar(){
             this.router.navigate(['editar-profe', this.profe]);
 
+
       }
+
+      
 
 
 
