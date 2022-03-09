@@ -35,7 +35,6 @@ export class ProfileProfeComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
     this.profe = {
             id_profesor: Number(this.route.snapshot.paramMap.get('id_profesor')),
