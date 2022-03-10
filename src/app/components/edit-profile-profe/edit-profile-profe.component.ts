@@ -81,10 +81,25 @@ onSubmit() {
 }
 
 modificarProfesor(){
-  this.serverProfesorService.modificarProfesor(this.profe.id_profesor,this.profe.nick, this.profe.fname, this.profe.lname, this.profe.mail, this.profe.centro).subscribe(
-    (              datos: any)  => this.profesores = datos
+  let profe: Profe = {
+    id_profesor: this.profe.id_profesor,
+    nick: this.profe.nick,
+    fname: this.profe.fname,
+    lname: this.profe.lname,
+    centro: this.profe.centro,
+    mail: this.profe.mail,
+    pssw: '',
+    psswConf: ''
+  }
+  this.serverProfesorService.modificarProfesor(profe).subscribe(
+    (    datos: string) => {
+      if (datos == 'OK') {
+        console.log('ok');
+      }else{
+        console.log('nooo');
+      }
+    }
   );
-this.router.navigate(['login']);
 }
 // get data() { return this.profe.controls; }
 
