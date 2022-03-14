@@ -60,7 +60,7 @@ ngOnInit(): void {
  lname: [''],
  nick: [''],
  mail: [''],
- centro: [''] 
+ centro: ['']
 });
 // this.myGroup = new FormGroup({
 //   firstName: [)
@@ -77,7 +77,6 @@ this.profes = new FormGroup({
 
 onSubmit() {
   this.modificarProfesor();
-
 }
 
 modificarProfesor(){
@@ -92,7 +91,7 @@ modificarProfesor(){
     psswConf: ''
   }
   this.serverProfesorService.modificarProfesor(profe).subscribe(
-    (    datos: string) => {
+    (datos: string) => {
       if (datos == 'OK') {
         console.log('ok');
       }else{
@@ -100,48 +99,11 @@ modificarProfesor(){
       }
     }
   );
-}
-// get data() { return this.profe.controls; }
-
-editar(){
-  this.router.navigate(['editar-profe']);
-
-
+  this.router.navigate(['pprofe', this.profe]);
 }
 
-
-// //   async editarImagen() {
-
-// //   const { value: file } = await Swal.fire({
-// //     title: 'Select image',
-// //     input: 'file',
-// //     inputAttributes: {
-// //       'accept': 'image/*',
-// //       'aria-label': 'Upload your profile picture'
-// //     }
-// //   })
-  
-// // //   if (file) {
-// // //     const reader = new FileReader()
-// // //     reader.onload = (e) => {
-            
-// // //       Swal.fire({
-// // //         title: 'Your uploaded picture',
-// // //         imageUrl: e.target.result,
-// // //         imageAlt: 'The uploaded picture'
-// // //       })
-// // //     }
-// // //     reader.readAsDataURL(file)
-// // //   }
-// }
-
-
-
-
-
-volver(){
-
-  this.router.navigate(['pprofe',this.profe]);
-}
+  volver(){
+    this.router.navigate(['pprofe',this.profe]);
+  }
 
 }
