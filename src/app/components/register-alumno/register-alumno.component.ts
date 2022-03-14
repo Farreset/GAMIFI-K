@@ -18,6 +18,7 @@ export class RegisterAlumnoComponent implements OnInit {
   submitted = false;
   ServiceService: any;
   isValidFormSubmitted = false;
+
   alumnos:Alumno = {
     id_alumno: 0,
     nick: "",
@@ -27,8 +28,8 @@ export class RegisterAlumnoComponent implements OnInit {
     mail:"" ,
     pssw:"" ,
     psswConf: ""
-  } 
-  
+  }
+
   alumnoParam: any;
 
   constructor(private formBuilder: FormBuilder, private router: Router, ServiceService: ServiceService, private serverAlumnoService: ServerAlumnoService, private http: HttpClient){
@@ -49,9 +50,9 @@ export class RegisterAlumnoComponent implements OnInit {
       validator: PasswordValidator('pssw', 'psswConf')
     });
 
-  
+
   }
-   
+
   onSubmit() {
     this.registrarAlumno();
   }
@@ -61,11 +62,9 @@ export class RegisterAlumnoComponent implements OnInit {
 
     this.serverAlumnoService.insertarAlumnos(this.alumnos.id_alumno,this.alumnos.nick, this.alumnos.fname, this.alumnos.lname, this.alumnos.mail, this.alumnos.year, this.alumnos.pssw, this.alumnos.psswConf).subscribe(
       datos  => this.alumnoParam = datos
-     
-      ); 
+      );
     this.router.navigate(['login']);
   }
-
   get data() { return this.alumno.controls; }
 
 
