@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Profe } from 'src/app/interfaces/interfaz';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 import { FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile-profe',
@@ -22,7 +23,8 @@ export class ProfileProfeComponent implements OnInit {
     mail: "",
     centro: "",
     pssw: "",
-    psswConf: "",
+    psswConf: ""
+    // avatar: ""
 
   }
   serverProfesorService: any;
@@ -45,6 +47,7 @@ export class ProfileProfeComponent implements OnInit {
             centro: String(this.route.snapshot.paramMap.get('centro')),
             pssw: String(this.route.snapshot.paramMap.get('pssw')),
             psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
+            // avatar: String(this.route.snapshot.paramMap.get('avatar'))
 
           }
       }
@@ -58,10 +61,8 @@ export class ProfileProfeComponent implements OnInit {
 
 
       }
-
       
-
-
+  
 
       addRank(){
 

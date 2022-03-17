@@ -23,7 +23,7 @@ export class RegisterAlumnoComponent implements OnInit {
     nick: "",
     fname:"" ,
     lname:"" ,
-    year:"",
+    fecha:"",
     mail:"" ,
     pssw:"" ,
     psswConf: ""
@@ -41,7 +41,7 @@ export class RegisterAlumnoComponent implements OnInit {
         nick:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
         fname:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z]+$')]],
         lname:['', [Validators.required,Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z]+$') ]],
-        year:['', [Validators.required ]],
+        fecha:['', [Validators.required ]],
         mail:['', [Validators.required, Validators.email]],
         pssw:['', [Validators.required, Validators.minLength(8)]],
         psswConf:['', [Validators.required, Validators.minLength(8)]]
@@ -59,7 +59,7 @@ export class RegisterAlumnoComponent implements OnInit {
   //Funcion para conectar con el php
   registrarAlumno(){
 
-    this.serverAlumnoService.insertarAlumnos(this.alumnos.id_alumno,this.alumnos.nick, this.alumnos.fname, this.alumnos.lname, this.alumnos.mail, this.alumnos.year, this.alumnos.pssw, this.alumnos.psswConf).subscribe(
+    this.serverAlumnoService.insertarAlumnos(this.alumnos.id_alumno,this.alumnos.nick, this.alumnos.fname, this.alumnos.lname, this.alumnos.mail, this.alumnos.fecha, this.alumnos.pssw, this.alumnos.psswConf).subscribe(
       datos  => this.alumnoParam = datos
      
       ); 

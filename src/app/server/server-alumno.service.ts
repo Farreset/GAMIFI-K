@@ -21,13 +21,13 @@ export class ServerAlumnoService {
   // eliminarProfesor(nombreProfesor) {
   //   return this.http.get(`${this.URL}eliminarProfesor.php?nombreProfesor=${nombreProfesor}`);
   // }
-  modificarAlumno(id_alumno: any, nick: any, fname: any, lname: any, mail: any, year: any, pssw: any, psswConf: any) {
+  modificarAlumno(id_alumno: any, nick: any, fname: any, lname: any, mail: any, fecha: any, pssw: any, psswConf: any) {
     let alumnos: Alumno = {
       id_alumno: id_alumno,
       nick: nick,
       fname: fname,
       lname: lname,
-      year: year,
+      fecha: fecha,
       mail: mail,
       pssw: pssw,
       psswConf: psswConf
@@ -35,13 +35,13 @@ export class ServerAlumnoService {
     return this.http.post(`${this.URL}alumnos/modificarAlumno.php`,JSON.stringify(alumnos));
   }
 
-  insertarAlumnos(id_alumno: any, nick: any, fname: any, lname: any, mail: any, year: any, pssw: any, psswConf: any){
+  insertarAlumnos(id_alumno: any, nick: any, fname: any, lname: any, mail: any, fecha: any, pssw: any, psswConf: any){
     let alumnos: Alumno = {
       id_alumno: id_alumno,
       nick: nick,
       fname: fname,
       lname: lname,
-      year: year,
+      fecha: fecha,
       mail: mail,
       pssw: pssw,
       psswConf: psswConf

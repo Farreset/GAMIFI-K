@@ -23,8 +23,9 @@
   echo $json;
 
   // REALIZA LA QUERY A LA DB
- $registros = mysqli_query($conexion, "INSERT INTO `alumnos` (`id_alumno`, `nick`, `fname`, `lname`, `mail`, `year`, `pssw`, `psswConf`)  
- VALUES (NULL, '$alumnoParam->nick', '$alumnoParam->fname', '$alumnoParam->lname', '$alumnoParam->mail', '$alumnoParam->year', '$alumnoParam->pssw', '$alumnoParam->psswConf')");
+ $registros = mysqli_query($conexion, "INSERT INTO `alumnos` (`id_alumno`, `nick`, `fname`, `lname`, `mail`, `fecha`, `pssw`, `psswConf`)  
+ VALUES (NULL, '$alumnoParam->nick', '$alumnoParam->fname', '$alumnoParam->lname', '$alumnoParam->mail', '$alumnoParam->fecha', '$alumnoParam->pssw', '$alumnoParam->psswConf')");
+
 
 
   echo "$registros";

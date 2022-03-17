@@ -7,8 +7,9 @@
     header('Content-Type text/html; charset=utf-8');
     header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
    
+   
     $json = file_get_contents('php://input');
-    $profesores = json_decode($json);
+    $usuario = json_decode($json);
 
     global $datos;
 
@@ -17,18 +18,47 @@
 
     $conexion = conexion(); // CREA LA CONEXION
 
+   
+    // $resultado = mysqli_query($conexion, $registros);
+    // mysqli_num_rows($resultado);
 
-    // REALIZA LA QUERY A LA BD
-    $registros = mysqli_query($conexion, "SELECT * FROM profesores WHERE mail='$profesores->mail' AND pssw='$profesores->pssw'");
+    // $resultado2 = mysqli_query($conexion, $registros2);
+    // mysqli_num_rows($resultado2);
 
 
-    // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
+   
+   
+    $registros = mysqli_query($conexion, "SELECT * FROM profesores WHERE mail='$usuario->mail' AND pssw='$usuario->pssw'");
 
-    $resultado = $registros->fetch_assoc();
-
-    $json = json_encode($resultado); // GENERA EL JSON CON LOS DATOS OBTENIDOS
-
-    echo $json; // MUESTRA EL JSON GENERADO AL EJECUTAR DIRECTAMENTE EL LOCALHOST
-
+    if(!$registros){
+        $response = 'Error';
+        echo json_encode($response);
+    }else{
+        if($registros->num_rows == 0){
+            $registros2 = mysqli_query($conexion,"SELECT * FROM alumnos WHERE mail='$usuario->mail' AND pssw='$usuario->pssw'");
+            if($registros2->num_rows == 0){
+                $response = 'Cuenta';
+               echo json_encode($response);
+            }else{
+                $datos = $registros2->fetch_assoc();
+                if($datos['pssw'] == $usuario->pssw){
+                    $json = json_encode($datos);
+                    echo $json;
+                }else{
+                    $response = 'pssw';
+                    echo json_encode($response);
+                }
+            }
+        }else{
+            $datos = $registros->fetch_assoc();
+            if($datos['pssw'] == $usuario->pssw){
+                $json = json_encode($datos);
+                echo $json;
+            }else{
+                $response = 'pssw';
+                echo json_encode($response);
+            }
+        }
+    }
 
 ?>

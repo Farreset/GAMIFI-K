@@ -18,12 +18,24 @@ export class LoginComponent implements OnInit {
   alumnosArray = [];
   alumno!:FormGroup;
 
-  alumnos:Alumno = {
+  datosUsuario: any={
+    id_profesor: 0,
     id_alumno: 0,
     nick: "",
     fname:"" ,
     lname:"" ,
-    year:"" ,
+    fecha:"" ,
+    centro:"" ,
+    mail:"" ,
+    pssw:"", 
+    psswConf:"",
+  }
+  alumnos:Alumno|any = {
+    id_alumno: 0,
+    nick: "",
+    fname:"" ,
+    lname:"" ,
+    fecha:"" ,
     mail:"" ,
     pssw:"", 
     psswConf:"", 
@@ -37,7 +49,7 @@ export class LoginComponent implements OnInit {
   profesArray = [];
   profe!:FormGroup;
 
-  profes:Profe = {
+  profes:Profe|any = {
     id_profesor: 0,
     nick: "",
     fname:"" ,
@@ -72,21 +84,23 @@ export class LoginComponent implements OnInit {
     // console.log(this.ServiceService)
   }
 
-  get data() { if(this.profe){
-    return this.profe.controls;}
-  else{
-    return this.alumno.controls;
-  } }
-  
-
-
-   onSubmit() {
-    if(this.profe){
-    this.listarProfesor();
+  get data() { 
+      if(this.profe){
+      return this.profe.controls;
     }else{
-    this.listarAlumno();
-    }
-    }
+      return this.alumno.controls;
+    } 
+  }
+
+
+
+  //  onSubmit() {
+  //   if(this.profe){
+  //     this.listarProfesor();
+  //   }else{
+  //     this.listarAlumno();
+  //     }
+  //   }
 
   //Funcion para conectar con el php
   listarProfesor(){
@@ -94,11 +108,18 @@ export class LoginComponent implements OnInit {
     this.profesorInicio.mail =  this.profes.mail;
     this.profesorInicio.pssw = this.profes.pssw;
     
+  
+        
     this.serverProfesorService.listarProfesor(this.profesorInicio).subscribe(
       datos  => {
-        this.router.navigate(['pprofe', datos]);
+        this.datosUsuario = datos;
+        if(this.datosUsuario.centro){
+          this.router.navigate(['pprofe', datos]);
+        }else {
+          this.router.navigate(['palumno', datos]);
+        }
       } 
-    );
+  );
 
   }
   listarAlumno(){

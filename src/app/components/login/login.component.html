@@ -28,7 +28,7 @@
                 <h2 class="fw-bold mb-2 text-uppercase">AJESTY LOGIN</h2>
 <hr size="7" class="rounded">
 
-                <form [formGroup]="profe" (ngSubmit)="onSubmit()" class="p-3 mt-3">
+                <form [formGroup]="profe" (ngSubmit)="listarProfesor()" class="p-3 mt-3">
                 <div class="form-outline form-white mb-4">
                     <label class="form-label" for="typeEmailX">Correo</label>
                   <input type="email" id="typeEmailX" class="form-control form-control-lg"  placeholder="ejemplo@mail.com"
@@ -46,7 +46,7 @@
                 </div>
              </form>
     
-                <button (click)="onSubmit()" [disabled]="!profe.valid" class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar Sesion</button>
+                <button (click)="listarProfesor()" [disabled]="!profe.valid" class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar Sesion</button>
                 
 
               </div>

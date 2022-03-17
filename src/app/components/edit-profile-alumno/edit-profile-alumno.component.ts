@@ -19,7 +19,7 @@ alumno:Alumno = {
   fname: "",
   lname: "",
   mail: "",
-  year: "",
+  fecha: "",
   pssw: "",
   psswConf: "",
 
@@ -41,7 +41,7 @@ ngOnInit(): void {
     lname: String(this.route.snapshot.paramMap.get('lname')),
     nick: String(this.route.snapshot.paramMap.get('nick')),
     mail: String(this.route.snapshot.paramMap.get('mail')),
-    year: String(this.route.snapshot.paramMap.get('year')),
+    fecha: String(this.route.snapshot.paramMap.get('year')),
     pssw: String(this.route.snapshot.paramMap.get('pssw')),
     psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
 }
@@ -53,7 +53,7 @@ onSubmit() {
 }
 
 modificarAlumno(){
-  this.serverAlumnoService.modificarProfesor(this.alumno.id_alumno,this.alumno.nick, this.alumno.fname, this.alumno.lname, this.alumno.mail, this.alumno.year, this.alumno.pssw, this.alumno.psswConf).subscribe(
+  this.serverAlumnoService.modificarProfesor(this.alumno.id_alumno,this.alumno.nick, this.alumno.fname, this.alumno.lname, this.alumno.mail, this.alumno.fecha, this.alumno.pssw, this.alumno.psswConf).subscribe(
     (      datos: Alumno)  => this.alumno = datos
   );
 this.router.navigate(['login']);
