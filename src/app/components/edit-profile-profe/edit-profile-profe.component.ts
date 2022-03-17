@@ -60,7 +60,7 @@ ngOnInit(): void {
  lname: [''],
  nick: [''],
  mail: [''],
- centro: [''] 
+ centro: ['']
 });
 // this.myGroup = new FormGroup({
 //   firstName: [)
@@ -77,7 +77,6 @@ this.profes = new FormGroup({
 
 onSubmit() {
   this.modificarProfesor();
-
 }
 
 modificarProfesor(){
@@ -92,7 +91,7 @@ modificarProfesor(){
     psswConf: ''
   }
   this.serverProfesorService.modificarProfesor(profe).subscribe(
-    (    datos: string) => {
+    (datos: string) => {
       if (datos == 'OK') {
         console.log('ok');
       }else{

@@ -17,7 +17,7 @@ export class ServerAlumnoService {
   listarAlumno(alumnoParam: any) {
     return this.http.post(`${this.URL}alumnos/listarAlumnos.php`,JSON.stringify(alumnoParam));
   }
-  
+
   // eliminarProfesor(nombreProfesor) {
   //   return this.http.get(`${this.URL}eliminarProfesor.php?nombreProfesor=${nombreProfesor}`);
   // }
@@ -48,10 +48,10 @@ export class ServerAlumnoService {
     }
     return this.http.post(`${this.URL}alumnos/insertarAlumnos.php`,JSON.stringify(alumnos));
   }
-  
+
   // modificarProfesorEquipos(nombreProfesor, modoEquipos){
   //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
-  
+
   // }
 
 

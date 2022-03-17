@@ -38,8 +38,8 @@
                       <input type="text" id="nick" class="form-control form-control-lg" placeholder="Apodo"
                         formControlName="nick" [(ngModel)]="alumnos.nick">
                     </div>
-                
-                    <!-- <div *ngIf="nick.errors?.required"> 
+
+                    <!-- <div *ngIf="nick.errors?.required">
                       Se requiere un apodo
                     </div>  -->
                   </div>
@@ -67,14 +67,14 @@
 
                     </div>
                   </div>
-               
-                
+
+
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                       <div class="form-outline form-white mb-4">
                         <label class="form-label" for="mail">Email</label>
                         <input type="mail" id="mail" class="form-control form-control-lg" placeholder="ejemplo@mail.com"
                           formControlName="mail" [(ngModel)]="alumnos.mail">
-  
+
                       </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -92,13 +92,10 @@
                     </div>
                   </div>
                 </div>
-              
 
-              <button class="btn btn-outline-light btn-lg px-5" type="submit" [disabled]="!alumno.valid">Registrase</button>
-
-</form>
+                <button class="btn btn-outline-light btn-lg px-5" type="submit" [disabled]="!alumno.valid">Registrase</button>
+              </form>
             </div>
-
             <div>
               <p class="mb-0">Ya estas registrado? <a (click)="login()" class="text-white-50 fw-bold">Iniciar Sesion</a></p>
             </div>

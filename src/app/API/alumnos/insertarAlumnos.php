@@ -5,7 +5,7 @@
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Headers: Authorization');
     header('Content-Type application/json; charset=utf-8');
-   
+
     $json =file_get_contents('php://input');
     $alumnoParam =json_decode($json);
 
@@ -31,7 +31,7 @@
   echo "$registros";
   // GENERA LOS DATOS DE RESPUESTA
     if($registros){
-      $resultado = 'OK';  
+      $resultado = 'OK';
     }else{
       $resultado = 'NO';
     }
