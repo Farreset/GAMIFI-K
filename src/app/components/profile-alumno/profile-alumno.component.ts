@@ -45,7 +45,7 @@ export class ProfileAlumnoComponent implements OnInit {
       }
       volver(){
         
-        this.router.navigate(['home']);
+        this.router.navigate(['']);
       }
 
       ranking(){
@@ -53,9 +53,11 @@ export class ProfileAlumnoComponent implements OnInit {
         this.router.navigate(['ranking']);
       }
 
-      modificar(){
-        
-      }
+      editar(){
+        this.router.navigate(['editar-alumno', this.alumno]);
+
+
+  }
 
       async editarImagen() {
 

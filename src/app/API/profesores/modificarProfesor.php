@@ -15,7 +15,6 @@
   require("../db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
   $conexion = conexion(); // CREA LA CONEXION
 
-  //Documentacion https://www.php.net/manual/es/wrappers.php.php
   $json = file_get_contents('php://input');
   $profesores =json_decode($json);
  

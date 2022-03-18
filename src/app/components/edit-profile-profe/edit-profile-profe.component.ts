@@ -29,8 +29,6 @@ profe:Profe = {
 
 }
 serverProfesorService: any;
-
-
 profesores: any;
 
 constructor(router: Router, route: ActivatedRoute, serverProfesorService: ServerProfesorService, private  formBuilder: FormBuilder) {

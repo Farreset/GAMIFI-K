@@ -52,21 +52,20 @@ export class ProfileProfeComponent implements OnInit {
           }
       }
 
-      volver(){
+  volver(){
 
         this.router.navigate(['']);
-      }
-      editar(){
+  }
+  editar(){
             this.router.navigate(['editar-profe', this.profe]);
 
 
-      }
+  }
       
   
 
-      addRank(){
+addRank(){
 
-      }
+  }
 
-
-    }
+}
