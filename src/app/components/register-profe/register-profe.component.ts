@@ -28,6 +28,7 @@ export class RegisterProfeComponent implements OnInit {
     mail:"" ,
     pssw:"" ,
     psswConf: ""
+    
   }
   profesores: any;
 
@@ -46,6 +47,7 @@ export class RegisterProfeComponent implements OnInit {
       mail:['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       pssw:['', [Validators.required, Validators.minLength(8)]],
       psswConf:['', [Validators.required, Validators.minLength(8)]]
+      
     }, {
       validator: PasswordValidator('pssw', 'psswConf')
     });

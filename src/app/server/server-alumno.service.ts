@@ -14,8 +14,8 @@ export class ServerAlumnoService {
 
 
 
-  listarAlumno(alumnoParam: any) {
-    return this.http.post(`${this.URL}alumnos/listarAlumnos.php`,JSON.stringify(alumnoParam));
+  listarAlumno(params: any) {
+    return this.http.post(`${this.URL}alumnos/listarAlumnos.php`,JSON.stringify(params));
   }
 
   // eliminarProfesor(nombreProfesor) {
@@ -23,10 +23,11 @@ export class ServerAlumnoService {
   // }
   modificarAlumno(alumno:Alumno) {
    console.log(alumno);
+
     return this.http.post(`${this.URL}alumnos/modificarAlumnos.php`,JSON.stringify(alumno));
   }
 
-  insertarAlumnos(id_alumno: any, nick: any, fname: any, lname: any, mail: any, fecha: any, pssw: any, psswConf: any){
+  insertarAlumnos(id_alumno: any, nick: any, fname: any, lname: any, mail: any, fecha: any, pssw: any, psswConf: any, avatar: any){
     let alumnos: Alumno = {
       id_alumno: id_alumno,
       nick: nick,
@@ -35,7 +36,8 @@ export class ServerAlumnoService {
       fecha: fecha,
       mail: mail,
       pssw: pssw,
-      psswConf: psswConf
+      psswConf: psswConf,
+      avatar: avatar
     }
     return this.http.post(`${this.URL}alumnos/insertarAlumnos.php`,JSON.stringify(alumnos));
   }

@@ -20,9 +20,13 @@ export class ProfileAlumnoComponent implements OnInit {
     mail: "",
     fecha: "",
     pssw: "",
-    psswConf: ""
+    psswConf: "",
+    avatar: ""
     
   } 
+  serverAlumnoService: any;
+  modificarAlumno: any;
+  
    
   constructor(router: Router, route: ActivatedRoute) {
 
@@ -40,7 +44,8 @@ export class ProfileAlumnoComponent implements OnInit {
             mail: String(this.route.snapshot.paramMap.get('mail')),
             fecha: String(this.route.snapshot.paramMap.get('fecha')),
             pssw: String(this.route.snapshot.paramMap.get('pssw')),
-            psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
+            psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
+            avatar: String(this.route.snapshot.paramMap.get('avatar'))
           } 
       }
       volver(){
@@ -70,29 +75,29 @@ export class ProfileAlumnoComponent implements OnInit {
           }
         })
         
-        // if (file) {
-        //     const reader = new FileReader()
-        //     reader.onload = (e) => {
-        //       const imageUrl = reader.result;
-        //       let old = this.modificarProfesor.avatar;
-        //       this.modificarProfesor.avatar = imageUrl;
-        //       this.serverProfesorService.editarImagen(this.modificarProfesor).subscribe(
-        //         (          datos: string)  => {
-        //           if(datos == 'ok'){
-        //             localStorage.setItem('usuario', JSON.stringify(this.modificarProfesor));
-        //             Swal.fire(
-        //               'Correcto',
-        //             )
-        //           }else{
-        //             this.modificarProfesor.avatar = old;
-        //             Swal.fire(
-        //               'Error',
-        //           )
-        //         }
-        //       }
-        //       );
-        //     }  
-        //     reader.readAsDataURL(file);
-        // }
+        if (file) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+              const imageUrl = reader.result;
+              let old = this.modificarAlumno.avatar;
+              this.modificarAlumno.avatar = imageUrl;
+              this.serverAlumnoService.editarImagen(this.modificarAlumno).subscribe(
+                (          datos: string)  => {
+                  if(datos == 'ok'){
+                    localStorage.setItem('usuario', JSON.stringify(this.modificarAlumno));
+                    Swal.fire(
+                      'Correcto',
+                    )
+                  }else{
+                    this.modificarAlumno.avatar = old;
+                    Swal.fire(
+                      'Error',
+                  )
+                }
+              }
+              );
+            }  
+            reader.readAsDataURL(file);
+        }
       }
     }

@@ -7,7 +7,7 @@ export interface Profe {
   centro :string;
   pssw :string;
   psswConf :string;
-  // avatar : string;
+  
   }
 
 export interface Alumno {
@@ -19,6 +19,6 @@ export interface Alumno {
   mail :string;
   pssw :string;
   psswConf :string;
-  // avatar: string;
+  avatar : string;
 
   }

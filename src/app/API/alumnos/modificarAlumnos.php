@@ -6,10 +6,8 @@
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Headers: Authorization');
     header('Content-Type application/json; charset=utf-8');
-
-    echo "Php abierto correctamente";
-
-    global $datos;
+    header('Content-Type: application/json');
+   
  
   require("../db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
   $conexion = conexion(); // CREA LA CONEXION
@@ -20,7 +18,7 @@
  
   //echo($params);
  
- $registros = mysqli_query($conexion, "UPDATE `alumnos` SET nick = '$params->nick', fname = '$params->fname', lname = '$params->lname', mail = '$params->mail', fecha = '$params->fecha' WHERE id_alumno ='$params->id_alumno';");
+ $registros = mysqli_query($conexion, "UPDATE `alumnos` SET nick = '$params->nick', fname = '$params->fname', lname = '$params->lname', mail = '$params->mail', fecha = '$params->fecha' WHERE id_alumno = $params->id_alumno;");
 
 
 
@@ -28,9 +26,9 @@
     if($registros){
       $resultado = 'OK';  
     }else{
-      $registros = 'NO';
+      $resultado = 'NO';
     }
-  header('Content-Type: application/json');
+ 
 
   echo json_encode($resultado); // MUESTRA EL JSON GENERADO
 

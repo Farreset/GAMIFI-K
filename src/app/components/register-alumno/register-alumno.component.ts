@@ -27,7 +27,8 @@ export class RegisterAlumnoComponent implements OnInit {
     fecha:"",
     mail:"" ,
     pssw:"" ,
-    psswConf: ""
+    psswConf: "",
+    avatar: ""
   }
 
   alumnoParam: any;
@@ -45,7 +46,8 @@ export class RegisterAlumnoComponent implements OnInit {
         fecha:['', [Validators.required ]],
         mail:['', [Validators.required, Validators.email]],
         pssw:['', [Validators.required, Validators.minLength(8)]],
-        psswConf:['', [Validators.required, Validators.minLength(8)]]
+        psswConf:['', [Validators.required, Validators.minLength(8)]],
+       
     }, {
       validator: PasswordValidator('pssw', 'psswConf')
     });
@@ -60,7 +62,7 @@ export class RegisterAlumnoComponent implements OnInit {
   //Funcion para conectar con el php
   registrarAlumno(){
 
-    this.serverAlumnoService.insertarAlumnos(this.alumnos.id_alumno,this.alumnos.nick, this.alumnos.fname, this.alumnos.lname, this.alumnos.mail, this.alumnos.fecha, this.alumnos.pssw, this.alumnos.psswConf).subscribe(
+    this.serverAlumnoService.insertarAlumnos(this.alumnos.id_alumno,this.alumnos.nick, this.alumnos.fname, this.alumnos.lname, this.alumnos.mail, this.alumnos.fecha, this.alumnos.pssw, this.alumnos.psswConf, this.alumnos.avatar).subscribe(
       datos  => this.alumnoParam = datos
       );
     this.router.navigate(['login']);

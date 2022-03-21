@@ -25,6 +25,7 @@ alumno:Alumno = {
   fecha: "",
   pssw: "",
   psswConf: "",
+  avatar: ""
 
 }
 serverAlumnoService: any;
@@ -47,7 +48,9 @@ ngOnInit(): void {
     mail: String(this.route.snapshot.paramMap.get('mail')),
     fecha: String(this.route.snapshot.paramMap.get('fecha')),
     pssw: String(this.route.snapshot.paramMap.get('pssw')),
-    psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
+    psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
+    avatar: String(this.route.snapshot.paramMap.get('avatar'))
+    
 };
 
 this.alums = this.formBuilder.group({
@@ -80,7 +83,8 @@ modificarAlumno(){
     fecha: this.alumno.fecha,
     mail: this.alumno.mail,
     pssw: '',
-    psswConf: ''
+    psswConf: '',
+    avatar: ''
   }
   this.serverAlumnoService.modificarAlumno(alumno).subscribe(
     (datos: string) => {

@@ -29,7 +29,7 @@
     if($registros){
       $resultado = 'OK';  
     }else{
-      $registros;
+      $resultado = 'No';
     }
   header('Content-Type: application/json');
 
