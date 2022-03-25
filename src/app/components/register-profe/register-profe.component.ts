@@ -27,7 +27,8 @@ export class RegisterProfeComponent implements OnInit {
     centro:"" ,
     mail:"" ,
     pssw:"" ,
-    psswConf: ""
+    psswConf: "",
+    avatar : ""
     
   }
   profesores: any;
@@ -63,7 +64,7 @@ export class RegisterProfeComponent implements OnInit {
 
   //Funcion para conectar con el php
   registrarProfesor(){
-    this.serverProfesorService.insertarProfesor(this.profes.id_profesor,this.profes.nick, this.profes.fname, this.profes.lname, this.profes.mail, this.profes.centro, this.profes.pssw, this.profes.psswConf).subscribe(
+    this.serverProfesorService.insertarProfesor(this.profes.id_profesor,this.profes.nick, this.profes.fname, this.profes.lname, this.profes.mail, this.profes.centro, this.profes.pssw, this.profes.psswConf,this.profes.avatar).subscribe(
       datos  => this.profesores = datos
     );
  this.router.navigate(['login']);
