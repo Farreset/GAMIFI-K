@@ -100,4 +100,13 @@ export class ProfileAlumnoComponent implements OnInit {
             reader.readAsDataURL(file);
         }
       }
+      async unirseRanking() {
+
+        const { value: file } = await Swal.fire({
+          title: 'Unirse ranking',
+          input: 'text',
+          text: 'Introduzca el codigo para unirte'
+        })
+      }
+
     }

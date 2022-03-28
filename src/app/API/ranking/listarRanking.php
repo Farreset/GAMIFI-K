@@ -13,32 +13,18 @@
 
 
   // REALIZA LA QUERY A LA DB
-  $registros = mysqli_query($conexion, "SELECT * FROM a_rankings");
+ $registros = mysqli_query($conexion, "SELECT name_r FROM ranking");
 
 
-  // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
+ echo "$registros";
+  
+ if($registros){
+   $resultado = 'OK';  
+ }else{
+   $resultado = 'NO';
+ }
+header('Content-Type: application/json');
 
-  while ($resultado = mysqli_fetch_array($registros))
-  {
-    $datos[] = $resultado;
-   }
-
-   for ($i=0;$i<sizeof($datos);$i++){
-     if($datos[$i]['equipos']==0){
-      $datos[$i]['equipos']=false;
-     }else{
-      $datos[$i]['equipos']=true;
-     }
-   }
-
-
-  $json = json_encode($datos); // GENERA EL JSON CON LOS DATOS OBTENIDOS
-
-
-  header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
-
-
-  echo $json; // MUESTRA EL JSON GENERADO AL EJECUTAR DIRECTAMENTE EL LOCALHOST
-
+echo json_encode($resultado); 
 
 ?>

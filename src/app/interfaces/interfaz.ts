@@ -22,3 +22,5 @@ export interface Alumno {
   avatar : string;
 
   }
+
+ 
