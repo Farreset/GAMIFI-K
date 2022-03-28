@@ -7,6 +7,8 @@ export interface Profe {
   centro :string;
   pssw :string;
   psswConf :string;
+  avatar : string;
+
   
   }
 

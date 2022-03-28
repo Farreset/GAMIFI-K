@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Alumno } from '../interfaces/interfaz';
+import { decimalDigest } from '@angular/compiler/src/i18n/digest';
 
 
 @Injectable({
@@ -41,6 +42,10 @@ export class ServerAlumnoService {
       avatar: avatar
     }
     return this.http.post(`${this.URL}alumnos/insertarAlumnos.php`,JSON.stringify(alumnos));
+  }
+  editarImagen(alumno: any){
+
+    return this.http.post(`${this.URL}alumnos/modificarAlumnos.php`,JSON.stringify(alumno));
   }
 
   // modificarProfesorEquipos(nombreProfesor, modoEquipos){

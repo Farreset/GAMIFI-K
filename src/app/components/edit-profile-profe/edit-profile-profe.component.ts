@@ -16,18 +16,7 @@ export class EditProfileProfeComponent implements OnInit {
 // public profes:Profe[] = [] ;
 router: Router;
 route: ActivatedRoute;
-profes!: FormGroup;
-profe:Profe = {
-  id_profesor: 0,
-  nick: '',
-  fname: "",
-  lname: "",
-  mail: "",
-  centro: "",
-  pssw: "",
-  psswConf: "",
 
-}
 serverProfesorService: any;
 profesores: any;
 
@@ -38,7 +27,19 @@ constructor(router: Router, route: ActivatedRoute, serverProfesorService: Server
   this.serverProfesorService = serverProfesorService;
 
 }
+profes!: FormGroup;
+profe:Profe = {
+  id_profesor: 0,
+  nick: '',
+  fname: "",
+  lname: "",
+  mail: "",
+  centro: "",
+  pssw: "",
+  psswConf: "",
+  avatar: ""
 
+}
 
 ngOnInit(): void {
   this.profe = {
@@ -49,7 +50,8 @@ ngOnInit(): void {
     mail: String(this.route.snapshot.paramMap.get('mail')),
     centro: String(this.route.snapshot.paramMap.get('centro')),
     pssw: String(this.route.snapshot.paramMap.get('pssw')),
-    psswConf: String(this.route.snapshot.paramMap.get('psswConf'))
+    psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
+    avatar: String(this.route.snapshot.paramMap.get('avatar'))
 
   };
 
@@ -86,7 +88,8 @@ modificarProfesor(){
     centro: this.profe.centro,
     mail: this.profe.mail,
     pssw: '',
-    psswConf: ''
+    psswConf: '',
+    avatar: ''
   }
   this.serverProfesorService.modificarProfesor(profe).subscribe(
     (datos: string) => {
@@ -110,6 +113,9 @@ editar(){
   volver(){
 
     this.router.navigate(['pprofe',this.profe]);
+  }
+  addRank(){
+    
   }
 
 }

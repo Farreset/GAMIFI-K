@@ -30,7 +30,7 @@ export class ServerProfesorService {
   }
 
   
-  insertarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any, pssw: any, psswConf: any){
+  insertarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any, pssw: any, psswConf: any, avatar: any){
     let profes: Profe = {
       id_profesor: id_profesor,
       nick: nick,
@@ -39,11 +39,16 @@ export class ServerProfesorService {
       centro: centro,
       mail: mail,
       pssw: pssw,
-      psswConf: psswConf
+      psswConf: psswConf,
+      avatar: avatar
+
     }
     return this.http.post(`${this.URL}profesores/insertarProfesor.php`,JSON.stringify(profes));
   }
-  
+  editarImagen(profe: any){
+
+    return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profe));
+  }
   // modificarProfesorEquipos(nombreProfesor, modoEquipos){
   //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
   

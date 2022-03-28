@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
 import { Alumno } from 'src/app/interfaces/interfaz';
 import Swal from 'sweetalert2';
 
@@ -9,9 +10,15 @@ import Swal from 'sweetalert2';
 })
 export class ProfileAlumnoComponent implements OnInit {
 
-  public alumnos:Alumno[] = [] ;
   router: Router; 
   route: ActivatedRoute;
+
+  constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService) {
+
+    this.route = route;
+    this.router = router;
+  }
+  
   alumno:Alumno = {
     id_alumno: 0,
     nick: '',
@@ -22,22 +29,25 @@ export class ProfileAlumnoComponent implements OnInit {
     pssw: "",
     psswConf: "",
     avatar: ""
-    
   } 
-  serverAlumnoService: any;
-  modificarAlumno: any;
-  
+  modificarAlumno: any = {
+    id_alumno: 0,
+    nick: '',
+    fname: "",
+    lname: "",
+    mail: "",
+    fecha: "",
+    pssw: "",
+    psswConf: "",
+    avatar: ""
+  } 
    
-  constructor(router: Router, route: ActivatedRoute) {
-
-    this.route = route;
-    this.router = router;
-  }
+ 
 
 
   ngOnInit(): void {
     this.alumno = {
-           id_alumno: Number(this.route.snapshot.paramMap.get('id')),
+           id_alumno: Number(this.route.snapshot.paramMap.get('id_alumno')),
             fname: String(this.route.snapshot.paramMap.get('fname')),
             lname: String(this.route.snapshot.paramMap.get('lname')),
             nick: String(this.route.snapshot.paramMap.get('nick')),
@@ -49,7 +59,7 @@ export class ProfileAlumnoComponent implements OnInit {
           } 
       }
       volver(){
-        
+        localStorage.clear();
         this.router.navigate(['']);
       }
 
@@ -61,8 +71,10 @@ export class ProfileAlumnoComponent implements OnInit {
       editar(){
         this.router.navigate(['editar-alumno', this.alumno]);
 
+      }
+      addRank(){
 
-  }
+      }
 
       async editarImagen() {
 
@@ -79,17 +91,22 @@ export class ProfileAlumnoComponent implements OnInit {
             const reader = new FileReader()
             reader.onload = (e) => {
               const imageUrl = reader.result;
+              this.modificarAlumno.id_alumno = this.alumno.id_alumno;
               let old = this.modificarAlumno.avatar;
+              this.modificarAlumno = this.alumno;
               this.modificarAlumno.avatar = imageUrl;
-              this.serverAlumnoService.editarImagen(this.modificarAlumno).subscribe(
-                (          datos: string)  => {
-                  if(datos == 'ok'){
-                    localStorage.setItem('usuario', JSON.stringify(this.modificarAlumno));
+
+              this.alumno = this.modificarAlumno;
+              console.log(this.alumno);
+              this.service.editarImagen(this.alumno).subscribe(
+                datos => {
+                  if(datos == 'OK'){
+                    localStorage.setItem('usuario', JSON.stringify(this.alumno));
                     Swal.fire(
                       'Correcto',
                     )
                   }else{
-                    this.modificarAlumno.avatar = old;
+                    this.alumno = old;
                     Swal.fire(
                       'Error',
                   )
