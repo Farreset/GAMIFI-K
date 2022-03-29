@@ -125,5 +125,48 @@ export class ProfileAlumnoComponent implements OnInit {
           text: 'Introduzca el codigo para unirte'
         })
       }
+      async modifyPassword() {
+
+        const { value: password } = await Swal.fire({
+          title: 'Enter your password',
+          input: 'password',
+          inputLabel: 'Password',
+          inputPlaceholder: 'Enter your password',
+        
+        })
+        
+        if (password) {
+          Swal.fire(`Entered password: ${password}`)
+        }
+        if (password) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+              const imageUrl = reader.result;
+              this.modificarAlumno.id_profesor = this.alumno.id_alumno;
+              let old = this.modificarAlumno.avatar;
+              this.modificarAlumno = this.alumno;
+              this.modificarAlumno.avatar = imageUrl;
+    
+              this.alumno = this.modificarAlumno;
+              console.log(this.alumno);
+              this.service.editarImagen(this.alumno).subscribe(
+                datos => {
+                  if(datos == 'OK'){
+                    localStorage.setItem('usuario', JSON.stringify(this.alumno));
+                    Swal.fire(
+                      'Correcto',
+                    )
+                  }else{
+                    this.alumno = old;
+                    Swal.fire(
+                      'Error',
+                  )
+                }
+              }
+              );
+            }  
+            reader.readAsDataURL(password);
+        }
+      }
 
     }

@@ -31,25 +31,25 @@
   // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
 
 
-    // if(!$registros){
-    //     $response = 'Error';
-    //     echo json_encode($response);
-    // }else{
-    //   if($registros->num_rows == 0){
-    //           $response = 'No existe';
-    //           echo json_encode($response);
-    //   } else{
-    //       $ranking = $registros->fetch_assoc();
-    //       $name_r_a = $ranking['name_r'];
-    //       $registros2 = mysqli_query($conexion, "INSERT INTO `r_alumno` (`name_r_a`,`id_alumno`)");
+    if(!$registros){
+        $response = 'Error';
+        echo json_encode($response);
+    }else{
+      if($registros->num_rows == 0){
+              $response = 'No existe';
+              echo json_encode($response);
+      } else{
+          $ranking = $registros->fetch_assoc();
+          $name_r_a = $ranking['name_r'];
+          $registros2 = mysqli_query($conexion, "INSERT INTO `r_alumno` (`name_r_a`,`id_alumno`)");
 
-    //       if(!$registros2){
-    //           $response = 'Error';
-    //       } else{
-    //           $response = $name_r_a;
-    //       }
-    //       echo json_encode($response);
-    //     }
-    // }
+          if(!$registros2){
+              $response = 'Error';
+          } else{
+              $response = $name_r_a;
+          }
+          echo json_encode($response);
+        }
+    }
 
 ?>

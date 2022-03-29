@@ -16,6 +16,13 @@ export class ProfileProfeComponent implements OnInit {
   route: ActivatedRoute;
   profesGrup!:FormGroup;
 
+ 
+
+
+    
+        
+    
+
   serverProfesorService: any;
   profesorInicio: any;
   constructor(router: Router, route: ActivatedRoute, private service: ServerProfesorService) {
@@ -70,14 +77,12 @@ export class ProfileProfeComponent implements OnInit {
   }
   editar(){
             this.router.navigate(['editar-profe', this.profe]);
-
-
   }
       
   addRank(){
 
   }
-
+  
 
   async editarImagen() {
 
@@ -163,4 +168,24 @@ export class ProfileProfeComponent implements OnInit {
         reader.readAsDataURL(password);
     }
   }
+
+ randomCodigo() {
+      let numero = '';
+      const characters = '0123456789';
+      const charactersLength = characters.length;
+      for (let i = 0; i < charactersLength; i++) {
+          numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return numero;
+    }
+
+  async codigoRanking() {
+    Swal.fire({
+      title: 'Tu codigo ' + this.randomCodigo(),
+    })
+    .then(result => {
+     console.log("Codigo " + this.randomCodigo);
+    });
+}
+   
 }

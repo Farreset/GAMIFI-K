@@ -29,6 +29,11 @@ export class ServerAlumnoService {
     return this.http.post(`${this.URL}alumnos/modificarAlumnos.php`,JSON.stringify(alumno));
   }
 
+  
+
+
+
+
   insertarAlumnos(id_alumno: any, nick: any, fname: any, lname: any, mail: any, fecha: any, pssw: any, psswConf: any, avatar: any){
     let alumnos: Alumno = {
       id_alumno: id_alumno,
