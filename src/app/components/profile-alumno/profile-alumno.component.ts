@@ -11,16 +11,19 @@ import Swal from 'sweetalert2';
 })
 export class ProfileAlumnoComponent implements OnInit {
 
-  router: Router;
+  router: Router; 
   route: ActivatedRoute;
+  name_r  = '';
+  algo: Object | undefined;
+  
 
   constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
 
     this.route = route;
     this.router = router;
   }
-
-  alumno: Alumno = {
+  
+  alumno:Alumno = {
     id_alumno: 0,
     nick: '',
     fname: "",
@@ -30,7 +33,7 @@ export class ProfileAlumnoComponent implements OnInit {
     pssw: "",
     psswConf: "",
     avatar: ""
-  }
+  } 
   modificarAlumno: any = {
     id_alumno: 0,
     nick: '',
@@ -41,14 +44,14 @@ export class ProfileAlumnoComponent implements OnInit {
     pssw: "",
     psswConf: "",
     avatar: ""
-  }
-
+  } 
+   
   ranking: Ranking = {
     id_r: 0,
     name_r: "",
-    cont_r: 0
+    cont_r: 0,
+    codigo: 0
   }
-
 
 
   ngOnInit(): void {
@@ -65,22 +68,44 @@ export class ProfileAlumnoComponent implements OnInit {
           },
 
           this.serverRankingService.listarRanking(this.ranking).subscribe(
-            datos => {
-              this.router.navigate(['palumno', datos]);
+            (datos: any ) => {
+              this.ranking = datos;
             }
           );
 
-    // this.ranking = {
-    //   id_r: Number(this.route.snapshot.paramMap.get('id_r')),
-    //   name_r: String(this.route.snapshot.paramMap.get('name_r')),
-    //   cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
-    //       }
+    this.ranking = {
+      id_r: Number(this.route.snapshot.paramMap.get('id_r')),
+      name_r: String(this.route.snapshot.paramMap.get('name_r')),
+      cont_r: Number(this.route.snapshot.paramMap.get('cont_r')),
+      codigo: Number(this.route.snapshot.paramMap.get('codigo'))
+          }
       console.log(this.ranking);
-    }
 
+      this.name_r = String(this.route.snapshot.paramMap.get('name_r'));
+      this.serverRankingService.listarRanking(this.name_r).subscribe(
+        datos => {
+          if(datos == 'No ranking') {
+            console.log(datos);
+            Swal.fire(
+              'Error',
+              'No existe ningun ranking'
+            ).then((result) => {
+              this.router.navigate(['palumno']);
+            })
+          }else{
+            this.algo = datos;
+          }
+        }
+      )
+    }
       volver(){
         localStorage.clear();
         this.router.navigate(['']);
+      }
+
+      _ranking(){
+        
+        this.router.navigate(['ranking']);
       }
 
       listar_ranking(){
@@ -105,7 +130,7 @@ export class ProfileAlumnoComponent implements OnInit {
             'aria-label': 'Upload your profile picture'
           }
         })
-
+        
         if (file) {
             const reader = new FileReader()
             reader.onload = (e) => {
@@ -132,18 +157,37 @@ export class ProfileAlumnoComponent implements OnInit {
                 }
               }
               );
-            }
+            }  
             reader.readAsDataURL(file);
         }
       }
       async unirseRanking() {
 
-        const { value: file } = await Swal.fire({
+        const { value: codigo } = await Swal.fire({
           title: 'Unirse ranking',
           input: 'text',
           text: 'Introduzca el codigo para unirte'
         })
+            this.serverRankingService.unirseRanking(this.ranking).subscribe(
+              datos => {
+                if(datos == 'No existe'){
+                  Swal.fire(
+                    'Error',
+                    'No existe.',
+                    'error'
+                  )
+                }else if (datos == 'Error'){
+                  Swal.fire(
+                    'Error',
+                    'Ya estas en este ranking.',
+                    'error'
+                  )
+                }
+            }
+          );
       }
+    
+
       async modifyPassword() {
 
         const { value: password } = await Swal.fire({
@@ -184,50 +228,6 @@ export class ProfileAlumnoComponent implements OnInit {
               }
               );
             }  
-            reader.readAsDataURL(password);
-        }
-      }
-
-      async modifyPassword() {
-
-        const { value: password } = await Swal.fire({
-          title: 'Enter your password',
-          input: 'password',
-          inputLabel: 'Password',
-          inputPlaceholder: 'Enter your password',
-
-        })
-
-        if (password) {
-          Swal.fire(`Entered password: ${password}`)
-        }
-        if (password) {
-            const reader = new FileReader()
-            reader.onload = (e) => {
-              const imageUrl = reader.result;
-              this.modificarAlumno.id_alumno = this.alumno.id_alumno;
-              let old = this.modificarAlumno.avatar;
-              this.modificarAlumno = this.alumno;
-              this.modificarAlumno.avatar = imageUrl;
-
-              this.alumno = this.modificarAlumno;
-              console.log(this.alumno);
-              this.service.editarImagen(this.alumno).subscribe(
-                datos => {
-                  if(datos == 'OK'){
-                    localStorage.setItem('usuario', JSON.stringify(this.alumno));
-                    Swal.fire(
-                      'Correcto',
-                    )
-                  }else{
-                    this.alumno = old;
-                    Swal.fire(
-                      'Error',
-                  )
-                }
-              }
-              );
-            }
             reader.readAsDataURL(password);
         }
       }

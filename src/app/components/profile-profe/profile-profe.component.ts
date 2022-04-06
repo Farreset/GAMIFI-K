@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Profe } from 'src/app/interfaces/interfaz';
+import { Profe, Ranking } from 'src/app/interfaces/interfaz';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 import { FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -14,14 +14,7 @@ export class ProfileProfeComponent implements OnInit {
 
   router: Router;
   route: ActivatedRoute;
-  profesGrup!:FormGroup;
-
- 
-
-
-    
-        
-    
+  profesGrup!: FormGroup;
 
   serverProfesorService: any;
   profesorInicio: any;
@@ -54,35 +47,43 @@ export class ProfileProfeComponent implements OnInit {
     pssw: "",
     psswConf: "",
     avatar: ""
-  } 
+  }
+  addRank: any = {
+    name_r: "",
+    codigo: 0
+  }
 
+  rank: Ranking = {
+    name_r: "",
+    id_r: 0,
+    cont_r: 0,
+    codigo: 0
+  }
   ngOnInit(): void {
     this.profe = {
-            id_profesor: Number(this.route.snapshot.paramMap.get('id_profesor')),
-            fname: String(this.route.snapshot.paramMap.get('fname')),
-            lname: String(this.route.snapshot.paramMap.get('lname')),
-            nick: String(this.route.snapshot.paramMap.get('nick')),
-            mail: String(this.route.snapshot.paramMap.get('mail')),
-            centro: String(this.route.snapshot.paramMap.get('centro')),
-            pssw: String(this.route.snapshot.paramMap.get('pssw')),
-            psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
-            avatar: String(this.route.snapshot.paramMap.get('avatar'))
+      id_profesor: Number(this.route.snapshot.paramMap.get('id_profesor')),
+      fname: String(this.route.snapshot.paramMap.get('fname')),
+      lname: String(this.route.snapshot.paramMap.get('lname')),
+      nick: String(this.route.snapshot.paramMap.get('nick')),
+      mail: String(this.route.snapshot.paramMap.get('mail')),
+      centro: String(this.route.snapshot.paramMap.get('centro')),
+      pssw: String(this.route.snapshot.paramMap.get('pssw')),
+      psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
+      avatar: String(this.route.snapshot.paramMap.get('avatar'))
 
-          }
-      }
+    }
+  }
 
-  volver(){
+  volver() {
     localStorage.clear();
     this.router.navigate(['']);
   }
-  editar(){
-            this.router.navigate(['editar-profe', this.profe]);
+  editar() {
+    this.router.navigate(['editar-profe', this.profe]);
   }
-      
-  addRank(){
 
-  }
-  
+
+
 
   async editarImagen() {
 
@@ -94,35 +95,35 @@ export class ProfileProfeComponent implements OnInit {
         'aria-label': 'Upload your profile picture'
       }
     })
-    
-    if (file) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          const imageUrl = reader.result;
-          this.modificarProfesor.id_profesor = this.profe.id_profesor;
-          let old = this.modificarProfesor.avatar;
-          this.modificarProfesor = this.profe;
-          this.modificarProfesor.avatar = imageUrl;
 
-          this.profe = this.modificarProfesor;
-          console.log(this.profe);
-          this.service.editarImagen(this.profe).subscribe(
-            datos => {
-              if(datos == 'OK'){
-                localStorage.setItem('usuario', JSON.stringify(this.profe));
-                Swal.fire(
-                  'Correcto',
-                )
-              }else{
-                this.profe = old;
-                Swal.fire(
-                  'Error',
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const imageUrl = reader.result;
+        this.modificarProfesor.id_profesor = this.profe.id_profesor;
+        let old = this.modificarProfesor.avatar;
+        this.modificarProfesor = this.profe;
+        this.modificarProfesor.avatar = imageUrl;
+
+        this.profe = this.modificarProfesor;
+        console.log(this.profe);
+        this.service.editarImagen(this.profe).subscribe(
+          datos => {
+            if (datos == 'OK') {
+              localStorage.setItem('usuario', JSON.stringify(this.profe));
+              Swal.fire(
+                'Correcto',
+              )
+            } else {
+              this.profe = old;
+              Swal.fire(
+                'Error',
               )
             }
           }
-          );
-        }  
-        reader.readAsDataURL(file);
+        );
+      }
+      reader.readAsDataURL(file);
     }
   }
   async modifyPassword() {
@@ -132,59 +133,70 @@ export class ProfileProfeComponent implements OnInit {
       input: 'password',
       inputLabel: 'Password',
       inputPlaceholder: 'Enter your password',
-    
+
     })
-    
+
     if (password) {
       Swal.fire(`Entered password: ${password}`)
     }
     if (password) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          const imageUrl = reader.result;
-          this.modificarProfesor.id_profesor = this.profe.id_profesor;
-          let old = this.modificarProfesor.avatar;
-          this.modificarProfesor = this.profe;
-          this.modificarProfesor.avatar = imageUrl;
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const imageUrl = reader.result;
+        this.modificarProfesor.id_profesor = this.profe.id_profesor;
+        let old = this.modificarProfesor.avatar;
+        this.modificarProfesor = this.profe;
+        this.modificarProfesor.avatar = imageUrl;
 
-          this.profe = this.modificarProfesor;
-          console.log(this.profe);
-          this.service.editarImagen(this.profe).subscribe(
-            datos => {
-              if(datos == 'OK'){
-                localStorage.setItem('usuario', JSON.stringify(this.profe));
-                Swal.fire(
-                  'Correcto',
-                )
-              }else{
-                this.profe = old;
-                Swal.fire(
-                  'Error',
+        this.profe = this.modificarProfesor;
+        console.log(this.profe);
+        this.service.editarImagen(this.profe).subscribe(
+          datos => {
+            if (datos == 'OK') {
+              localStorage.setItem('usuario', JSON.stringify(this.profe));
+              Swal.fire(
+                'Correcto',
+              )
+            } else {
+              this.profe = old;
+              Swal.fire(
+                'Error',
               )
             }
           }
-          );
-        }  
-        reader.readAsDataURL(password);
+        );
+      }
+      reader.readAsDataURL(password);
     }
   }
 
- randomCodigo() {
-      let numero = '';
-      const characters = '0123456789';
-      const charactersLength = characters.length;
-      for (let i = 0; i < charactersLength; i++) {
-          numero += characters.charAt(Math.floor(Math.random() * charactersLength));
-      }
-      return numero;
+  async anadirRanking() {
+
+    const { value: name_r } = await Swal.fire({
+      
+        title: 'Asigne un nombre al ranking',
+        input: 'text',
+        text: ''
+
+      })
     }
 
-  async codigoRanking() {
-    Swal.fire({
-      title: 'Tu codigo ' + this.randomCodigo(),
-    })
+randomCodigo() {
+  let numero = '';
+  const characters = '0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < charactersLength; i++) {
+    numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return numero;
+}
+
+async codigoRanking() {
+  Swal.fire({
+    title: 'Tu codigo: ' + this.randomCodigo(),
+  })
     .then(result => {
-     console.log("Codigo " + this.randomCodigo);
+      console.log("Codigo " + this.randomCodigo);
     });
 }
    

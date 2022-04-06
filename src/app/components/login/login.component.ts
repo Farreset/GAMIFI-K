@@ -107,9 +107,7 @@ export class LoginComponent implements OnInit {
     
     this.profesorInicio.mail =  this.profes.mail;
     this.profesorInicio.pssw = this.profes.pssw;
-    
-  
-        
+ 
     this.serverProfesorService.listarProfesor(this.profesorInicio).subscribe(
       datos  => {
         this.datosUsuario = datos;

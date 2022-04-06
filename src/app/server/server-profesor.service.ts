@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Profe } from '../interfaces/interfaz';
+import { Profe,Ranking} from '../interfaces/interfaz';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServerProfesorService {
+ 
 
   URL = 'http://localhost:8080/';
 
@@ -49,6 +50,12 @@ export class ServerProfesorService {
 
     return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profe));
   }
+
+  anadirRanking(ranking:Ranking){
+    console.log(ranking);
+    return this.http.post(`${this.URL}ranking/unirseRanking.php`,JSON.stringify(ranking));
+  }
+
   // modificarProfesorEquipos(nombreProfesor, modoEquipos){
   //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
   
