@@ -43,12 +43,22 @@ export class ProfileAlumnoComponent implements OnInit {
     avatar: ""
   }
 
+  // rankings = []
+
   ranking: Ranking = {
     id_r: 0,
     name_r: "",
     cont_r: 0
   }
 
+  // rankingList: Ranking[] = [];
+
+
+  ranking_=['Queso','Macarrones','Tomate','Virria'];
+  // ListRanking = [this.ranking.name_r, 'name_r', 'cont_r',];
+  ListRanking = ['id_r', 'name_r', 'cont_r',];
+
+  rankingsArray: [] | any;
 
 
   ngOnInit(): void {
@@ -62,21 +72,37 @@ export class ProfileAlumnoComponent implements OnInit {
             pssw: String(this.route.snapshot.paramMap.get('pssw')),
             psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
             avatar: String(this.route.snapshot.paramMap.get('avatar'))
-          },
+          };
+          console.log(this.alumno);
 
-          this.serverRankingService.listarRanking(this.ranking).subscribe(
-            datos => {
-              this.router.navigate(['palumno', datos]);
+    // this.ranking = {
+    //         id_r: Number(this.route.snapshot.paramMap.get('id_r')),
+    //         name_r: String(this.route.snapshot.paramMap.get('name_r')),
+    //         cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
+    //       };
+
+          // this.listar_ranking();
+    this.serverRankingService.listarRanking(this.ranking).subscribe(
+            (datos: any) => {
+              this.ranking = datos;
+              console.log(this.ranking);
             }
           );
 
-    // this.ranking = {
-    //   id_r: Number(this.route.snapshot.paramMap.get('id_r')),
-    //   name_r: String(this.route.snapshot.paramMap.get('name_r')),
-    //   cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
-    //       }
-      console.log(this.ranking);
+    //Listar Rankings del ARRAY
+    this.serverRankingService.listarRankingArray().subscribe(
+            datos => {
+            this.rankingsArray = datos;
+            // console.log(this.rankingsArray);
+            }
+      );
+
+
+
     }
+
+
+
 
       volver(){
         localStorage.clear();
@@ -190,3 +216,4 @@ export class ProfileAlumnoComponent implements OnInit {
       }
 
     }
+

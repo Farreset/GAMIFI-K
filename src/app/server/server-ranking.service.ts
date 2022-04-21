@@ -11,9 +11,13 @@ export class ServerRankingService {
 
   constructor(private http: HttpClient) { }
 
-  listarRanking(parametros: any) {
-    return this.http.post(`${this.URL}ranking/listarRanking.php`,JSON.stringify(parametros));
+  listarRanking(ranking: Ranking) {
+    return this.http.post(`${this.URL}ranking/listarRanking.php`,JSON.stringify(ranking));
   }
+
+  listarRankingArray(){
+    return this.http.get(`${this.URL}ranking/listarRanking.php`);
+    }
 
 
 

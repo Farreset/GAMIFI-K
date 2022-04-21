@@ -47,7 +47,7 @@ export class RegisterAlumnoComponent implements OnInit {
         mail:['', [Validators.required, Validators.email]],
         pssw:['', [Validators.required, Validators.minLength(8)]],
         psswConf:['', [Validators.required, Validators.minLength(8)]],
-       
+
     }, {
       validator: PasswordValidator('pssw', 'psswConf')
     });

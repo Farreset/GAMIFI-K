@@ -1,7 +1,8 @@
+import { ServerRankingService } from './../../server/server-ranking.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Alumno,Profe } from 'src/app/interfaces/interfaz';
+import { Alumno, Profe, Ranking } from 'src/app/interfaces/interfaz';
 import { ServiceService } from 'src/app/server/service.service';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
     fecha:"" ,
     centro:"" ,
     mail:"" ,
-    pssw:"", 
+    pssw:"",
     psswConf:"",
   }
   alumnos:Alumno|any = {
@@ -37,13 +38,13 @@ export class LoginComponent implements OnInit {
     lname:"" ,
     fecha:"" ,
     mail:"" ,
-    pssw:"", 
-    psswConf:"", 
-  } 
+    pssw:"",
+    psswConf:"",
+  }
   alumnoInicio = {
     mail:"" ,
     pssw:""
-  }  
+  }
   alumnoParam: any;
 
   profesArray = [];
@@ -56,22 +57,29 @@ export class LoginComponent implements OnInit {
     lname:"" ,
     centro:"" ,
     mail:"" ,
-    pssw:"", 
-    psswConf:"", 
-  }  
+    pssw:"",
+    psswConf:"",
+  }
   profesorInicio = {
     mail:"" ,
     pssw:""
-  }  
+  }
   profesores: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute, ServiceService: ServiceService,private serverProfesorService: ServerProfesorService, private serverAlumnoService: ServerAlumnoService){
+  ranking: Ranking = {
+    id_r: 0,
+    name_r: "",
+    cont_r: 0
+  }
+
+
+  constructor(private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute, ServiceService: ServiceService,private serverProfesorService: ServerProfesorService, private serverAlumnoService: ServerAlumnoService, private serverRankingService: ServerRankingService){
     this.formBuilder = formBuilder;
     this.ServiceService = ServiceService;
     this.route = route;
     this.router = router;
   };
-  
+
   ngOnInit() : void {
     this.profe =  this.formBuilder.group({
       mail: ['', [Validators.required, Validators.email]],
@@ -81,15 +89,22 @@ export class LoginComponent implements OnInit {
       mail: ['', [Validators.required, Validators.email]],
       pssw: ['', [Validators.required,Validators.minLength(8)]],
     });
-    // console.log(this.ServiceService)
+    console.log(this.ServiceService);
+
+    this.ranking = {
+      id_r: Number(this.route.snapshot.paramMap.get('id_r')),
+      name_r: String(this.route.snapshot.paramMap.get('name_r')),
+      cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
+    }
+
   }
 
-  get data() { 
+  get data() {
       if(this.profe){
       return this.profe.controls;
     }else{
       return this.alumno.controls;
-    } 
+    }
   }
 
 
@@ -104,36 +119,52 @@ export class LoginComponent implements OnInit {
 
   //Funcion para conectar con el php
   listarProfesor(){
-    
+
     this.profesorInicio.mail =  this.profes.mail;
     this.profesorInicio.pssw = this.profes.pssw;
-    
-  
-        
+
+
+
     this.serverProfesorService.listarProfesor(this.profesorInicio).subscribe(
       datos  => {
         this.datosUsuario = datos;
         if(this.datosUsuario.centro){
           this.router.navigate(['pprofe', datos]);
         }else {
+          console.log(datos);
           this.router.navigate(['palumno', datos]);
         }
-      } 
-  );
+      }
+  )
+      // this.serverRankingService.listarRanking(this.ranking).subscribe(
+      //   datos => {
+      //     this.router.navigate(['palumno',datos]);
+      //   }
+      // );
 
   }
   listarAlumno(){
-    
+
     this.alumnoInicio.mail =  this.alumnos.mail;
     this.alumnoInicio.pssw = this.alumnos.pssw;
 
     this.serverAlumnoService.listarAlumno(this.alumnoInicio).subscribe(
       datos  => {
         this.router.navigate(['palumno', datos]);
-      } 
+      }
     );
 
   }
+
+  listarRanking(){
+    this.serverRankingService.listarRanking(this.ranking).subscribe(
+        datos => {
+          this.router.navigate(['palumno',datos]);
+        }
+      );
+  }
+
+
   volver(){
     this.router.navigate(['']);
   }
@@ -143,5 +174,5 @@ export class LoginComponent implements OnInit {
   registerAlumno(){
     this.router.navigate(['ralumno']);
   }
- 
+
 }

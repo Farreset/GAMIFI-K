@@ -9,7 +9,7 @@ import { decimalDigest } from '@angular/compiler/src/i18n/digest';
 })
 export class ServerAlumnoService {
 
- 
+
   URL = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }

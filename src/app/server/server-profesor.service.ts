@@ -17,19 +17,19 @@ export class ServerProfesorService {
   listarProfesor(profesor: any) {
     return this.http.post(`${this.URL}profesores/listarProfesor.php`,JSON.stringify(profesor));
   }
-  
-  
+
+
   // eliminarProfesor(nombreProfesor) {
   //   return this.http.get(`${this.URL}eliminarProfesor.php?nombreProfesor=${nombreProfesor}`);
   // }
-  
+
   modificarProfesor(profe:Profe) {
 
     console.log(profe);
     return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profe));
   }
 
-  
+
   insertarProfesor(id_profesor: any, nick: any, fname: any, lname: any, mail: any, centro: any, pssw: any, psswConf: any, avatar: any){
     let profes: Profe = {
       id_profesor: id_profesor,
@@ -51,7 +51,7 @@ export class ServerProfesorService {
   }
   // modificarProfesorEquipos(nombreProfesor, modoEquipos){
   //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
-  
+
   // }
 
   // modificarProfesor(){
