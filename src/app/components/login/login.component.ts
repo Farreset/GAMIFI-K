@@ -69,7 +69,8 @@ export class LoginComponent implements OnInit {
   ranking: Ranking = {
     id_r: 0,
     name_r: "",
-    cont_r: 0
+    cont_r: 0,
+    codigo: 0
   }
 
 
@@ -91,11 +92,11 @@ export class LoginComponent implements OnInit {
     });
     console.log(this.ServiceService);
 
-    this.ranking = {
-      id_r: Number(this.route.snapshot.paramMap.get('id_r')),
-      name_r: String(this.route.snapshot.paramMap.get('name_r')),
-      cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
-    }
+    // this.ranking = {
+    //   id_r: Number(this.route.snapshot.paramMap.get('id_r')),
+    //   name_r: String(this.route.snapshot.paramMap.get('name_r')),
+    //   cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
+    // }
 
   }
 
