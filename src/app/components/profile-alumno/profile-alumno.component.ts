@@ -13,6 +13,9 @@ export class ProfileAlumnoComponent implements OnInit {
 
   router: Router;
   route: ActivatedRoute;
+  name_r  = '';
+  algo: Object | undefined;
+
 
   constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
 
@@ -20,7 +23,7 @@ export class ProfileAlumnoComponent implements OnInit {
     this.router = router;
   }
 
-  alumno: Alumno = {
+  alumno:Alumno = {
     id_alumno: 0,
     nick: '',
     fname: "",
@@ -43,12 +46,11 @@ export class ProfileAlumnoComponent implements OnInit {
     avatar: ""
   }
 
-  // rankings = []
-
   ranking: Ranking = {
     id_r: 0,
     name_r: "",
-    cont_r: 0
+    cont_r: 0,
+    codigo: 0
   }
 
   // rankingList: Ranking[] = [];
@@ -59,7 +61,6 @@ export class ProfileAlumnoComponent implements OnInit {
   ListRanking = ['id_r', 'name_r', 'cont_r',];
 
   rankingsArray: [] | any;
-
 
   ngOnInit(): void {
     this.alumno = {
@@ -98,6 +99,34 @@ export class ProfileAlumnoComponent implements OnInit {
       );
 
 
+///////////////////////////////////////////////////////////////////caste
+      // this.ranking = {
+      //   id_r: Number(this.route.snapshot.paramMap.get('id_r')),
+      //   name_r: String(this.route.snapshot.paramMap.get('name_r')),
+      //   cont_r: Number(this.route.snapshot.paramMap.get('cont_r')),
+      //   codigo: Number(this.route.snapshot.paramMap.get('codigo'))
+      //       }
+      //   console.log(this.ranking);
+
+      //   this.name_r = String(this.route.snapshot.paramMap.get('name_r'));
+      //   this.serverRankingService.listarRanking(this.name_r).subscribe(
+      //     datos => {
+      //       if(datos == 'No ranking') {
+      //         console.log(datos);
+      //         Swal.fire(
+      //           'Error',
+      //           'No existe ningun ranking'
+      //         ).then((result) => {
+      //           this.router.navigate(['palumno']);
+      //         })
+      //       }else{
+      //         this.algo = datos;
+      //       }
+      //     }
+      //   )
+      // }
+////////////////////////////////////////////////////
+
 
     }
 
@@ -107,6 +136,11 @@ export class ProfileAlumnoComponent implements OnInit {
       volver(){
         localStorage.clear();
         this.router.navigate(['']);
+      }
+
+      _ranking(){
+
+        this.router.navigate(['ranking']);
       }
 
       listar_ranking(){
@@ -164,12 +198,30 @@ export class ProfileAlumnoComponent implements OnInit {
       }
       async unirseRanking() {
 
-        const { value: file } = await Swal.fire({
+        const { value: codigo } = await Swal.fire({
           title: 'Unirse ranking',
           input: 'text',
           text: 'Introduzca el codigo para unirte'
         })
+            this.serverRankingService.unirseRanking(this.ranking).subscribe(
+              datos => {
+                if(datos == 'No existe'){
+                  Swal.fire(
+                    'Error',
+                    'No existe.',
+                    'error'
+                  )
+                }else if (datos == 'Error'){
+                  Swal.fire(
+                    'Error',
+                    'Ya estas en este ranking.',
+                    'error'
+                  )
+                }
+            }
+          );
       }
+
 
       async modifyPassword() {
 
@@ -188,7 +240,7 @@ export class ProfileAlumnoComponent implements OnInit {
             const reader = new FileReader()
             reader.onload = (e) => {
               const imageUrl = reader.result;
-              this.modificarAlumno.id_alumno = this.alumno.id_alumno;
+              this.modificarAlumno.id_profesor = this.alumno.id_alumno;
               let old = this.modificarAlumno.avatar;
               this.modificarAlumno = this.alumno;
               this.modificarAlumno.avatar = imageUrl;

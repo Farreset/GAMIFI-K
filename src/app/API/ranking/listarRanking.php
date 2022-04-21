@@ -1,9 +1,9 @@
 <?php
   header('Access-Control-Allow-Origin: *');
-/* */ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+  header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: text/html; charset=UTF-8');
-/* */ header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
+  header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
 
   $json = file_get_contents('php://input');
   // $rankingParam = json_decode($json);
@@ -16,6 +16,11 @@
 
   // REALIZA LA QUERY A LA BD
   $listado = mysqli_query($conexion, "SELECT * FROM ranking");
+  //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
+
+  // while ($resultado = mysqli_fetch_array($listado)) {
+  //   $ranking[] = $resultado;
+  // }
 
   while ($resultadoArray = mysqli_fetch_array($listado)) {
     $rankingsArray[] = $resultadoArray;
