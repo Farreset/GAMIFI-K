@@ -42,7 +42,6 @@ export class ServerProfesorService {
       pssw: pssw,
       psswConf: psswConf,
       avatar: avatar
-
     }
     return this.http.post(`${this.URL}profesores/insertarProfesor.php`,JSON.stringify(profes));
   }
@@ -51,9 +50,18 @@ export class ServerProfesorService {
     return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profe));
   }
 
-  anadirRanking(ranking:Ranking){
-    console.log(ranking);
-    return this.http.post(`${this.URL}ranking/unirseRanking.php`,JSON.stringify(ranking));
+  // anadirRanking(ranking:Ranking){
+  //   console.log(ranking);
+  //   return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
+  // }
+  anadirRanking(name_r: any, codigo: number){
+    let ranking: Ranking = {
+      id_r: 0,
+      name_r: name_r,
+      codigo: codigo,
+      cont_r: 0
+    }
+    return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   }
 
   // modificarProfesorEquipos(nombreProfesor, modoEquipos){

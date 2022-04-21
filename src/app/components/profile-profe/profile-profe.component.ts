@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Profe, Ranking } from 'src/app/interfaces/interfaz';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,6 +18,8 @@ export class ProfileProfeComponent implements OnInit {
 
   serverProfesorService: any;
   profesorInicio: any;
+  formBuilder: any;
+  rankings: any;
   constructor(router: Router, route: ActivatedRoute, private service: ServerProfesorService) {
 
     this.route = route;
@@ -53,7 +55,7 @@ export class ProfileProfeComponent implements OnInit {
     codigo: 0
   }
 
-  rank: Ranking = {
+  ranking: Ranking [] | any = {
     name_r: "",
     id_r: 0,
     cont_r: 0,
@@ -72,7 +74,23 @@ export class ProfileProfeComponent implements OnInit {
       avatar: String(this.route.snapshot.paramMap.get('avatar'))
 
     }
+  
+  
+  
   }
+
+  onSubmit() {
+    this.registrarRanking();
+
+  }
+
+  registrarRanking(){
+    this.serverProfesorService.insertarProfesor(this.ranking.name_r).subscribe(
+      (         datos: any) => this.rankings = datos
+    );
+ this.router.navigate(['login']);
+  }
+  get data() { return this.ranking.controls; }
 
   volver() {
     localStorage.clear();
@@ -81,9 +99,6 @@ export class ProfileProfeComponent implements OnInit {
   editar() {
     this.router.navigate(['editar-profe', this.profe]);
   }
-
-
-
 
   async editarImagen() {
 
@@ -179,7 +194,23 @@ export class ProfileProfeComponent implements OnInit {
         text: ''
 
       })
-    }
+      if(name_r){
+        let codigo = this.randomCodigo();
+        this.service.anadirRanking(name_r, Number(codigo)).subscribe(
+          datos => {
+            if (datos == 'OK') {
+              Swal.fire(
+                'Correcto',
+              )
+            } else {
+              Swal.fire(
+                'Error',
+              )
+            }
+          }
+          )}     
+      }
+
 
 randomCodigo() {
   let numero = '';

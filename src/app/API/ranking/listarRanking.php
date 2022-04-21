@@ -16,6 +16,11 @@
 
   // REALIZA LA QUERY A LA BD
   $listado = mysqli_query($conexion, "SELECT * FROM ranking");
+  //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
+
+  // while ($resultado = mysqli_fetch_array($listado)) {
+  //   $ranking[] = $resultado;
+  // }
 
   // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
   $resultado = $listado->fetch_assoc();

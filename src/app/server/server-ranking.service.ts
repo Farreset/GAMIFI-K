@@ -15,8 +15,24 @@ export class ServerRankingService {
     return this.http.post(`${this.URL}ranking/listarRanking.php`,JSON.stringify(parametros));
   }
 
+  // listarRanking(){
+  //   return this.http.get(`${this.URL}ranking/listarRanking.php`);
+  // }
+
   unirseRanking(ranking:Ranking){
     console.log(ranking);
     return this.http.post(`${this.URL}ranking/unirseRanking.php`,JSON.stringify(ranking));
   }
+
+  anadirRanking(id_r: any, name_r: any, codigo: any, cont_r: any){
+    let ranking: Ranking = {
+      id_r: id_r,
+      name_r: name_r,
+      codigo: codigo,
+      cont_r: cont_r
+    }
+    console.log(ranking);
+    return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
+  }
+
 }
