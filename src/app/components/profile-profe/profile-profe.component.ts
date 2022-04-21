@@ -4,6 +4,7 @@ import { Profe, Ranking } from 'src/app/interfaces/interfaz';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 import { FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { ServerRankingService } from 'src/app/server/server-ranking.service';
 
 @Component({
   selector: 'app-profile-profe',
@@ -20,7 +21,7 @@ export class ProfileProfeComponent implements OnInit {
   profesorInicio: any;
   formBuilder: any;
   rankings: any;
-  constructor(router: Router, route: ActivatedRoute, private service: ServerProfesorService) {
+  constructor(router: Router, route: ActivatedRoute, private service: ServerProfesorService, private serverRankingService: ServerRankingService) {
 
     this.route = route;
     this.router = router;
@@ -61,6 +62,9 @@ export class ProfileProfeComponent implements OnInit {
     cont_r: 0,
     codigo: 0
   }
+
+  rankingsArray: [] | any;
+
   ngOnInit(): void {
     this.profe = {
       id_profesor: Number(this.route.snapshot.paramMap.get('id_profesor')),
@@ -74,9 +78,15 @@ export class ProfileProfeComponent implements OnInit {
       avatar: String(this.route.snapshot.paramMap.get('avatar'))
 
     }
-  
-  
-  
+
+    //Listar Rankings del ARRAY
+    this.serverRankingService.listarRankingArray().subscribe(
+      datos => {
+      this.rankingsArray = datos;
+      // console.log(this.rankingsArray);
+      }
+    );
+
   }
 
   onSubmit() {
@@ -188,7 +198,7 @@ export class ProfileProfeComponent implements OnInit {
   async anadirRanking() {
 
     const { value: name_r } = await Swal.fire({
-      
+
         title: 'Asigne un nombre al ranking',
         input: 'text',
         text: ''
@@ -208,7 +218,7 @@ export class ProfileProfeComponent implements OnInit {
               )
             }
           }
-          )}     
+          )}
       }
 
 
@@ -230,5 +240,5 @@ async codigoRanking() {
       console.log("Codigo " + this.randomCodigo);
     });
 }
-   
+
 }

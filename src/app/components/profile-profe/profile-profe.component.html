@@ -113,17 +113,17 @@
               <h4>RANKINGS </h4>
               <div class="col-sm-12">
                 <button type="button" (click)="anadirRanking()"  class="btn btn-primary float-right">Añadir Ranking</button>
-              
+
               </div>
             </div>
             <div class="card-body">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
+                <li *ngFor="let data of rankingsArray" class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
                   <h6 class="mb-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                       class="feather feather-globe mr-2 icon-inline">
-                    </svg>{{ranking.name_r}}</h6>
-                    
+                    </svg>{{data.name_r}}</h6>
+
                   <span class="text-secondary"></span>
                   <button type="button" (click)="codigoRanking()"  class="btn btn-primary float-right">Codigo Ranking</button>
                 </li>

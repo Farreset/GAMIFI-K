@@ -1,4 +1,3 @@
-import { TestForELIMINARComponent } from './components/test-for-eliminar/test-for-eliminar.component';
 import { EditProfileProfeComponent } from './components/edit-profile-profe/edit-profile-profe.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
     { path: 'pprofe', component: ProfileProfeComponent, pathMatch: 'full'},
     { path: 'editar-profe', component: EditProfileProfeComponent, pathMatch: 'full'},
     { path: 'editar-alumno', component: EditProfileAlumnoComponent, pathMatch: 'full'},
-    { path: 'testEliminar', component: TestForELIMINARComponent, pathMatch: 'full'},
 
   { path: '**', redirectTo: '/register' } //Dejar la ultima
   ];

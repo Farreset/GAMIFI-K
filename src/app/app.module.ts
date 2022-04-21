@@ -18,7 +18,6 @@ import { HttpClientModule } from '@angular/common/http';
 // import { ModificarComponent } from './components/modificar/modificar.component';
 import { EditProfileProfeComponent } from './components/edit-profile-profe/edit-profile-profe.component';
 import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edit-profile-alumno.component';
-import { TestForELIMINARComponent } from './components/test-for-eliminar/test-for-eliminar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import { TestForELIMINARComponent } from './components/test-for-eliminar/test-fo
     // ModificarComponent,
     EditProfileProfeComponent,
     EditProfileAlumnoComponent,
-    TestForELIMINARComponent
 
 
     ],
