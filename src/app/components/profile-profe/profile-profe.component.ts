@@ -151,47 +151,48 @@ export class ProfileProfeComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+
+  //Modificar Contraseña
   async modifyPassword() {
-
-    const { value: password } = await Swal.fire({
-      title: 'Enter your password',
-      input: 'password',
-      inputLabel: 'Password',
-      inputPlaceholder: 'Enter your password',
-
+    const { value: formValues } = await Swal.fire({
+      title: 'Cambiar la contraseña',
+      html:
+        '<label>Contraseña actual</label>' +
+        '<input class="form-control" id="passw" type="password" placeholder="Contraseña actual" maxlenght>' +
+        '<label>Nueva Contraseña</label>' +
+        '<input class="form-control" id="newPassw" type="password" placeholder="Contraseña actual" maxlenght>' +
+        '<label>Confirmar nueve Contraseña</label>' +
+        '<input class="form-control" id="confNewPassw" type="password" placeholder="Contraseña actual" maxlenght>',
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          (document.getElementById("passw") as HTMLFormElement).value,
+          (document.getElementById("newPassw") as HTMLFormElement).value,
+          (document.getElementById("confNewPassw") as HTMLFormElement).value
+        ]
+      }
     })
+    if (formValues) {
+      if (formValues[0] != this.profe.pssw) {
+        console.log('contrasenia actual no coinside');
 
-    if (password) {
-      Swal.fire(`Entered password: ${password}`)
-    }
-    if (password) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        const imageUrl = reader.result;
-        this.modificarProfesor.id_profesor = this.profe.id_profesor;
-        let old = this.modificarProfesor.avatar;
-        this.modificarProfesor = this.profe;
-        this.modificarProfesor.avatar = imageUrl;
+      }
+      else if (formValues[1] != formValues[2]) {
+        console.log('contrasenia nueva no coinside');
 
-        this.profe = this.modificarProfesor;
-        console.log(this.profe);
-        this.service.editarImagen(this.profe).subscribe(
-          datos => {
+      }
+      else {
+        this.profe.pssw = formValues[1];
+        this.service.modificarProfesor(this.profe).subscribe(
+          (datos) => {
             if (datos == 'OK') {
-              localStorage.setItem('usuario', JSON.stringify(this.profe));
-              Swal.fire(
-                'Correcto',
-              )
-            } else {
-              this.profe = old;
-              Swal.fire(
-                'Error',
-              )
+              console.log('ok');
+            }else{
+              console.log('nooo');
             }
           }
         );
       }
-      reader.readAsDataURL(password);
     }
   }
 
