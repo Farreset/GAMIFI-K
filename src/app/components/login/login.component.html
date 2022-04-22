@@ -26,7 +26,7 @@
               <div class="mb-md-5 mt-md-4 pb-5">
 
                 <h2 class="fw-bold mb-2 text-uppercase">AJESTY LOGIN</h2>
-                <hr size="7" class="rounded">
+<hr size="7" class="rounded">
 
                 <form [formGroup]="profe" (ngSubmit)="listarProfesor()" class="p-3 mt-3">
                 <div class="form-outline form-white mb-4">
@@ -44,9 +44,12 @@
                   [(ngModel)]="profes.pssw">
 
                 </div>
-                <button  [disabled]="!profe.valid" class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar Sesion</button>
              </form>
-            </div>
+    
+                <button (click)="listarProfesor()" [disabled]="!profe.valid" class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar Sesion</button>
+                
+
+              </div>
 
               <div>
                 <p class="mb-0">Todavia no estas registrado?  </p><a class="text-white-50 fw-bold" (click)="registerProfe()">Registrate como <a class="fw-bold">Porfesor</a></a>

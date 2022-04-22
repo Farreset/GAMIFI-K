@@ -6,41 +6,25 @@
 
   global $datos;
 
-  require("../db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
+  require("db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 
   $conexion = conexion(); // CREA LA CONEXION
-  $json= file_get_contents('php://input');
-  $unirse=json_decode($json);
-  // echo $unirse; 
- 
+
 
   // REALIZA LA QUERY A LA DB
-  //$registros = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
-  $registros = mysqli_query($conexion, "INSERT INTO `ranking` (`id_r`, `name_r`, `codigo`) VALUES (NULL,'$unirse->name_r', '$unirse->codigo')");
- 
-  
-  //echo "$registros";
-  
-    if($registros){
-      $resultado = 'OK';  
-    }else{
-      $resultado = 'NO';
-    }
+ $registros = mysqli_query($conexion, "INSERT INTO `a_rankings` (`nombre_ranking`, `estilo`, `equipos`, `num_bonus`) VALUES ('R_$_GET[nombreRanking]', 'Clasico', 0, 6);");
+
+
+  class Result {}
+
+  // GENERA LOS DATOS DE RESPUESTA
+  $response = new Result();
+  $response->resultado = 'OK';
+  $response->mensaje = 'EL USUARIO SE ELIMINO EXITOSAMENTE';
+
   header('Content-Type: application/json');
 
-  echo json_encode($resultado); 
-
-  // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
-
-
-//   if(!$registros){
-//     $response = 'Error';
-//     echo json_encode($response);
-//   }else if($registros->num_rows == 0){
-//           $response = 'No esta';
-//           echo json_encode($response);
-//   }
-
+  echo json_encode($response); // MUESTRA EL JSON GENERADO
 
 ?>

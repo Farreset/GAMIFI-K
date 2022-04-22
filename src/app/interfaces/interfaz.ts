@@ -8,6 +8,8 @@ export interface Profe {
   pssw :string;
   psswConf :string;
   avatar : string;
+
+  
   }
 
 export interface Alumno {
@@ -22,12 +24,3 @@ export interface Alumno {
   avatar : string;
 
   }
-
-  export interface Ranking {
-    id_r: number;
-    name_r: string;
-    cont_r: number;
-    codigo: number;
-  }
-
- 

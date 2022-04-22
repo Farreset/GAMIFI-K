@@ -18,7 +18,7 @@
   <!-- Core theme CSS (includes Bootstrap)-->
 
 </head>
-<section class="vh-100 gradient-custom bg-danger">
+<section class="vh-100 gradient-custom bg-primary">
   <div class="container bg-light rounded-bottom ">
     <div class="main-body">
 
@@ -110,20 +110,17 @@
           <div class="card">
             <div class="card-header">
               <h4>RANKINGS ASSIGNADIOS</h4>
-                <button type="button" (click)="unirseRanking()"  class="btn btn-primary float-right">UNIRSE RANKING</button>
             </div>
             <div class="card-body">
-
               <ul class="list-group list-group-flush">
-                <li  *ngFor="let data of rankingsArray" class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
                   <h6 class="mb-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                       class="feather feather-globe mr-2 icon-inline">
-                    </svg>
-                      {{data.name_r}}
-                  </h6>
-                    <button type="button" (click)="listar_ranking()" class="btn btn-primary float-right">VER</button>
+                    </svg>BONUS DAW2</h6>
+                    <button type="button" (click)="ranking()" class="btn btn-primary float-right">VER</button>
                 </li>
+
               </ul>
             </div>
           </div>
@@ -131,6 +128,7 @@
       </div>
     </div>
   </div>
+
 </section>
 
 </html>

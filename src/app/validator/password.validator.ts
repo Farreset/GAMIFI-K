@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-    
+import { AbstractControl } from '@angular/forms';
 export function PasswordValidator(controlName: string, matchingControlName: string){
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
@@ -14,3 +14,5 @@ export function PasswordValidator(controlName: string, matchingControlName: stri
         }
     }
 }
+
+

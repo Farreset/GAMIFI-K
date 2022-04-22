@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Alumno, Ranking } from '../interfaces/interfaz';
+import { Alumno } from '../interfaces/interfaz';
 import { decimalDigest } from '@angular/compiler/src/i18n/digest';
 
 
@@ -8,7 +8,6 @@ import { decimalDigest } from '@angular/compiler/src/i18n/digest';
   providedIn: 'root'
 })
 export class ServerAlumnoService {
-
 
   URL = 'http://localhost:8080/';
 
@@ -28,13 +27,6 @@ export class ServerAlumnoService {
 
     return this.http.post(`${this.URL}alumnos/modificarAlumnos.php`,JSON.stringify(alumno));
   }
-
-  unirseRanking(ranking:Ranking){
-
-    return this.http.post(`${this.URL}ranking/unirseRanking.php`,JSON.stringify(ranking));
-  }
-
-  
 
   insertarAlumnos(id_alumno: any, nick: any, fname: any, lname: any, mail: any, fecha: any, pssw: any, psswConf: any, avatar: any){
     let alumnos: Alumno = {

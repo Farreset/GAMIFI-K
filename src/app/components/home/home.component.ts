@@ -20,9 +20,4 @@ export class HomeComponent implements OnInit {
   register(){
     this.router.navigate(['login']);
   }
-
-  fortest(){
-    this.router.navigate(['testEliminar']);
-  }
-
 }

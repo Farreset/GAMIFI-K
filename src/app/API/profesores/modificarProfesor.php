@@ -22,7 +22,7 @@
   // echo $json;
 
   // REALIZA LA QUERY A LA DB
- $registros = mysqli_query($conexion, "UPDATE `profesores` SET nick = '$profesores->nick', fname = '$profesores->fname', lname = '$profesores->lname', mail = '$profesores->mail', centro = '$profesores->centro', avatar = '$profesores->avatar' WHERE id_profesor ='$profesores->id_profesor';");
+ $registros = mysqli_query($conexion, "UPDATE `profesores` SET nick = '$profesores->nick', fname = '$profesores->fname', lname = '$profesores->lname', mail = '$profesores->mail', centro = '$profesores->centro', pssw = '$profesores->pssw', psswConf = '$profesores->pssw', avatar = '$profesores->avatar' WHERE id_profesor ='$profesores->id_profesor';");
 
 
   // GENERA LOS DATOS DE RESPUESTA
