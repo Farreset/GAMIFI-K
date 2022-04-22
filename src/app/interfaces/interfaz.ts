@@ -7,13 +7,7 @@ export interface Profe {
   centro :string;
   pssw :string;
   psswConf :string;
-<<<<<<< Updated upstream
   avatar : string;
-
-  
-=======
-
->>>>>>> Stashed changes
   }
 
 export interface Alumno {
@@ -29,9 +23,11 @@ export interface Alumno {
 
   }
 
-export interface Ranking {
-  id_r: number;
-  name_r: string;
-  cont_r: number;
+  export interface Ranking {
+    id_r: number;
+    name_r: string;
+    cont_r: number;
+    codigo: number;
+  }
 
-}
+ 

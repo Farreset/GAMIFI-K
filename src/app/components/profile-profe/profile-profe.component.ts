@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Profe } from 'src/app/interfaces/interfaz';
+import { Profe, Ranking } from 'src/app/interfaces/interfaz';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { ServerRankingService } from 'src/app/server/server-ranking.service';
 
 @Component({
   selector: 'app-profile-profe',
@@ -18,7 +19,9 @@ export class ProfileProfeComponent implements OnInit {
 
   serverProfesorService: any;
   profesorInicio: any;
-  constructor(router: Router, route: ActivatedRoute, private service: ServerProfesorService) {
+  formBuilder: any;
+  rankings: any;
+  constructor(router: Router, route: ActivatedRoute, private service: ServerProfesorService, private serverRankingService: ServerRankingService) {
 
     this.route = route;
     this.router = router;
@@ -48,6 +51,19 @@ export class ProfileProfeComponent implements OnInit {
     psswConf: "",
     avatar: ""
   }
+  addRank: any = {
+    name_r: "",
+    codigo: 0
+  }
+
+  ranking: Ranking [] | any = {
+    name_r: "",
+    id_r: 0,
+    cont_r: 0,
+    codigo: 0
+  }
+
+  rankingsArray: [] | any;
 
   ngOnInit(): void {
     this.profe = {
@@ -62,7 +78,29 @@ export class ProfileProfeComponent implements OnInit {
       avatar: String(this.route.snapshot.paramMap.get('avatar'))
 
     }
+
+    //Listar Rankings del ARRAY
+    this.serverRankingService.listarRankingArray().subscribe(
+      datos => {
+      this.rankingsArray = datos;
+      // console.log(this.rankingsArray);
+      }
+    );
+
   }
+
+  onSubmit() {
+    this.registrarRanking();
+
+  }
+
+  registrarRanking(){
+    this.serverProfesorService.insertarProfesor(this.ranking.name_r).subscribe(
+      (         datos: any) => this.rankings = datos
+    );
+ this.router.navigate(['login']);
+  }
+  get data() { return this.ranking.controls; }
 
   volver() {
     localStorage.clear();
@@ -70,14 +108,7 @@ export class ProfileProfeComponent implements OnInit {
   }
   editar() {
     this.router.navigate(['editar-profe', this.profe]);
-
-
   }
-
-  addRank() {
-
-  }
-
 
   async editarImagen() {
 
@@ -121,45 +152,93 @@ export class ProfileProfeComponent implements OnInit {
     }
   }
   async modifyPassword() {
-    const { value: formValues } = await Swal.fire({
-      title: 'Cambiar la contraseña',
-      html:
-        '<label>Contraseña actual</label>' +
-        '<input class="form-control" id="passw" type="password" placeholder="Contraseña actual" maxlenght>' +
-        '<label>Nueva Contraseña</label>' +
-        '<input class="form-control" id="newPassw" type="password" placeholder="Contraseña actual" maxlenght>' +
-        '<label>Confirmar nueve Contraseña</label>' +
-        '<input class="form-control" id="confNewPassw" type="password" placeholder="Contraseña actual" maxlenght>',
-      focusConfirm: false,
-      preConfirm: () => {
-        return [
-          (document.getElementById("passw") as HTMLFormElement).value,
-          (document.getElementById("newPassw") as HTMLFormElement).value,
-          (document.getElementById("confNewPassw") as HTMLFormElement).value
-        ]
-      }
+
+    const { value: password } = await Swal.fire({
+      title: 'Enter your password',
+      input: 'password',
+      inputLabel: 'Password',
+      inputPlaceholder: 'Enter your password',
+
     })
-    if (formValues) {
-      if (formValues[0] != this.profe.pssw) {
-        console.log('contrasenia actual no coinside');
 
-      }
-      else if (formValues[1] != formValues[2]) {
-        console.log('contrasenia nueva no coinside');
+    if (password) {
+      Swal.fire(`Entered password: ${password}`)
+    }
+    if (password) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const imageUrl = reader.result;
+        this.modificarProfesor.id_profesor = this.profe.id_profesor;
+        let old = this.modificarProfesor.avatar;
+        this.modificarProfesor = this.profe;
+        this.modificarProfesor.avatar = imageUrl;
 
-      }
-      else {
-        this.profe.pssw = formValues[1];
-        this.service.modificarProfesor(this.profe).subscribe(
-          (datos) => {
+        this.profe = this.modificarProfesor;
+        console.log(this.profe);
+        this.service.editarImagen(this.profe).subscribe(
+          datos => {
             if (datos == 'OK') {
-              console.log('ok');
+              localStorage.setItem('usuario', JSON.stringify(this.profe));
+              Swal.fire(
+                'Correcto',
+              )
             } else {
-              console.log('nooo');
+              this.profe = old;
+              Swal.fire(
+                'Error',
+              )
             }
           }
         );
       }
+      reader.readAsDataURL(password);
     }
   }
+
+  async anadirRanking() {
+
+    const { value: name_r } = await Swal.fire({
+
+        title: 'Asigne un nombre al ranking',
+        input: 'text',
+        text: ''
+
+      })
+      if(name_r){
+        let codigo = this.randomCodigo();
+        this.service.anadirRanking(name_r, Number(codigo)).subscribe(
+          datos => {
+            if (datos == 'OK') {
+              Swal.fire(
+                'Correcto',
+              )
+            } else {
+              Swal.fire(
+                'Error',
+              )
+            }
+          }
+          )}
+      }
+
+
+randomCodigo() {
+  let numero = '';
+  const characters = '0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < charactersLength; i++) {
+    numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return numero;
+}
+
+async codigoRanking() {
+  Swal.fire({
+    title: 'Tu codigo: ' + this.randomCodigo(),
+  })
+    .then(result => {
+      console.log("Codigo " + this.randomCodigo);
+    });
+}
+
 }

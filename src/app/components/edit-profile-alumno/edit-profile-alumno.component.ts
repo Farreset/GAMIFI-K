@@ -103,7 +103,7 @@ editar(){
 }
 
 volver(){
-  this.router.navigate(['palumno', this.alumno]);
+  this.router.navigate(['palumno',this.alumno]);
   }
 
 }

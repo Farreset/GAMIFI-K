@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
-import { PasswordValidator } from 'src/app/validator/password.validator';
-import { Alumno } from 'src/app/interfaces/interfaz';
-import { Ranking } from 'src/app/interfaces/interfaz';
-import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
+import { ServerRankingService } from './../../server/server-ranking.service';
+import { Alumno, Ranking } from 'src/app/interfaces/interfaz';
 import Swal from 'sweetalert2';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-profile-alumno',
@@ -15,25 +11,19 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class ProfileAlumnoComponent implements OnInit {
 
-<<<<<<< Updated upstream
   router: Router;
   route: ActivatedRoute;
-  
+  name_r  = '';
+  algo: Object | undefined;
 
-  constructor(private fb: FormBuilder, router: Router, route: ActivatedRoute, private service: ServerAlumnoService) {
+
+  constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
 
     this.route = route;
     this.router = router;
   }
-=======
-  public alumnos:Alumno[] = [] ;
-  public rankings:Ranking[] = [] ;
 
-  router: Router;
-  route: ActivatedRoute;
->>>>>>> Stashed changes
-
-  alumno: Alumno = {
+  alumno:Alumno = {
     id_alumno: 0,
     nick: '',
     fname: "",
@@ -44,7 +34,6 @@ export class ProfileAlumnoComponent implements OnInit {
     psswConf: "",
     avatar: ""
   }
-<<<<<<< Updated upstream
   modificarAlumno: any = {
     id_alumno: 0,
     nick: '',
@@ -56,157 +45,26 @@ export class ProfileAlumnoComponent implements OnInit {
     psswConf: "",
     avatar: ""
   }
-  changePassword: any = {
-    updatePassw: "",
-    newPw: "",
-    confirm: ""
-=======
 
   ranking: Ranking = {
     id_r: 0,
-    name_r: '',
-    cont_r: 0
-
+    name_r: "",
+    cont_r: 0,
+    codigo: 0
   }
 
-  // serverAlumnoService: any;
-  modificarAlumno: any;
+  // rankingList: Ranking[] = [];
 
 
-  constructor(router: Router, route: ActivatedRoute, private serverAlumnoService: ServerAlumnoService) {
+  ranking_=['Queso','Macarrones','Tomate','Virria'];
+  // ListRanking = [this.ranking.name_r, 'name_r', 'cont_r',];
+  ListRanking = ['id_r', 'name_r', 'cont_r',];
 
-    this.route = route;
-    this.router = router;
->>>>>>> Stashed changes
-  }
-
-
+  rankingsArray: [] | any;
 
   ngOnInit(): void {
     this.alumno = {
-<<<<<<< Updated upstream
-      id_alumno: Number(this.route.snapshot.paramMap.get('id_alumno')),
-      fname: String(this.route.snapshot.paramMap.get('fname')),
-      lname: String(this.route.snapshot.paramMap.get('lname')),
-      nick: String(this.route.snapshot.paramMap.get('nick')),
-      mail: String(this.route.snapshot.paramMap.get('mail')),
-      fecha: String(this.route.snapshot.paramMap.get('fecha')),
-      pssw: String(this.route.snapshot.paramMap.get('pssw')),
-      psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
-      avatar: String(this.route.snapshot.paramMap.get('avatar'))
-    }
-
-  }
-
-  volver() {
-    localStorage.clear();
-    this.router.navigate(['']);
-  }
-
-  ranking() {
-
-    this.router.navigate(['ranking']);
-  }
-
-  editar() {
-    this.router.navigate(['editar-alumno', this.alumno]);
-
-  }
-
-  addRank() {
-
-  }
-
-  async editarImagen() {
-
-    const { value: file } = await Swal.fire({
-      title: 'Select image',
-      input: 'file',
-      inputAttributes: {
-        'accept': 'image/*',
-        'aria-label': 'Upload your profile picture'
-      }
-    })
-
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        const imageUrl = reader.result;
-        this.modificarAlumno.id_alumno = this.alumno.id_alumno;
-        let old = this.modificarAlumno.avatar;
-        this.modificarAlumno = this.alumno;
-        this.modificarAlumno.avatar = imageUrl;
-
-        this.alumno = this.modificarAlumno;
-        console.log(this.alumno);
-        this.service.editarImagen(this.alumno).subscribe(
-          datos => {
-            if (datos == 'OK') {
-              localStorage.setItem('usuario', JSON.stringify(this.alumno));
-              Swal.fire(
-                'Correcto',
-              )
-            } else {
-              this.alumno = old;
-              Swal.fire(
-                'Error',
-              )
-            }
-          }
-        );
-      }
-      reader.readAsDataURL(file);
-    }
-  }
-  async modifyPassword() {
-    const { value: formValues } = await Swal.fire({
-      title: 'Cambiar la contraseña',
-      html:
-        '<label>Contraseña actual</label>' +
-        '<input class="form-control" id="passw" type="password" placeholder="Contraseña actual" maxlenght>' +
-        '<label>Nueva Contraseña</label>' +
-        '<input class="form-control" id="newPassw" type="password" placeholder="Contraseña actual" maxlenght>' +
-        '<label>Confirmar nueve Contraseña</label>' +
-        '<input class="form-control" id="confNewPassw" type="password" placeholder="Contraseña actual" maxlenght>',
-      focusConfirm: false,
-      preConfirm: () => {
-        return [
-          (document.getElementById("passw") as HTMLFormElement).value,
-          (document.getElementById("newPassw") as HTMLFormElement).value,
-          (document.getElementById("confNewPassw") as HTMLFormElement).value
-        ]
-      }
-    })
-    if (formValues) {
-      if (formValues[0] != this.alumno.pssw) {
-        console.log('contrasenia actual no coinside');
-
-      }
-      else if (formValues[1] != formValues[2]) {
-        console.log('contrasenia nueva no coinside');
-
-      }
-      else {
-        this.alumno.pssw = formValues[1];
-        this.service.modificarAlumno(this.alumno).subscribe(
-          (datos) => {
-            if (datos == 'OK') {
-              console.log('ok');
-            }else{
-              console.log('nooo');
-            }
-          }
-        );
-      }
-    }
-  }
-
-
-}
-
-
-=======
-           id_alumno: Number(this.route.snapshot.paramMap.get('id')),
+           id_alumno: Number(this.route.snapshot.paramMap.get('id_alumno')),
             fname: String(this.route.snapshot.paramMap.get('fname')),
             lname: String(this.route.snapshot.paramMap.get('lname')),
             nick: String(this.route.snapshot.paramMap.get('nick')),
@@ -215,91 +73,199 @@ export class ProfileAlumnoComponent implements OnInit {
             pssw: String(this.route.snapshot.paramMap.get('pssw')),
             psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
             avatar: String(this.route.snapshot.paramMap.get('avatar'))
-          }
+          };
+          console.log(this.alumno);
 
-    this.ranking = {
-            id_r: Number(this.route.snapshot.paramMap.get('id_r')),
-            name_r: String(this.route.snapshot.paramMap.get('name_r')),
-            cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
-    }
-    console.log(this.ranking);
-  }
+    // this.ranking = {
+    //         id_r: Number(this.route.snapshot.paramMap.get('id_r')),
+    //         name_r: String(this.route.snapshot.paramMap.get('name_r')),
+    //         cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
+    //       };
 
-      listarRanking(){
-        this.serverAlumnoService.listarRanking(this.ranking).subscribe(
-          datos => {
-            this.router.navigate(['palumno', datos]);
-          }
+          // this.listar_ranking();
+    this.serverRankingService.listarRanking(this.ranking).subscribe(
+            (datos: any) => {
+              this.ranking = datos;
+              console.log(this.ranking);
+            }
+          );
 
-        )
+    //Listar Rankings del ARRAY
+    this.serverRankingService.listarRankingArray().subscribe(
+            datos => {
+            this.rankingsArray = datos;
+            // console.log(this.rankingsArray);
+            }
+      );
 
 
-      }
+///////////////////////////////////////////////////////////////////caste
+      // this.ranking = {
+      //   id_r: Number(this.route.snapshot.paramMap.get('id_r')),
+      //   name_r: String(this.route.snapshot.paramMap.get('name_r')),
+      //   cont_r: Number(this.route.snapshot.paramMap.get('cont_r')),
+      //   codigo: Number(this.route.snapshot.paramMap.get('codigo'))
+      //       }
+      //   console.log(this.ranking);
 
-      // listarAlumno(){
-
-      //   // this.alumnoInicio.mail =  this.alumnos.mail;
-      //   // this.alumnoInicio.pssw = this.alumnos.pssw;
-
-      //   this.serverAlumnoService.listarAlumno(this.alumnoInicio).subscribe(
-      //     datos  => {
-      //       this.router.navigate(['palumno', datos]);
+      //   this.name_r = String(this.route.snapshot.paramMap.get('name_r'));
+      //   this.serverRankingService.listarRanking(this.name_r).subscribe(
+      //     datos => {
+      //       if(datos == 'No ranking') {
+      //         console.log(datos);
+      //         Swal.fire(
+      //           'Error',
+      //           'No existe ningun ranking'
+      //         ).then((result) => {
+      //           this.router.navigate(['palumno']);
+      //         })
+      //       }else{
+      //         this.algo = datos;
+      //       }
       //     }
-      //   );
-
+      //   )
       // }
+////////////////////////////////////////////////////
+
+
+    }
+
+
+
 
       volver(){
+        localStorage.clear();
         this.router.navigate(['']);
       }
 
-      ir_ranking(){
+      _ranking(){
+
+        this.router.navigate(['ranking']);
+      }
+
+      listar_ranking(){
         this.router.navigate(['ranking']);
       }
 
       editar(){
         this.router.navigate(['editar-alumno', this.alumno]);
-      }
 
+      }
       addRank(){
 
       }
 
-      // async editarImagen() {
+      async editarImagen() {
 
-      //   const { value: file } = await Swal.fire({
-      //     title: 'Select image',
-      //     input: 'file',
-      //     inputAttributes: {
-      //       'accept': 'image/*',
-      //       'aria-label': 'Upload your profile picture'
-      //     }
-      //   })
+        const { value: file } = await Swal.fire({
+          title: 'Select image',
+          input: 'file',
+          inputAttributes: {
+            'accept': 'image/*',
+            'aria-label': 'Upload your profile picture'
+          }
+        })
 
-      //   if (file) {
-      //       const reader = new FileReader()
-      //       reader.onload = (e) => {
-      //         const imageUrl = reader.result;
-      //         let old = this.modificarAlumno.avatar;
-      //         this.modificarAlumno.avatar = imageUrl;
-      //         this.serverAlumnoService.editarImagen(this.modificarAlumno).subscribe(
-      //           (          datos: string)  => {
-      //             if(datos == 'ok'){
-      //               localStorage.setItem('usuario', JSON.stringify(this.modificarAlumno));
-      //               Swal.fire(
-      //                 'Correcto',
-      //               )
-      //             }else{
-      //               this.modificarAlumno.avatar = old;
-      //               Swal.fire(
-      //                 'Error',
-      //             )
-      //           }
-      //         }
-      //         );
-      //       }
-      //       reader.readAsDataURL(file);
-      //   }
-      // }
+        if (file) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+              const imageUrl = reader.result;
+              this.modificarAlumno.id_alumno = this.alumno.id_alumno;
+              let old = this.modificarAlumno.avatar;
+              this.modificarAlumno = this.alumno;
+              this.modificarAlumno.avatar = imageUrl;
+
+              this.alumno = this.modificarAlumno;
+              console.log(this.alumno);
+              this.service.editarImagen(this.alumno).subscribe(
+                datos => {
+                  if(datos == 'OK'){
+                    localStorage.setItem('usuario', JSON.stringify(this.alumno));
+                    Swal.fire(
+                      'Correcto',
+                    )
+                  }else{
+                    this.alumno = old;
+                    Swal.fire(
+                      'Error',
+                  )
+                }
+              }
+              );
+            }
+            reader.readAsDataURL(file);
+        }
+      }
+      async unirseRanking() {
+
+        const { value: codigo } = await Swal.fire({
+          title: 'Unirse ranking',
+          input: 'text',
+          text: 'Introduzca el codigo para unirte'
+        })
+            this.serverRankingService.unirseRanking(this.ranking).subscribe(
+              datos => {
+                if(datos == 'No existe'){
+                  Swal.fire(
+                    'Error',
+                    'No existe.',
+                    'error'
+                  )
+                }else if (datos == 'Error'){
+                  Swal.fire(
+                    'Error',
+                    'Ya estas en este ranking.',
+                    'error'
+                  )
+                }
+            }
+          );
+      }
+
+
+      async modifyPassword() {
+
+        const { value: password } = await Swal.fire({
+          title: 'Enter your password',
+          input: 'password',
+          inputLabel: 'Password',
+          inputPlaceholder: 'Enter your password',
+
+        })
+
+        if (password) {
+          Swal.fire(`Entered password: ${password}`)
+        }
+        if (password) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+              const imageUrl = reader.result;
+              this.modificarAlumno.id_profesor = this.alumno.id_alumno;
+              let old = this.modificarAlumno.avatar;
+              this.modificarAlumno = this.alumno;
+              this.modificarAlumno.avatar = imageUrl;
+
+              this.alumno = this.modificarAlumno;
+              console.log(this.alumno);
+              this.service.editarImagen(this.alumno).subscribe(
+                datos => {
+                  if(datos == 'OK'){
+                    localStorage.setItem('usuario', JSON.stringify(this.alumno));
+                    Swal.fire(
+                      'Correcto',
+                    )
+                  }else{
+                    this.alumno = old;
+                    Swal.fire(
+                      'Error',
+                  )
+                }
+              }
+              );
+            }
+            reader.readAsDataURL(password);
+        }
+      }
+
     }
->>>>>>> Stashed changes
+

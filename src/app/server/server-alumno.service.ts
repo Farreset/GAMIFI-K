@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Alumno } from '../interfaces/interfaz';
-<<<<<<< Updated upstream
+import { Alumno, Ranking } from '../interfaces/interfaz';
 import { decimalDigest } from '@angular/compiler/src/i18n/digest';
-=======
-import { Ranking } from '../interfaces/interfaz';
->>>>>>> Stashed changes
 
 
 @Injectable({
@@ -13,19 +9,32 @@ import { Ranking } from '../interfaces/interfaz';
 })
 export class ServerAlumnoService {
 
+
   URL = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
+
+
 
   listarAlumno(params: any) {
     return this.http.post(`${this.URL}alumnos/listarAlumnos.php`,JSON.stringify(params));
   }
 
+  // eliminarProfesor(nombreProfesor) {
+  //   return this.http.get(`${this.URL}eliminarProfesor.php?nombreProfesor=${nombreProfesor}`);
+  // }
   modificarAlumno(alumno:Alumno) {
    console.log(alumno);
 
     return this.http.post(`${this.URL}alumnos/modificarAlumnos.php`,JSON.stringify(alumno));
   }
+
+  unirseRanking(ranking:Ranking){
+
+    return this.http.post(`${this.URL}ranking/unirseRanking.php`,JSON.stringify(ranking));
+  }
+
+  
 
   insertarAlumnos(id_alumno: any, nick: any, fname: any, lname: any, mail: any, fecha: any, pssw: any, psswConf: any, avatar: any){
     let alumnos: Alumno = {
@@ -46,11 +55,12 @@ export class ServerAlumnoService {
     return this.http.post(`${this.URL}alumnos/modificarAlumnos.php`,JSON.stringify(alumno));
   }
 
+  // modificarProfesorEquipos(nombreProfesor, modoEquipos){
+  //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
 
-  //RANKINGS
-  listarRanking(ranking: Ranking) {
-    console.log(ranking);
-    return this.http.post(`${this.URL}ranking/listarRanking.php`,JSON.stringify(ranking));
-  }
+  // }
+
+
+
 
 }
