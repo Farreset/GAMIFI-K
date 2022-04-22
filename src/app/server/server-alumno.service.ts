@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Alumno } from '../interfaces/interfaz';
+<<<<<<< Updated upstream
 import { decimalDigest } from '@angular/compiler/src/i18n/digest';
+=======
+import { Ranking } from '../interfaces/interfaz';
+>>>>>>> Stashed changes
 
 
 @Injectable({
@@ -13,15 +17,10 @@ export class ServerAlumnoService {
 
   constructor(private http: HttpClient) { }
 
-
-
   listarAlumno(params: any) {
     return this.http.post(`${this.URL}alumnos/listarAlumnos.php`,JSON.stringify(params));
   }
 
-  // eliminarProfesor(nombreProfesor) {
-  //   return this.http.get(`${this.URL}eliminarProfesor.php?nombreProfesor=${nombreProfesor}`);
-  // }
   modificarAlumno(alumno:Alumno) {
    console.log(alumno);
 
@@ -47,12 +46,11 @@ export class ServerAlumnoService {
     return this.http.post(`${this.URL}alumnos/modificarAlumnos.php`,JSON.stringify(alumno));
   }
 
-  // modificarProfesorEquipos(nombreProfesor, modoEquipos){
-  //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
 
-  // }
-
-
-
+  //RANKINGS
+  listarRanking(ranking: Ranking) {
+    console.log(ranking);
+    return this.http.post(`${this.URL}ranking/listarRanking.php`,JSON.stringify(ranking));
+  }
 
 }

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
 import { PasswordValidator } from 'src/app/validator/password.validator';
 import { Alumno } from 'src/app/interfaces/interfaz';
+import { Ranking } from 'src/app/interfaces/interfaz';
+import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -13,6 +15,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class ProfileAlumnoComponent implements OnInit {
 
+<<<<<<< Updated upstream
   router: Router;
   route: ActivatedRoute;
   
@@ -22,6 +25,13 @@ export class ProfileAlumnoComponent implements OnInit {
     this.route = route;
     this.router = router;
   }
+=======
+  public alumnos:Alumno[] = [] ;
+  public rankings:Ranking[] = [] ;
+
+  router: Router;
+  route: ActivatedRoute;
+>>>>>>> Stashed changes
 
   alumno: Alumno = {
     id_alumno: 0,
@@ -34,6 +44,7 @@ export class ProfileAlumnoComponent implements OnInit {
     psswConf: "",
     avatar: ""
   }
+<<<<<<< Updated upstream
   modificarAlumno: any = {
     id_alumno: 0,
     nick: '',
@@ -49,12 +60,31 @@ export class ProfileAlumnoComponent implements OnInit {
     updatePassw: "",
     newPw: "",
     confirm: ""
+=======
+
+  ranking: Ranking = {
+    id_r: 0,
+    name_r: '',
+    cont_r: 0
+
+  }
+
+  // serverAlumnoService: any;
+  modificarAlumno: any;
+
+
+  constructor(router: Router, route: ActivatedRoute, private serverAlumnoService: ServerAlumnoService) {
+
+    this.route = route;
+    this.router = router;
+>>>>>>> Stashed changes
   }
 
 
 
   ngOnInit(): void {
     this.alumno = {
+<<<<<<< Updated upstream
       id_alumno: Number(this.route.snapshot.paramMap.get('id_alumno')),
       fname: String(this.route.snapshot.paramMap.get('fname')),
       lname: String(this.route.snapshot.paramMap.get('lname')),
@@ -175,3 +205,101 @@ export class ProfileAlumnoComponent implements OnInit {
 }
 
 
+=======
+           id_alumno: Number(this.route.snapshot.paramMap.get('id')),
+            fname: String(this.route.snapshot.paramMap.get('fname')),
+            lname: String(this.route.snapshot.paramMap.get('lname')),
+            nick: String(this.route.snapshot.paramMap.get('nick')),
+            mail: String(this.route.snapshot.paramMap.get('mail')),
+            fecha: String(this.route.snapshot.paramMap.get('fecha')),
+            pssw: String(this.route.snapshot.paramMap.get('pssw')),
+            psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
+            avatar: String(this.route.snapshot.paramMap.get('avatar'))
+          }
+
+    this.ranking = {
+            id_r: Number(this.route.snapshot.paramMap.get('id_r')),
+            name_r: String(this.route.snapshot.paramMap.get('name_r')),
+            cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
+    }
+    console.log(this.ranking);
+  }
+
+      listarRanking(){
+        this.serverAlumnoService.listarRanking(this.ranking).subscribe(
+          datos => {
+            this.router.navigate(['palumno', datos]);
+          }
+
+        )
+
+
+      }
+
+      // listarAlumno(){
+
+      //   // this.alumnoInicio.mail =  this.alumnos.mail;
+      //   // this.alumnoInicio.pssw = this.alumnos.pssw;
+
+      //   this.serverAlumnoService.listarAlumno(this.alumnoInicio).subscribe(
+      //     datos  => {
+      //       this.router.navigate(['palumno', datos]);
+      //     }
+      //   );
+
+      // }
+
+      volver(){
+        this.router.navigate(['']);
+      }
+
+      ir_ranking(){
+        this.router.navigate(['ranking']);
+      }
+
+      editar(){
+        this.router.navigate(['editar-alumno', this.alumno]);
+      }
+
+      addRank(){
+
+      }
+
+      // async editarImagen() {
+
+      //   const { value: file } = await Swal.fire({
+      //     title: 'Select image',
+      //     input: 'file',
+      //     inputAttributes: {
+      //       'accept': 'image/*',
+      //       'aria-label': 'Upload your profile picture'
+      //     }
+      //   })
+
+      //   if (file) {
+      //       const reader = new FileReader()
+      //       reader.onload = (e) => {
+      //         const imageUrl = reader.result;
+      //         let old = this.modificarAlumno.avatar;
+      //         this.modificarAlumno.avatar = imageUrl;
+      //         this.serverAlumnoService.editarImagen(this.modificarAlumno).subscribe(
+      //           (          datos: string)  => {
+      //             if(datos == 'ok'){
+      //               localStorage.setItem('usuario', JSON.stringify(this.modificarAlumno));
+      //               Swal.fire(
+      //                 'Correcto',
+      //               )
+      //             }else{
+      //               this.modificarAlumno.avatar = old;
+      //               Swal.fire(
+      //                 'Error',
+      //             )
+      //           }
+      //         }
+      //         );
+      //       }
+      //       reader.readAsDataURL(file);
+      //   }
+      // }
+    }
+>>>>>>> Stashed changes
