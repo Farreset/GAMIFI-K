@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Profe, Ranking } from 'src/app/interfaces/interfaz';
+import { Entrega, Profe, Ranking } from 'src/app/interfaces/interfaz';
 import { ServerProfesorService } from 'src/app/server/server-profesor.service';
 import { FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -61,6 +61,12 @@ export class ProfileProfeComponent implements OnInit {
     id_r: 0,
     cont_r: 0,
     codigo: 0
+  }
+
+  entrega: Entrega [] | any = {
+    id: 0,
+    nombre: "",
+    puntos: 0
   }
 
   rankingsArray: [] | any;
@@ -221,6 +227,33 @@ export class ProfileProfeComponent implements OnInit {
           }
           )}
       }
+    
+  async anadirEntrega() {
+
+      const { value: nombre } = await Swal.fire({
+  
+          title: 'Asigne un nombre a la entrega',
+          input: 'text',
+          text: ''
+  
+        })
+        if(nombre){
+        
+          this.service.anadirEntrega(nombre).subscribe(
+            datos => {
+              if (datos == 'OK') {
+                console.log(nombre);
+                Swal.fire(
+                  'Correcto',
+                )
+              } else {
+                Swal.fire(
+                  'Error',
+                )
+              }
+            }
+            )}
+        }
 
 
 randomCodigo() {

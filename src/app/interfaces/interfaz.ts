@@ -30,4 +30,10 @@ export interface Alumno {
     codigo: number;
   }
 
+  export interface Entrega {
+    id: number;
+    nombre: string;
+    puntos: number;
+  }
+
  

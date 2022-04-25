@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Profe,Ranking} from '../interfaces/interfaz';
+import { Entrega, Profe,Ranking} from '../interfaces/interfaz';
 
 
 @Injectable({
@@ -62,6 +62,15 @@ export class ServerProfesorService {
       cont_r: 0
     }
     return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
+  }
+
+  anadirEntrega(nombre: any){
+    let entrega: Entrega = {
+      id: 0,
+      nombre: nombre,
+      puntos: 0
+    }
+    return this.http.post(`${this.URL}entregas/insertarEntrega.php`,JSON.stringify(entrega));
   }
 
   // modificarProfesorEquipos(nombreProfesor, modoEquipos){

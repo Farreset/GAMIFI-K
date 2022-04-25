@@ -198,12 +198,13 @@ export class ProfileAlumnoComponent implements OnInit {
       }
       async unirseRanking() {
 
-        const { value: codigo } = await Swal.fire({
+        const { value: codigoAl } = await Swal.fire({
           title: 'Unirse ranking',
           input: 'text',
           text: 'Introduzca el codigo para unirte'
         })
-            this.serverRankingService.unirseRanking(this.ranking).subscribe(
+        if(codigoAl==this.ranking.codigo){
+          this.serverRankingService.unirseRanking(this.ranking).subscribe(
               datos => {
                 if(datos == 'No existe'){
                   Swal.fire(
@@ -220,9 +221,9 @@ export class ProfileAlumnoComponent implements OnInit {
                 }
             }
           );
+        }
       }
 
-      //Modificar contraseña
       async modifyPassword() {
         const { value: formValues } = await Swal.fire({
           title: 'Cambiar la contraseña',
