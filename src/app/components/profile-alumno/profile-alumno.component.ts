@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
 import { ServerRankingService } from './../../server/server-ranking.service';
-import { Alumno, Ranking } from 'src/app/interfaces/interfaz';
+import { Alumno, Entrega, Ranking } from 'src/app/interfaces/interfaz';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -48,11 +48,17 @@ export class ProfileAlumnoComponent implements OnInit {
 
   ranking: Ranking = {
     id_r: 0,
-    id_alumno: 0,
     name_r: "",
+    id_alumno: 0,
+    cont_r: 0,
     codigo: 0
   }
- 
+  entrega: Entrega = {
+    id_ent: 0,
+    nombre: "",
+    puntos: 0,
+  
+  }
   // rankingList: Ranking[] = [];
 
 
@@ -61,6 +67,7 @@ export class ProfileAlumnoComponent implements OnInit {
   ListRanking = ['id_r', 'name_r', 'cont_r',];
 
   rankingsArray: [] | any;
+  entregas: [] | any;
 
   ngOnInit(): void {
     this.alumno = {
@@ -75,22 +82,35 @@ export class ProfileAlumnoComponent implements OnInit {
             avatar: String(this.route.snapshot.paramMap.get('avatar'))
           };
           console.log(this.alumno);
+
+
+    this.serverRankingService.listarRanking(this.ranking).subscribe(
+            (datos: any) => {
+              this.ranking = datos;
+              console.log(this.ranking);
+            }
+          );
+
+    //Listar Rankings del ARRAY
+    this.serverRankingService.listarRanking(this.ranking).subscribe(
+      (datos: any) => {
+      this.rankingsArray = datos;
+        console.log(this.ranking);
+      }
+    );
+
+    this.serverRankingService.listarEntregas(this.entregas ).subscribe(
+      (datos: any) => {
+      this.entregas = datos;
+        console.log(this.ranking);
+      }
+    );
+
+
+    }
+
     
 
-    // this.ranking = {
-    //         id_r: Number(this.route.snapshot.paramMap.get('id_r')),
-    //         name_r: String(this.route.snapshot.paramMap.get('name_r')),
-    //         cont_r: Number(this.route.snapshot.paramMap.get('cont_r'))
-    //       };
-
-          // this.listar_ranking();
-          this.serverRankingService.listarRanking(this.ranking).subscribe(
-              (datos: any) => {
-              this.rankingsArray = datos;
-                console.log(this.ranking);
-              }
-            );
-    }
 
       volver(){
         localStorage.clear();
@@ -155,7 +175,6 @@ export class ProfileAlumnoComponent implements OnInit {
             reader.readAsDataURL(file);
         }
       }
-
       async unirseRanking() {
 
         const { value: codigo } = await Swal.fire({
@@ -228,5 +247,7 @@ export class ProfileAlumnoComponent implements OnInit {
           }
         }
       }
+
+
   }
 

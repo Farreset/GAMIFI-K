@@ -27,11 +27,12 @@ export interface Alumno {
     id_r: number;
     id_alumno?: number;
     name_r: string;
+    cont_r: number;
     codigo: number;
   }
 
   export interface Entrega {
-    id: number;
+    id_ent: number;
     nombre: string;
     puntos: number;
   }

@@ -6,16 +6,16 @@
   header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
 
   $json = file_get_contents('php://input');
-  $unirse = json_decode($json);
+  // $rankingParam = json_decode($json);
   json_decode($json);
 
-  global $datos;
+  // global $datos;
 
   require("../db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
   $conexion = conexion(); // CREA LA CONEXION
 
   // REALIZA LA QUERY A LA BD
-  $listado = mysqli_query($conexion, "SELECT name_r_a FROM r_alumno WHERE id_alumno = '$unirse->id_alumno'");
+  $listado = mysqli_query($conexion, "SELECT * FROM ranking");
   //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
 
   // while ($resultado = mysqli_fetch_array($listado)) {
@@ -35,5 +35,6 @@
   header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
 
   echo $json; // MUESTRA EL JSON GENERADO AL EJECUTAR DIRECTAMENTE EL LOCALHOST
+
 
 ?>

@@ -57,16 +57,16 @@ export class ServerProfesorService {
   anadirRanking(name_r: any, codigo: number){
     let ranking: Ranking = {
       id_r: 0,
-      //id_alumno: id_alumno,
       name_r: name_r,
       codigo: codigo,
+      cont_r: 0
     }
     return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   }
 
   anadirEntrega(nombre: any){
     let entrega: Entrega = {
-      id: 0,
+      id_ent: 0,
       nombre: nombre,
       puntos: 0
     }
