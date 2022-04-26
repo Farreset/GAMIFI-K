@@ -48,11 +48,11 @@ export class ProfileAlumnoComponent implements OnInit {
 
   ranking: Ranking = {
     id_r: 0,
+    id_alumno: 0,
     name_r: "",
-    cont_r: 0,
     codigo: 0
   }
-
+ 
   // rankingList: Ranking[] = [];
 
 
@@ -75,6 +75,7 @@ export class ProfileAlumnoComponent implements OnInit {
             avatar: String(this.route.snapshot.paramMap.get('avatar'))
           };
           console.log(this.alumno);
+    
 
     // this.ranking = {
     //         id_r: Number(this.route.snapshot.paramMap.get('id_r')),
@@ -83,55 +84,13 @@ export class ProfileAlumnoComponent implements OnInit {
     //       };
 
           // this.listar_ranking();
-    this.serverRankingService.listarRanking(this.ranking).subscribe(
-            (datos: any) => {
-              this.ranking = datos;
-              console.log(this.ranking);
-            }
-          );
-
-    //Listar Rankings del ARRAY
-    this.serverRankingService.listarRankingArray().subscribe(
-            datos => {
-            this.rankingsArray = datos;
-            // console.log(this.rankingsArray);
-            }
-      );
-
-
-///////////////////////////////////////////////////////////////////caste
-      // this.ranking = {
-      //   id_r: Number(this.route.snapshot.paramMap.get('id_r')),
-      //   name_r: String(this.route.snapshot.paramMap.get('name_r')),
-      //   cont_r: Number(this.route.snapshot.paramMap.get('cont_r')),
-      //   codigo: Number(this.route.snapshot.paramMap.get('codigo'))
-      //       }
-      //   console.log(this.ranking);
-
-      //   this.name_r = String(this.route.snapshot.paramMap.get('name_r'));
-      //   this.serverRankingService.listarRanking(this.name_r).subscribe(
-      //     datos => {
-      //       if(datos == 'No ranking') {
-      //         console.log(datos);
-      //         Swal.fire(
-      //           'Error',
-      //           'No existe ningun ranking'
-      //         ).then((result) => {
-      //           this.router.navigate(['palumno']);
-      //         })
-      //       }else{
-      //         this.algo = datos;
-      //       }
-      //     }
-      //   )
-      // }
-////////////////////////////////////////////////////
-
-
+          this.serverRankingService.listarRanking(this.ranking).subscribe(
+              (datos: any) => {
+              this.rankingsArray = datos;
+                console.log(this.ranking);
+              }
+            );
     }
-
-
-
 
       volver(){
         localStorage.clear();
@@ -196,23 +155,26 @@ export class ProfileAlumnoComponent implements OnInit {
             reader.readAsDataURL(file);
         }
       }
+
       async unirseRanking() {
 
-        const { value: codigoAl } = await Swal.fire({
+        const { value: codigo } = await Swal.fire({
           title: 'Unirse ranking',
           input: 'text',
           text: 'Introduzca el codigo para unirte'
         })
-        if(codigoAl==this.ranking.codigo){
+        console.log(this.ranking.codigo);
+        if(this.ranking.codigo==codigo){
+          this.ranking.id_alumno = this.alumno.id_alumno;
           this.serverRankingService.unirseRanking(this.ranking).subscribe(
               datos => {
-                if(datos == 'No existe'){
+                if(datos == 'NO'){
                   Swal.fire(
                     'Error',
                     'No existe.',
                     'error'
                   )
-                }else if (datos == 'Error'){
+                }else if (datos == 'OK'){
                   Swal.fire(
                     'Error',
                     'Ya estas en este ranking.',
@@ -266,7 +228,5 @@ export class ProfileAlumnoComponent implements OnInit {
           }
         }
       }
-
-
   }
 

@@ -25,8 +25,8 @@ export interface Alumno {
 
   export interface Ranking {
     id_r: number;
+    id_alumno?: number;
     name_r: string;
-    cont_r: number;
     codigo: number;
   }
 

@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
   ranking: Ranking = {
     id_r: 0,
     name_r: "",
-    cont_r: 0,
     codigo: 0
   }
 
