@@ -3,44 +3,34 @@
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: text/html; charset=UTF-8');
 
+  $codigo = $_GET['codigo'];
+  // echo "El codigo es " . $codigo . "<br>";
 
   global $datos;
 
   require("../db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
-
   $conexion = conexion(); // CREA LA CONEXION
-  $json= file_get_contents('php://input');
-  $unirse=json_decode($json);
-  // echo $unirse; 
- 
 
-  // REALIZA LA QUERY A LA DB
-  //$registros = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
-  $registros = mysqli_query($conexion, "INSERT INTO `r_alumno` (`id_alumno`, `id_r`, `name_r_a`) VALUES ('$unirse->id_alumno','$unirse->id_r', '$unirse->name_r_a')");
- 
-  
-  //echo "$registros";
-  
+  $list = mysqli_query($conexion, "SELECT name_r, id_r FROM ranking WHERE codigo = $codigo");
+  if(!$list){
+    $response = 'Error';
+  }else if($list->num_rows == 0){
+    $resultado = 'No esta';
+  }else{
+    $datos = $list->fetch_assoc();
+    // REALIZA LA QUERY A LA DB
+    $registros = mysqli_query($conexion, "INSERT INTO `r_alumno` (`id_alumno`, `id_r`, `name_r_a`) VALUES ($_GET[id_alumno], $datos[id_r], '$datos[name_r]')");
+
+    //echo "$registros";
     if($registros){
-      $resultado = 'OK';  
+      $resultado = 'OK';
     }else{
       $resultado = 'NO';
     }
-  header('Content-Type: application/json');
-
-  echo json_encode($resultado); 
-
-  // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
-
-
-  if(!$registros){
-    $response = 'Error';
-    echo json_encode($response);
-  }else if($registros->num_rows == 0){
-          $response = 'No esta';
-          echo json_encode($response);
   }
 
+  header('Content-Type: application/json');
 
+  echo json_encode($resultado);
 ?>
