@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Alumno, Ranking } from '../interfaces/interfaz';
+import { Entrega, Ranking } from '../interfaces/interfaz';
 
 @Injectable({
   providedIn: 'root'
@@ -16,21 +16,29 @@ export class ServerRankingService {
     return this.http.get(`${this.URL}ranking/listarRanking.php?id_alumno=${id_alumno}`);
   }
 
-  listarTodoRanking(ranking: Ranking) {
-    return this.http.post(`${this.URL}ranking/listarTodosRanking.php`,JSON.stringify(ranking));
+  listarRankingProfe(ranking: Ranking) {
+    return this.http.post(`${this.URL}ranking/listarRankingProfe.php`,JSON.stringify(ranking));
   }
+
+  listarEntregas(entraga: Entrega) {
+    return this.http.post(`${this.URL}entregas/listarEntrega.php`,JSON.stringify(entraga));
+  }
+
+  // listarRanking(){
+  //   return this.http.get(`${this.URL}ranking/listarRanking.php`);
+  // }
 
   unirseRanking(codigo: Number, id_alumno: Number){
     console.log("Codigo en el service: ",codigo);
     return this.http.get(`${this.URL}ranking/unirseRanking.php?codigo=${codigo}&id_alumno=${id_alumno}` );
   }
 
-  anadirRanking(id_r: any, id_alumno: any, name_r: any, codigo: any){
+  anadirRanking(id_r: any, name_r: any, codigo: any, cont_r: any){
     let ranking: Ranking = {
       id_r: id_r,
-      id_alumno: id_alumno,
       name_r: name_r,
       codigo: codigo,
+      cont_r: cont_r
     }
     // console.log(ranking);
     return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));

@@ -86,7 +86,7 @@ export class ProfileProfeComponent implements OnInit {
     }
 
     //Listar Rankings del ARRAY
-    this.serverRankingService.listarRanking(this.ranking).subscribe(
+    this.serverRankingService.listarRankingProfe(this.ranking).subscribe(
       datos => {
       this.rankingsArray = datos;
       // console.log(this.rankingsArray);
