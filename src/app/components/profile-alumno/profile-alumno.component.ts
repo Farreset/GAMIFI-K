@@ -57,7 +57,7 @@ export class ProfileAlumnoComponent implements OnInit {
     id_ent: 0,
     nombre: "",
     puntos: 0,
-  
+    id_ranking: 0,
   }
   // rankingList: Ranking[] = [];
 

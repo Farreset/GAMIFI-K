@@ -16,11 +16,8 @@
  
 
   // REALIZA LA QUERY A LA DB
-  //$registros = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
-  $registros = mysqli_query($conexion, "INSERT INTO `entregas` (`id_ent`, `nombre`) VALUES (NULL,'$unirse->nombre')");
+  $registros = mysqli_query($conexion, "INSERT INTO `entregas` (`id_ent`,`nombre`,`puntos`,`id_ranking`) VALUES (NULL,'$unirse->nombre',NULL,'$unirse->ranking')");
  
-  
-  //echo "$registros";
   
     if($registros){
       $resultado = 'OK';  
@@ -31,16 +28,6 @@
 
   echo json_encode($resultado); 
 
-  // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
-
-
-//   if(!$registros){
-//     $response = 'Error';
-//     echo json_encode($response);
-//   }else if($registros->num_rows == 0){
-//           $response = 'No esta';
-//           echo json_encode($response);
-//   }
 
 
 ?>

@@ -35,6 +35,7 @@ export interface Alumno {
     id_ent: number;
     nombre: string;
     puntos: number;
+    id_ranking: number;
   }
 
  

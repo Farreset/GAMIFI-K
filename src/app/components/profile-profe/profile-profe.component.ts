@@ -239,10 +239,12 @@ export class ProfileProfeComponent implements OnInit {
         })
         if(nombre){
         
-          this.service.anadirEntrega(nombre).subscribe(
+          this.service.anadirEntrega(nombre, this.ranking.id_r).subscribe(
+            
             datos => {
               if (datos == 'OK') {
                 console.log(nombre);
+              
                 Swal.fire(
                   'Correcto',
                 )

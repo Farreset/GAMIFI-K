@@ -64,12 +64,14 @@ export class ServerProfesorService {
     return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   }
 
-  anadirEntrega(nombre: any){
+  anadirEntrega(nombre: any, ranking: number){
     let entrega: Entrega = {
       id_ent: 0,
       nombre: nombre,
-      puntos: 0
+      puntos: 0,
+      id_ranking: ranking,
     }
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     return this.http.post(`${this.URL}entregas/insertarEntrega.php`,JSON.stringify(entrega));
   }
 
