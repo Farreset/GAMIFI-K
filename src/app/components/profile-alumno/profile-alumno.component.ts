@@ -15,6 +15,7 @@ export class ProfileAlumnoComponent implements OnInit {
   route: ActivatedRoute;
   name_r  = '';
   algo: Object | undefined;
+  rankingTodo: any;
 
 
   constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
@@ -84,20 +85,12 @@ export class ProfileAlumnoComponent implements OnInit {
           console.log(this.alumno);
 
 
-    this.serverRankingService.listarRanking(this.ranking).subscribe(
+          this.serverRankingService.listarRanking(this.alumno.id_alumno).subscribe(
             (datos: any) => {
-              this.ranking = datos;
-              console.log(this.ranking);
+              console.log("lISTAR ORIGINAL",this.ranking);// NO llega
+              this.rankingsArray = datos;
             }
           );
-
-    //Listar Rankings del ARRAY
-    this.serverRankingService.listarRanking(this.ranking).subscribe(
-      (datos: any) => {
-      this.rankingsArray = datos;
-        console.log(this.ranking);
-      }
-    );
 
     this.serverRankingService.listarEntregas(this.entregas ).subscribe(
       (datos: any) => {
@@ -109,33 +102,27 @@ export class ProfileAlumnoComponent implements OnInit {
 
     }
 
-    
+
 
 
       volver(){
         localStorage.clear();
         this.router.navigate(['']);
       }
-
       _ranking(){
-
         this.router.navigate(['ranking']);
       }
-
       listar_ranking(){
         this.router.navigate(['ranking']);
       }
-
       editar(){
         this.router.navigate(['editar-alumno', this.alumno]);
-
       }
       addRank(){
 
       }
 
       async editarImagen() {
-
         const { value: file } = await Swal.fire({
           title: 'Select image',
           input: 'file',
@@ -182,27 +169,35 @@ export class ProfileAlumnoComponent implements OnInit {
           input: 'text',
           text: 'Introduzca el codigo para unirte'
         })
-        console.log(this.ranking.codigo);
-        if(this.ranking.codigo==codigo){
-          this.ranking.id_alumno = this.alumno.id_alumno;
-          this.serverRankingService.unirseRanking(this.ranking).subscribe(
+            // console.log("El codigo de la BD es: ", this.ranking);   //this.ranking.codigo
+
+          if(codigo){
+            console.log("El codigo introducido es: ", codigo);
+            this.serverRankingService.unirseRanking(codigo, this.alumno.id_alumno).subscribe(
               datos => {
-                if(datos == 'NO'){
+                if (datos == 'OK'){
+                  Swal.fire(
+                    'Enhorabuena!!',
+                    'Te has unido correctamente.',
+                    'success'
+                  )
+                }else if (datos == 'No esta'){
                   Swal.fire(
                     'Error',
-                    'No existe.',
+                    'Este ranking no existe.',
                     'error'
                   )
-                }else if (datos == 'OK'){
+                }else{
                   Swal.fire(
                     'Error',
-                    'Ya estas en este ranking.',
+                    'No se ha podido unir.',
                     'error'
                   )
                 }
             }
           );
-        }
+          }
+
       }
 
       async modifyPassword() {

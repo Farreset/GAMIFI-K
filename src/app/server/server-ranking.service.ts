@@ -11,8 +11,9 @@ export class ServerRankingService {
 
   constructor(private http: HttpClient) { }
 
-  listarRanking(ranking: Ranking) {
-    return this.http.post(`${this.URL}ranking/listarRanking.php`,JSON.stringify(ranking));
+  listarRanking(id_alumno: Number) {
+    // console.log("Ranking en service: ", ranking);
+    return this.http.get(`${this.URL}ranking/listarRanking.php?id_alumno=${id_alumno}`);
   }
 
   listarRankingProfe(ranking: Ranking) {
@@ -27,9 +28,9 @@ export class ServerRankingService {
   //   return this.http.get(`${this.URL}ranking/listarRanking.php`);
   // }
 
-  unirseRanking(ranking:Ranking){
-    console.log(ranking);
-    return this.http.post(`${this.URL}ranking/unirseRanking.php`,JSON.stringify(ranking));
+  unirseRanking(codigo: Number, id_alumno: Number){
+    console.log("Codigo en el service: ",codigo);
+    return this.http.get(`${this.URL}ranking/unirseRanking.php?codigo=${codigo}&id_alumno=${id_alumno}` );
   }
 
   anadirRanking(id_r: any, name_r: any, codigo: any, cont_r: any){
@@ -39,7 +40,7 @@ export class ServerRankingService {
       codigo: codigo,
       cont_r: cont_r
     }
-    console.log(ranking);
+    // console.log(ranking);
     return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   }
 

@@ -157,8 +157,8 @@ export class LoginComponent implements OnInit {
 
   }
 
-  listarRanking(){
-    this.serverRankingService.listarRanking(this.ranking).subscribe(
+  listarRanking(){/////////////////////////////////////
+    this.serverRankingService.listarRanking(this.alumnos.id_alumno).subscribe(
         datos => {
           this.router.navigate(['palumno',datos]);
         }
