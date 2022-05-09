@@ -93,6 +93,7 @@
     <div class="main-body">
       <div class="row gutters-sm">
         <div class="col-md-12 mb-3">
+<<<<<<< Updated upstream
             <div class="card">
             <div class="card-body">
           <ul class="list-group list-group-flush">
@@ -105,6 +106,36 @@
             </li>
             
           </ul>
+=======
+          <div class="card">
+            <div class="card-header">
+              <div class="row  my-2">
+              <div class="col"><h4>RANKINGS </h4></div>
+              <div class="col d-flex justify-content-end">
+                <button type="button" (click)="anadirRanking()"  class="btn btn-primary ">Añadir Ranking</button>
+
+              </div>
+            </div>
+            </div>
+            <div class="card-body ">
+              <ul class="list-group list-group-flush " style="height: 150px; overflow: auto">
+                <li *ngFor="let data of rankingsArray" class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
+                  <div class="col d-flex justify-content-start"><h6 class="mb-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="feather feather-globe mr-2 icon-inline">
+                    </svg>{{data.name_r}}</h6></div>
+
+                  <span class="text-secondary"></span>
+                  <div class="col d-flex justify-content-end">Codigo: {{data.codigo}}</div>
+                  <i class="bi bi-arrow-clockwise"></i>
+                  <div class="col d-flex justify-content-end"><button type="button" (click)="codigoRanking(data.id_r)"  class=" btn btn-primary ">Codigo</button></div>
+                  <div class="col d-flex justify-content-end"><button type="button" (click)="anadirEntrega()"  class=" btn btn-primary ">Entregas</button></div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+>>>>>>> Stashed changes
         </div>
       </div>
     </div>
