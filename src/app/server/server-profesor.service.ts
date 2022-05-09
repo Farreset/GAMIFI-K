@@ -71,7 +71,7 @@ export class ServerProfesorService {
       puntos: 0,
       id_ranking: ranking,
     }
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    console.log(entrega);
     return this.http.post(`${this.URL}entregas/insertarEntrega.php`,JSON.stringify(entrega));
   }
 

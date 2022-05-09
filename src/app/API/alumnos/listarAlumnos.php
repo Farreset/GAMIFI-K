@@ -24,8 +24,9 @@
 
   // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
 
-  $resultado = $registros->fetch_assoc();
-
+  while ($resultadoArray = mysqli_fetch_array($registros)) {
+    $alumnosArray[] = $resultadoArray;
+  }
 
     $json = json_encode($datos); // GENERA EL JSON CON LOS DATOS OBTENIDOS
 

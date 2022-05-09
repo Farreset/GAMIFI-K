@@ -15,7 +15,6 @@ export class ProfileAlumnoComponent implements OnInit {
   route: ActivatedRoute;
   name_r  = '';
   algo: Object | undefined;
-  rankingTodo: any;
 
 
   constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
@@ -59,16 +58,13 @@ export class ProfileAlumnoComponent implements OnInit {
     nombre: "",
     puntos: 0,
     id_ranking: 0,
+  
   }
   // rankingList: Ranking[] = [];
 
-
-  ranking_=['Queso','Macarrones','Tomate','Virria'];
-  // ListRanking = [this.ranking.name_r, 'name_r', 'cont_r',];
-  ListRanking = ['id_r', 'name_r', 'cont_r',];
-
   rankingsArray: [] | any;
   entregas: [] | any;
+  numero_entregas = 0;
 
   ngOnInit(): void {
     this.alumno = {
@@ -85,24 +81,27 @@ export class ProfileAlumnoComponent implements OnInit {
           console.log(this.alumno);
 
 
-          this.serverRankingService.listarRanking(this.alumno.id_alumno).subscribe(
-            (datos: any) => {
-              console.log("lISTAR ORIGINAL",this.ranking);// NO llega
-              this.rankingsArray = datos;
-            }
-          );
 
-    this.serverRankingService.listarEntregas(this.entregas ).subscribe(
+
+    //Listar Rankings del ARRAY
+    this.ranking.id_alumno = this.alumno.id_alumno;
+    this.serverRankingService.listarRanking(this.ranking).subscribe(
       (datos: any) => {
-      this.entregas = datos;
-        console.log(this.ranking);
+      this.rankingsArray = datos;
+        console.log(datos);
+        console.log(this.rankingsArray);
       }
     );
 
-
+    this.serverRankingService.listarEntregas(this.entregas ).subscribe(
+        (datos: any) => {
+        this.entregas = datos;
+        this.numero_entregas = this.entregas.length;
+          console.log(this.entregas);
+        }
+      );
     }
-
-
+       
 
 
       volver(){
@@ -115,6 +114,9 @@ export class ProfileAlumnoComponent implements OnInit {
       listar_ranking(){
         this.router.navigate(['ranking']);
       }
+      listar_entregas(){
+        this.router.navigate(['entregas']);
+      }
       editar(){
         this.router.navigate(['editar-alumno', this.alumno]);
       }
@@ -123,6 +125,7 @@ export class ProfileAlumnoComponent implements OnInit {
       }
 
       async editarImagen() {
+
         const { value: file } = await Swal.fire({
           title: 'Select image',
           input: 'file',
