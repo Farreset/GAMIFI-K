@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Profe } from 'src/app/interfaces/interfaz';
+import { Entrega, Profe, Ranking } from 'src/app/interfaces/interfaz';
+import { ServerProfesorService } from 'src/app/server/server-profesor.service';
+import { FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { ServerRankingService } from 'src/app/server/server-ranking.service';
 
 
 
@@ -10,13 +14,9 @@ import { Profe } from 'src/app/interfaces/interfaz';
   styleUrls: ['./profile-profe.component.css']
 })
 export class ProfileProfeComponent implements OnInit {
-  public profes:Profe[] = [] ;
-  router: Router; 
+
+  router: Router;
   route: ActivatedRoute;
-<<<<<<< Updated upstream
-  profe:Profe = {
-    id: 0,
-=======
   profesGrup!: FormGroup;
 
   serverProfesorService: any;
@@ -33,41 +33,49 @@ export class ProfileProfeComponent implements OnInit {
   }
   profe: Profe = {
     id_profesor: 0,
->>>>>>> Stashed changes
     nick: '',
     fname: "",
     lname: "",
     mail: "",
     centro: "",
-    pssw: ""
-    
-  } 
-   
-  constructor(router: Router, route: ActivatedRoute) {
+    pssw: "",
+    psswConf: "",
+    avatar: ""
 
-    this.route = route;
-    this.router = router;
+  }
+  modificarProfesor: any = {
+    id_profesor: 0,
+    nick: '',
+    fname: "",
+    lname: "",
+    mail: "",
+    fecha: "",
+    pssw: "",
+    psswConf: "",
+    avatar: ""
+  }
+  addRank: any = {
+    name_r: "",
+    codigo: 0
   }
 
+  ranking: Ranking [] | any = {
+    name_r: "",
+    id_r: 0,
+    cont_r: 0,
+    codigo: 0
+  }
+
+  entrega: Entrega [] | any = {
+    id: 0,
+    nombre: "",
+    puntos: 0
+  }
+
+  rankingsArray: [] | any;
 
   ngOnInit(): void {
     this.profe = {
-<<<<<<< Updated upstream
-            id: Number(this.route.snapshot.paramMap.get('id')),
-            fname: String(this.route.snapshot.paramMap.get('fname')),
-            lname: String(this.route.snapshot.paramMap.get('lname')),
-            nick: String(this.route.snapshot.paramMap.get('nick')),
-            mail: String(this.route.snapshot.paramMap.get('mail')),
-            centro: String(this.route.snapshot.paramMap.get('centro')),
-            pssw: String(this.route.snapshot.paramMap.get('pssw'))
-          } 
-      }
-      volver(){
-        
-        this.router.navigate(['home']);
-      }
-    }
-=======
       id_profesor: Number(this.route.snapshot.paramMap.get('id_profesor')),
       fname: String(this.route.snapshot.paramMap.get('fname')),
       lname: String(this.route.snapshot.paramMap.get('lname')),
@@ -306,4 +314,3 @@ randomCodigo() {
   }
 }
 
->>>>>>> Stashed changes

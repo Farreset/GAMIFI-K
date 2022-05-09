@@ -12,6 +12,12 @@ import { ProfileProfeComponent } from './components/profile-profe/profile-profe.
 import { LoginComponent } from './components/login/login.component';
 
 import { APP_BASE_HREF } from '@angular/common';
+import { RankingsComponent } from './components/rankings/rankings.component';
+import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.component';
+import { HttpClientModule } from '@angular/common/http';
+// import { ModificarComponent } from './components/modificar/modificar.component';
+import { EditProfileProfeComponent } from './components/edit-profile-profe/edit-profile-profe.component';
+import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edit-profile-alumno.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +27,21 @@ import { APP_BASE_HREF } from '@angular/common';
     RegisterProfeComponent,
     LoginComponent,
     ProfileProfeComponent,
-    ProfileAlumnoComponent
+    ProfileAlumnoComponent,
+    RankingsComponent,
+    RankingAdminComponent,
+    // ModificarComponent,
+    EditProfileProfeComponent,
+    EditProfileAlumnoComponent,
+
+
     ],
   imports: [
   BrowserModule,
   ReactiveFormsModule,
   FormsModule,
-  Routing
+  Routing,
+  HttpClientModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent],

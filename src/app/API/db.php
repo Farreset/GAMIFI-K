@@ -10,7 +10,7 @@ function conexion() {
     mysqli_set_charset($enlace,"utf8");
 
     if (!$enlace) {
-      echo "Error: No se puede conectar a MySQL." .PHP_EOL;
+      echo "Error: No se puede conectar a MySQL." . PHP_EOL;
       echo "Error de depuracion: " . mysqli_connect_error() . PHP_EOL;
       echo "Error de depuracion: " . mysqli_connect_error() . PHP_EOL;
       exit;
@@ -20,3 +20,4 @@ function conexion() {
     }
 
 ?>
+
