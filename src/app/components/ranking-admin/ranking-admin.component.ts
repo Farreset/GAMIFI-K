@@ -16,10 +16,12 @@ export class RankingAdminComponent implements OnInit {
   name_r = '';
   algo: Object | undefined;
   id_ranking = 0;
+  
   constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
     this.route = route;
     this.router = router;
   }
+
   alumno: Alumno = {
     id_alumno: 0,
     nick: '',
@@ -37,8 +39,8 @@ export class RankingAdminComponent implements OnInit {
     nombre: "",
     puntos: 0,
     id_ranking: 0,
-
   }
+
   alumnoArray: [] | any;
   rankingsArray: [] | any;
   entregas: [] | any;

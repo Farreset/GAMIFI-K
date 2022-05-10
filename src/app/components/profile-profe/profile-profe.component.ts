@@ -274,17 +274,38 @@ export class ProfileProfeComponent implements OnInit {
     for (let i = 0; i < charactersLength; i++) {
       numero += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
+    this.ranking.codigo = numero;
     return numero;
+  
   }
-
-  async codigoRanking() {
-    Swal.fire({
-      title: 'Tu codigo: ' + this.randomCodigo(),
-    })
-      .then(result => {
-        console.log("Codigo " + this.randomCodigo);
-      });
-  }
+    mostrar_codigo(name_r: string){
+      console.log(this.ranking.codigo);
+    }
+  
+   codigoRanking(id_r: number) {
+    let numero = '';
+    const characters = '0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < charactersLength; i++) {
+      numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+  
+    console.log(Number(numero), id_r);
+    
+    this.service.actualizarCodigo(Number(numero), id_r).subscribe(
+      (datos: any) => {
+        if (datos == 'OK') {
+          console.log('ok');
+          
+        }else{
+          console.log('nooo');
+        }
+        window.location.reload();
+      }
+    );
+  
+    }
+    
   verEntrega() {
 
     this.router.navigate(['']);

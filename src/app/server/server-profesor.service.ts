@@ -80,9 +80,11 @@ export class ServerProfesorService {
 
   // }
 
-  // modificarProfesor(){
-  //   return this.http.post(`${this.URL}profesores/modificarProfesor.php`,JSON.stringify(profes));
-  // }
+  actualizarCodigo(codigo:number, id_r: number){
+    console.log(codigo, id_r);
+   
+   return this.http.get(`${this.URL}ranking/actualizarCodigo.php?codigo=${codigo}&id_r=${id_r}`);
+ }
 
 
 }
