@@ -15,7 +15,8 @@
   $conexion = conexion(); // CREA LA CONEXION
 
   // REALIZA LA QUERY A LA BD
-  $listado = mysqli_query($conexion, "SELECT nombre FROM entregas ");
+
+  $listado = mysqli_query($conexion, "SELECT ent. * , ran. * , alum. * FROM entregas ent, r_alumno ran, alumnos alum WHERE ent.id_ranking = ran.id_r AND ran.id_alumno = alum.id_alumno");
   //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
 
   // while ($resultado = mysqli_fetch_array($listado)) {

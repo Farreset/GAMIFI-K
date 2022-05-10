@@ -127,9 +127,13 @@
                     </svg>{{data.name_r}}</h6></div>
 
                   <span class="text-secondary"></span>
-                  <div class="col-2 d-flex justify-content-end"><button type="button" (click)="codigoRanking()"  class=" btn btn-info ">Codigo</button></div>
-                  <div class="col-2 d-flex justify-content-end"><button type="button" (click)="anadirEntrega()"  class=" btn btn-info ">Entregas</button></div>
-                  <div class="col-2 d-flex justify-content-end"><button type="button" (click)="verMiembros()"  class=" btn btn-info ">Miembros</button></div>
+                  <div class="col d-flex justify-content-end">Codigo: {{data.codigo}}</div>
+                  <i class="bi bi-arrow-clockwise"></i>
+                  <div class="col d-flex justify-content-end"><button type="button" (click)="codigoRanking(data.id_r)"  class=" btn btn-primary ">Codigo</button></div>
+                  <div class="col d-flex justify-content-end"><button type="button" (click)="verEntrega()"  class=" btn btn-primary ">Ver Entregas</button></div>
+                  <div class="col d-flex justify-content-end"><button type="button" (click)="anadirEntrega(data.id_r)"  class=" btn btn-primary ">Entregas</button></div>
+                  <div class="col d-flex justify-content-end"><button type="button" (click)="verAlumno(data.id_r)"  class=" btn btn-primary ">Ver Alumnos</button></div>
+
                 </li>
 
               </ul>

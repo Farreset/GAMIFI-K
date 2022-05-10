@@ -57,14 +57,14 @@ export class ProfileProfeComponent implements OnInit {
     codigo: 0
   }
 
-  ranking: Ranking [] | any = {
+  ranking: Ranking[] | any = {
     name_r: "",
     id_r: 0,
     cont_r: 0,
     codigo: 0
   }
 
-  entrega: Entrega [] | any = {
+  entrega: Entrega[] | any = {
     id: 0,
     nombre: "",
     puntos: 0
@@ -85,12 +85,18 @@ export class ProfileProfeComponent implements OnInit {
       avatar: String(this.route.snapshot.paramMap.get('avatar'))
 
     }
+    this.ranking = {
+      name_r: Number(this.route.snapshot.paramMap.get('name_r')),
+      id_r: String(this.route.snapshot.paramMap.get('id_r')),
+      cont_r: String(this.route.snapshot.paramMap.get('cont_r')),
+      codigo: String(this.route.snapshot.paramMap.get('codigo')),
+    }
 
     //Listar Rankings del ARRAY
     this.serverRankingService.listarRankingProfe(this.ranking).subscribe(
       datos => {
-      this.rankingsArray = datos;
-      // console.log(this.rankingsArray);
+        this.rankingsArray = datos;
+        console.log(this.rankingsArray);
       }
     );
 
@@ -101,11 +107,11 @@ export class ProfileProfeComponent implements OnInit {
 
   }
 
-  registrarRanking(){
+  registrarRanking() {
     this.serverProfesorService.insertarProfesor(this.ranking.name_r).subscribe(
-      (         datos: any) => this.rankings = datos
+      (datos: any) => this.rankings = datos
     );
- this.router.navigate(['login']);
+    this.router.navigate(['login']);
   }
   get data() { return this.ranking.controls; }
 
@@ -113,6 +119,7 @@ export class ProfileProfeComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['']);
   }
+
   editar() {
     this.router.navigate(['editar-profe', this.profe]);
   }
@@ -198,7 +205,7 @@ export class ProfileProfeComponent implements OnInit {
           (datos) => {
             if (datos == 'OK') {
               console.log('ok');
-            }else{
+            } else {
               console.log('nooo');
             }
           }
@@ -211,75 +218,105 @@ export class ProfileProfeComponent implements OnInit {
 
     const { value: name_r } = await Swal.fire({
 
-        title: 'Asigne un nombre al ranking',
-        input: 'text',
-        text: ''
+      title: 'Asigne un nombre al ranking',
+      input: 'text',
+      text: ''
 
-      })
-      if(name_r){
-        let codigo = this.randomCodigo();
-        this.service.anadirRanking(name_r, Number(codigo)).subscribe(
-          datos => {
-            if (datos == 'OK') {
-              Swal.fire(
-                'Correcto',
-              )
-            } else {
-              Swal.fire(
-                'Error',
-              )
-            }
+    })
+    if (name_r) {
+      let codigo = this.randomCodigo();
+      this.service.anadirRanking(name_r, Number(codigo)).subscribe(
+        datos => {
+          if (datos == 'OK') {
+            Swal.fire(
+              'Correcto',
+            )
+          } else {
+            Swal.fire(
+              'Error',
+            )
           }
-          )}
-      }
-
-  async anadirEntrega() {
-
-      const { value: nombre } = await Swal.fire({
-
-          title: 'Asigne un nombre a la entrega',
-          input: 'text',
-          text: ''
-
-        })
-        if(nombre){
-
-          this.service.anadirEntrega(nombre, this.ranking.id_r).subscribe(
-
-            datos => {
-              if (datos == 'OK') {
-                console.log(nombre);
-
-                Swal.fire(
-                  'Correcto',
-                )
-              } else {
-                Swal.fire(
-                  'Error',
-                )
-              }
-            }
-            )}
         }
-
-
-randomCodigo() {
-  let numero = '';
-  const characters = '0123456789';
-  const charactersLength = characters.length;
-  for (let i = 0; i < charactersLength; i++) {
-    numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+      )
+    }
   }
-  return numero;
-}
 
-async codigoRanking() {
-  Swal.fire({
-    title: 'Tu codigo: ' + this.randomCodigo(),
-  })
-    .then(result => {
-      console.log("Codigo " + this.randomCodigo);
-    });
-}
+  async anadirEntrega(id: number) {
 
-};
+    const { value: nombre } = await Swal.fire({
+
+      title: 'Asigne un nombre a la entrega',
+      input: 'text',
+      text: ''
+
+    })
+    if (nombre) {
+      console.log(id);
+      this.service.anadirEntrega(nombre, id).subscribe(
+
+        datos => {
+          if (datos == 'OK') {
+            console.log(nombre);
+
+            Swal.fire(
+              'Correcto',
+            )
+          } else {
+            Swal.fire(
+              'Error',
+            )
+          }
+        }
+      )
+    }
+  }
+
+
+  randomCodigo() {
+    let numero = '';
+    const characters = '0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < charactersLength; i++) {
+      numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    this.ranking.codigo = numero;
+    return numero;
+
+  }
+    mostrar_codigo(name_r: string){
+      console.log(this.ranking.codigo);
+    }
+
+   codigoRanking(id_r: number) {
+    let numero = '';
+    const characters = '0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < charactersLength; i++) {
+      numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    console.log(Number(numero), id_r);
+
+    this.service.actualizarCodigo(Number(numero), id_r).subscribe(
+      (datos: any) => {
+        if (datos == 'OK') {
+          console.log('ok');
+
+        }else{
+          console.log('nooo');
+        }
+        window.location.reload();
+      }
+    );
+
+    }
+
+  verEntrega() {
+
+    this.router.navigate(['']);
+  }
+  verAlumno(id_r: number) {
+    console.log(id_r);
+    this.router.navigate(['adminRank', id_r]);
+  }
+}

@@ -9,21 +9,22 @@ import { ProfileProfeComponent } from './components/profile-profe/profile-profe.
 import { RankingsComponent } from './components/rankings/rankings.component';
 import { RankingAdminComponent } from './components/ranking-admin/ranking-admin.component';
 import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edit-profile-alumno.component';
+import { EntregasComponent } from './components/entregas/entregas.component';
 
 
 const routes: Routes = [
-  { path: 'ranking', component: RankingsComponent, pathMatch: 'full'},
-  { path: 'adminRank', component: RankingAdminComponent, pathMatch: 'full'},
-    { path: 'login', component: LoginComponent, pathMatch: 'full'},
-    { path: '', component: HomeComponent, pathMatch: 'full'},
-    { path: 'ralumno', component: RegisterAlumnoComponent, pathMatch: 'full'},
-    { path: 'rprofe', component: RegisterProfeComponent, pathMatch: 'full'},
-    { path: 'palumno', component: ProfileAlumnoComponent, pathMatch: 'full'},
-    { path: 'pprofe', component: ProfileProfeComponent, pathMatch: 'full'},
-    { path: 'editar-profe', component: EditProfileProfeComponent, pathMatch: 'full'},
-    { path: 'editar-alumno', component: EditProfileAlumnoComponent, pathMatch: 'full'},
-
-  { path: '**', redirectTo: '/register' } //Dejar la ultima
+  { path: 'ranking', component: RankingsComponent},
+    { path: 'login', component: LoginComponent},
+    { path: '', component: HomeComponent},
+    { path: 'ralumno', component: RegisterAlumnoComponent},
+    { path: 'rprofe', component: RegisterProfeComponent},
+    { path: 'palumno', component: ProfileAlumnoComponent},
+    { path: 'pprofe', component: ProfileProfeComponent},
+    { path: 'editar-profe', component: EditProfileProfeComponent},
+    { path: 'editar-alumno', component: EditProfileAlumnoComponent},
+    { path: 'entregas', component: EntregasComponent},
+  { path: 'adminRank/:id_r', component: RankingAdminComponent},
+  //{ path: '**', redirectTo: '/register' } Dejar la ultima
   ];
 
 export const Routing = RouterModule.forRoot(routes);

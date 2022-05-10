@@ -11,12 +11,12 @@
 
   $conexion = conexion(); // CREA LA CONEXION
   $json= file_get_contents('php://input');
-  $unirse=json_decode($json);
-  // echo $unirse; 
+  $delete=json_decode($json);
+  // echo $delete; 
  
 
   // REALIZA LA QUERY A LA DB
-  $registros = mysqli_query($conexion, "INSERT INTO `entregas` (`id_ent`,`nombre`,`puntos`,`id_ranking`) VALUES (NULL,'$unirse->nombre',NULL,'$unirse->id_ranking')");
+  $registros = mysqli_query($conexion, "DELETE FROM entregas  WHERE id_ent = '$delete->id_ent';");
  
   
     if($registros){
