@@ -272,17 +272,18 @@ export class ProfileProfeComponent implements OnInit {
   }
 
 
-  randomCodigo() {
-    let numero = '';
-    const characters = '0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < charactersLength; i++) {
-      numero += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    this.ranking.codigo = numero;
-    return numero;
+    randomCodigo() {
+      let numero = '';
+      const characters = '0123456789';
+      const charactersLength = characters.length;
+      for (let i = 0; i < charactersLength; i++) {
+        numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      this.ranking.codigo = numero;
+      return numero;
 
-  }
+    }
+
     mostrar_codigo(name_r: string){
       console.log(this.ranking.codigo);
     }
@@ -315,8 +316,11 @@ export class ProfileProfeComponent implements OnInit {
 
     this.router.navigate(['']);
   }
+
   verAlumno(id_r: number) {
     console.log(id_r);
     this.router.navigate(['adminRank', id_r]);
   }
+
+
 }

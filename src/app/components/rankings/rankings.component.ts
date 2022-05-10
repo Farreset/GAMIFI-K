@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Alumno, Ranking } from 'src/app/interfaces/interfaz';
+import { Alumno, Entrega, Ranking } from 'src/app/interfaces/interfaz';
 import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
 import { ServerRankingService } from 'src/app/server/server-ranking.service';
 import Swal from 'sweetalert2';
@@ -14,87 +14,56 @@ import Swal from 'sweetalert2';
 })
 export class RankingsComponent implements OnInit {
 
-    router: Router;
-    route: ActivatedRoute;
-    miembrosArray: [] | any;
+  router: Router;
+  route: ActivatedRoute;
+  name_r = '';
+  algo: Object | undefined;
+  id_ranking = 0;
 
-    ServerRankingService: any;
-    profesorInicio: any;
-    rankings: any;
-    constructor(router: Router, route: ActivatedRoute, private serverRankingService: ServerRankingService, private serverAlumnoService: ServerAlumnoService) {
+  constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
+    this.route = route;
+    this.router = router;
+  }
 
-      this.route = route;
-      this.router = router;
-      this.serverRankingService = serverRankingService;
+  alumno: Alumno = {
+    id_alumno: 0,
+    nick: '',
+    fname: "",
+    lname: "",
+    mail: "",
+    fecha: "",
+    pssw: "",
+    psswConf: "",
+    avatar: ""
+  }
 
-    }
+  entrega: Entrega = {
+    id_ent: 0,
+    nombre: "",
+    puntos: 0,
+    id_ranking: 0,
+  }
 
-    alumno:Alumno = {
-      id_alumno: 0,
-      nick: '',
-      fname: "",
-      lname: "",
-      mail: "",
-      fecha: "",
-      pssw: "",
-      psswConf: "",
-      avatar: ""
-    }
+  alumnoArray: [] | any;
+  rankingsArray: [] | any;
+  entregas: [] | any;
 
-    ranking: Ranking [] | any = {
-      id_r: 0,
-      name_r: "",
-      cont_r: 0,
-      codigo: 0
-    }
+  ngOnInit(): void {
 
-    ngOnInit(): void {
-      this.alumno = {
-        id_alumno: Number(this.route.snapshot.paramMap.get('id_alumno')),
-         fname: String(this.route.snapshot.paramMap.get('fname')),
-         lname: String(this.route.snapshot.paramMap.get('lname')),
-         nick: String(this.route.snapshot.paramMap.get('nick')),
-         mail: String(this.route.snapshot.paramMap.get('mail')),
-         fecha: String(this.route.snapshot.paramMap.get('fecha')),
-         pssw: String(this.route.snapshot.paramMap.get('pssw')),
-         psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
-         avatar: String(this.route.snapshot.paramMap.get('avatar'))
-       };
-       console.log("Alumno; ", this.alumno);
+    this.id_ranking = Number(this.route.snapshot.paramMap.get('id_r'));
+    console.log(this.id_ranking);
+    this.serverRankingService.listarAlumnos(this.id_ranking).subscribe(
+      (datos: any) => {
+        this.alumnoArray = datos;
+        console.log(datos);
+      }
+    );
+  }
 
-       this.serverAlumnoService.listarMiembros(this.ranking).subscribe(
-        datos => {
-          this.ranking = datos;
-          console.log("Dentro de listar",this.ranking);
-        }
-      );
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
-    onSubmit() {
-      this.registrarRanking();
-
-    }
-
-    registrarRanking(){
-      this.serverRankingService.anadirRanking(this.ranking.idr_r,this.ranking.name_r,this.ranking.codigo,this.ranking.cont_r).subscribe(
-           datos => this.ranking = datos
-      );
-   this.router.navigate(['login']);
-    }
-    get data() { return this.ranking.controls; }
+  eliminarAlumno(id_alumno: number) {
+    console.log(id_alumno);
+    this.serverRankingService.deleteAlumnos(id_alumno);
+  }
 
 
 }
