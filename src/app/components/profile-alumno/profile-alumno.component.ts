@@ -35,6 +35,7 @@ export class ProfileAlumnoComponent implements OnInit {
     psswConf: "",
     avatar: ""
   }
+
   modificarAlumno: any = {
     id_alumno: 0,
     nick: '',
@@ -113,7 +114,7 @@ export class ProfileAlumnoComponent implements OnInit {
         this.router.navigate(['ranking']);
       }
       listar_ranking(){
-        this.router.navigate(['ranking']);
+        this.router.navigate(['ranking',this.alumno]);
       }
       editar(){
         this.router.navigate(['editar-alumno', this.alumno]);

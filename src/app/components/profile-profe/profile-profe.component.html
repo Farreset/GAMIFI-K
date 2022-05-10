@@ -121,15 +121,15 @@
             <div class="card-body ">
               <ul class="list-group list-group-flush " style="height: 150px; overflow: auto">
                 <li *ngFor="let data of rankingsArray" class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
-                  <div class="col d-flex justify-content-start"><h6 class="mb-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  <div class="col-6 d-flex justify-content-start"><h6 class="mb-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                       class="feather feather-globe mr-2 icon-inline">
                     </svg>{{data.name_r}}</h6></div>
 
                   <span class="text-secondary"></span>
-                  <div class="col d-flex justify-content-end"><button type="button" (click)="codigoRanking()"  class=" btn btn-primary ">Codigo</button></div>
-                  <div class="col d-flex justify-content-end"><button type="button" (click)="anadirEntrega()"  class=" btn btn-primary ">Entregas</button></div>
-                 
+                  <div class="col-2 d-flex justify-content-end"><button type="button" (click)="codigoRanking()"  class=" btn btn-info ">Codigo</button></div>
+                  <div class="col-2 d-flex justify-content-end"><button type="button" (click)="anadirEntrega()"  class=" btn btn-info ">Entregas</button></div>
+                  <div class="col-2 d-flex justify-content-end"><button type="button" (click)="verMiembros()"  class=" btn btn-info ">Miembros</button></div>
                 </li>
 
               </ul>

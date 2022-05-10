@@ -38,8 +38,8 @@ export class ProfileProfeComponent implements OnInit {
     pssw: "",
     psswConf: "",
     avatar: ""
-
   }
+
   modificarProfesor: any = {
     id_profesor: 0,
     nick: '',
@@ -51,6 +51,7 @@ export class ProfileProfeComponent implements OnInit {
     psswConf: "",
     avatar: ""
   }
+
   addRank: any = {
     name_r: "",
     codigo: 0
@@ -115,6 +116,10 @@ export class ProfileProfeComponent implements OnInit {
   editar() {
     this.router.navigate(['editar-profe', this.profe]);
   }
+
+  verMiembros(){
+    this.router.navigate(['ranking']);
+  };
 
   async editarImagen() {
 
@@ -227,24 +232,24 @@ export class ProfileProfeComponent implements OnInit {
           }
           )}
       }
-    
+
   async anadirEntrega() {
 
       const { value: nombre } = await Swal.fire({
-  
+
           title: 'Asigne un nombre a la entrega',
           input: 'text',
           text: ''
-  
+
         })
         if(nombre){
-        
+
           this.service.anadirEntrega(nombre, this.ranking.id_r).subscribe(
-            
+
             datos => {
               if (datos == 'OK') {
                 console.log(nombre);
-              
+
                 Swal.fire(
                   'Correcto',
                 )
@@ -277,4 +282,4 @@ async codigoRanking() {
     });
 }
 
-}
+};

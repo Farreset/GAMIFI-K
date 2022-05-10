@@ -17,6 +17,7 @@ export class ServerAlumnoService {
 
 
   listarAlumno(params: any) {
+    console.log("ALUMNO=>",params)
     return this.http.post(`${this.URL}alumnos/listarAlumnos.php`,JSON.stringify(params));
   }
 
@@ -34,7 +35,7 @@ export class ServerAlumnoService {
     return this.http.post(`${this.URL}ranking/unirseRanking.php`,JSON.stringify(ranking));
   }
 
-  
+
 
   insertarAlumnos(id_alumno: any, nick: any, fname: any, lname: any, mail: any, fecha: any, pssw: any, psswConf: any, avatar: any){
     let alumnos: Alumno = {
@@ -55,12 +56,10 @@ export class ServerAlumnoService {
     return this.http.post(`${this.URL}alumnos/modificarAlumnos.php`,JSON.stringify(alumno));
   }
 
-  // modificarProfesorEquipos(nombreProfesor, modoEquipos){
-  //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
-
-  // }
-
-
+  listarMiembros(id_ranking: Number) {
+    console.log("Ranking en service: ", id_ranking);
+    return this.http.get(`${this.URL}ranking/listarMiembros.php?id_alumno=${id_ranking}`);
+  }
 
 
 }

@@ -50,7 +50,7 @@ ngOnInit(): void {
     pssw: String(this.route.snapshot.paramMap.get('pssw')),
     psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
     avatar: String(this.route.snapshot.paramMap.get('avatar'))
-    
+
 };
 
 this.alums = this.formBuilder.group({
