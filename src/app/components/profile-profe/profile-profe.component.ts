@@ -292,7 +292,7 @@ export class ProfileProfeComponent implements OnInit {
     let numero = '';
     const characters = '0123456789';
     const charactersLength = characters.length;
-    for (let i = 0; i < charactersLength; i++) {
+    for (let i = 0; i < 5; i++) {
       numero += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
