@@ -289,12 +289,51 @@ randomCodigo() {
     console.log(this.ranking.codigo);
   }
 
+<<<<<<< Updated upstream
  codigoRanking(id_r: number) {
   let numero = '';
   const characters = '0123456789';
   const charactersLength = characters.length;
   for (let i = 0; i < 5; i++) {
     numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+=======
+  async eliminarRanking(name_r:string){
+    const { value: mensaje } = await Swal.fire({
+      title: 'Estas seguro de eliminar el ranking '+name_r+'?',
+      text: "Para confirmar, escriba eliminar",
+      input: 'text',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    })
+    if(mensaje=="eliminar"){
+      this.serverProfesorService.deleteRanking(this.ranking.id_r,this.profe.id_profesor).subscribe(
+        (        datos: string) => {
+          if (datos == 'OK'){
+            Swal.fire(
+              'Correcto',
+              'Eliminado correctamente.',
+              'success'
+            )
+          }else if (datos == 'No esta'){
+            Swal.fire(
+              'Error',
+              'Este ranking no existe.',
+              'error'
+            )
+            }
+      }
+    );
+    }else{
+            Swal.fire(
+              'Error',
+              'No se ha podido eliminar.',
+              'error'
+            )
+          }
+>>>>>>> Stashed changes
   }
 
   console.log(Number(numero), id_r);

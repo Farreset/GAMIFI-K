@@ -85,6 +85,11 @@ export class ServerProfesorService {
     return this.http.get(`${this.URL}ranking/actualizarCodigo.php?codigo=${codigo}&id_r=${id_r}`);
   }
 
+ deleteRanking(id_r: any, id_profesor: any){
+  console.log(id_profesor);
+  return this.http.get(`${this.URL}ranking/eliminarRanking.php?id_r=${id_r}&id_profesor=${id_profesor}`);
+}
+
 
 }
 
