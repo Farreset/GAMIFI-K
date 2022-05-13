@@ -59,7 +59,7 @@ export class ProfileAlumnoComponent implements OnInit {
     nombre: "",
     puntos: 0,
     id_ranking: 0,
-  
+
   }
   // rankingList: Ranking[] = [];
 
@@ -102,7 +102,7 @@ export class ProfileAlumnoComponent implements OnInit {
         }
       );
     }
-       
+
 
 
       volver(){
@@ -194,7 +194,7 @@ export class ProfileAlumnoComponent implements OnInit {
                 }else{
                   Swal.fire(
                     'Error',
-                    'No se ha podido unir.',
+                    'Ya perteneces a ese ranking.',
                     'error'
                   )
                 }
