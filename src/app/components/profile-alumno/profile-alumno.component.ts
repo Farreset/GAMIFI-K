@@ -247,6 +247,8 @@ export class ProfileAlumnoComponent implements OnInit {
         }
       }
 
+      
+
 
   }
 

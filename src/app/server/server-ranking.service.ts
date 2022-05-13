@@ -48,8 +48,8 @@ export class ServerRankingService {
     console.log(id_ent);
     return this.http.post(`${this.URL}entregas/deleteEntrega.php`,JSON.stringify(id_ent));
   }
-  deleteAlumnos(id_alumno: any){
+  deleteAlumno(id_alumno: any, id_r: any){
     console.log(id_alumno);
-    return this.http.get(`${this.URL}entregas/deleteAlumnos.php?id_alumno=${id_alumno}`);
+    return this.http.get(`${this.URL}entregas/eliminarAlumno.php?id_alumno=${id_alumno}&id_r=${id_r}`);
   }
 }

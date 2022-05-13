@@ -30,7 +30,7 @@
                 <div class="card">
                   <div class="card-header">
    
-                    <h4>Texto de ejemplo</h4>
+                    <h4>Alumnos</h4>
 
                   </div>
                   <div class="card-body p-0">
@@ -41,6 +41,7 @@
                             <th>Nick</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
+                            <th>Puntos</th>
                             <th>Acciones</th>
                           </tr>
                         </thead>
@@ -49,12 +50,13 @@
                              <th>{{data.nick}}</th>
                              <th>{{data.fname}}</th>
                              <th>{{data.lname}}</th>
+                             <th>{{data.puntos}}</th>
                              
                             <!-- <th>  <input type="number" id="number" class="form-control w-50" placeholder="{{ alumno.mail }}"
                             [(ngModel)]="alumno.mail"></th> -->
                              <!--<th>{{data.puntos}}</th>
                             <th>{{data.puntos}}</th> -->
-                            <th><button class="btn btn-danger" (click)="eliminarAlumno(data.id_alumno)">Eliminar Alumno</button></th> 
+                            <th><button class="btn btn-danger" (click)="eliminarAlumno(data.fname)">Eliminar Alumno</button></th> 
                         
                           </tr>
                         </tbody>
