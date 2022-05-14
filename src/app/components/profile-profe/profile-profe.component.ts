@@ -128,6 +128,16 @@ export class ProfileProfeComponent implements OnInit {
     this.router.navigate(['ranking']);
   };
 
+  verEntrega() {
+
+    this.router.navigate(['']);
+  }
+
+  verAlumno(id_r: number) {
+    console.log(id_r);
+    this.router.navigate(['adminRank', id_r, this.profe]);
+  }
+
   async editarImagen() {
 
     const { value: file } = await Swal.fire({
@@ -311,16 +321,6 @@ export class ProfileProfeComponent implements OnInit {
     );
 
     }
-
-  verEntrega() {
-
-    this.router.navigate(['']);
-  }
-
-  verAlumno(id_r: number) {
-    console.log(id_r);
-    this.router.navigate(['adminRank', id_r]);
-  }
 
   async eliminarRanking(){
     Swal.fire({

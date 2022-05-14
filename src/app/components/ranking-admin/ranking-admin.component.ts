@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Alumno, Entrega, Ranking } from 'src/app/interfaces/interfaz';
+import { Alumno, Entrega, Profe, Ranking } from 'src/app/interfaces/interfaz';
 import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
 import { ServerRankingService } from 'src/app/server/server-ranking.service';
 import Swal from 'sweetalert2';
@@ -17,7 +17,7 @@ export class RankingAdminComponent implements OnInit {
   name_r = '';
   algo: Object | undefined;
   id_ranking = 0;
-  
+
   constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
     this.route = route;
     this.router = router;
@@ -35,6 +35,18 @@ export class RankingAdminComponent implements OnInit {
     avatar: ""
   }
 
+  profe: Profe = {
+    id_profesor: 0,
+    nick: '',
+    fname: "",
+    lname: "",
+    mail: "",
+    centro: "",
+    pssw: "",
+    psswConf: "",
+    avatar: ""
+  }
+
   entrega: Entrega = {
     id_ent: 0,
     nombre: "",
@@ -47,7 +59,7 @@ export class RankingAdminComponent implements OnInit {
   entregas: [] | any;
 
   ngOnInit(): void {
-    
+
     this.id_ranking = Number(this.route.snapshot.paramMap.get('id_r'));
     console.log(this.id_ranking);
     this.serverRankingService.listarAlumnos(this.id_ranking).subscribe(
@@ -56,12 +68,16 @@ export class RankingAdminComponent implements OnInit {
         console.log(datos);
       }
     );
+
+      // FUNCION QUE RECOJA LOS PUNTOS desde el service y php
+
+
+
   }
 
-  // eliminarAlumno(id_alumno: number) {
-  //   console.log(id_alumno);
-  //   this.serverRankingService.deleteAlumnos(id_alumno);
-  // }
+  volver(){
+    this.router.navigate(['pprofe',this.profe]);
+  }
 
   async eliminarAlumno(fname:string){
     const { value: mensaje } = await Swal.fire({

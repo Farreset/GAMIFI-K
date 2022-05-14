@@ -56,15 +56,12 @@ ngOnInit(): void {
   };
 
   this.profes = this.formBuilder.group({
- fname: [''],
- lname: [''],
- nick: [''],
- mail: [''],
- centro: ['']
-});
-// this.myGroup = new FormGroup({
-//   firstName: [)
-// });
+    fname: [''],
+    lname: [''],
+    nick: [''],
+    mail: [''],
+    centro: ['']
+    });
 
 this.profes = new FormGroup({
   fname: new FormControl('',[Validators.required]),
@@ -104,18 +101,16 @@ modificarProfesor(){
 }
 // get data() { return this.profe.controls; }
 
-editar(){
-  this.router.navigate(['editar-profe']);
-
-
-}
+  editar(){
+    this.router.navigate(['editar-profe']);
+  }
 
   volver(){
 
     this.router.navigate(['pprofe',this.profe]);
   }
   addRank(){
-    
+
   }
 
 }

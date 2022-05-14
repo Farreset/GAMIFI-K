@@ -29,7 +29,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-   
+
                     <h4>Alumnos</h4>
 
                   </div>
@@ -50,14 +50,14 @@
                              <th>{{data.nick}}</th>
                              <th>{{data.fname}}</th>
                              <th>{{data.lname}}</th>
-                             <th>{{data.puntos}}</th>
-                             
+                             <th>{{entrega.puntos}}</th>
+
                             <!-- <th>  <input type="number" id="number" class="form-control w-50" placeholder="{{ alumno.mail }}"
                             [(ngModel)]="alumno.mail"></th> -->
                              <!--<th>{{data.puntos}}</th>
                             <th>{{data.puntos}}</th> -->
-                            <th><button class="btn btn-danger" (click)="eliminarAlumno(data.fname)">Eliminar Alumno</button></th> 
-                        
+                            <th><button class="btn btn-danger" (click)="eliminarAlumno(data.fname)">Eliminar Alumno</button></th>
+
                           </tr>
                         </tbody>
                       </table>
@@ -68,6 +68,9 @@
             </div>
           </div>
         </div>
+          <div class="col-12 bottom-0   d-flex justify-content-end ">
+            <button (click)=" volver()" class="btn btn-outline-danger mb-3" style="margin-right: 20px;">Volver</button>
+          </div>
       </div>
     </div>
   </div>
