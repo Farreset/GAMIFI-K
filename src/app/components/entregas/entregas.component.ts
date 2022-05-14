@@ -58,7 +58,7 @@ export class EntregasComponent implements OnInit {
     nombre: "",
     puntos: 0,
     id_ranking: 0,
-  
+
   }
   rankingsArray: [] | any;
   entregas: [] | any;
@@ -71,18 +71,15 @@ export class EntregasComponent implements OnInit {
    console.log(datos)
     }
   );
- 
+
   this.serverRankingService.listarRanking(this.ranking ).subscribe(
     (datos: any) => {
     this.rankingsArray = datos;
    console.log(datos)
     }
   );
- 
- }
- eliminar(){
 
-  this.serverRankingService.deleteEntregas(this.entrega.id_ent);
-}
-   
+ }
+
+
 }

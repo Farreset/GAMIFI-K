@@ -1,5 +1,5 @@
 <?php
-  header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Origin: ');
   header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: text/html; charset=UTF-8');
@@ -16,7 +16,7 @@
 
   // REALIZA LA QUERY A LA BD
 
-  $listado = mysqli_query($conexion, "SELECT ent. * , ran. * , alum. * FROM entregas ent, r_alumno ran, alumnos alum WHERE ent.id_ranking = ran.id_r AND ran.id_alumno = alum.id_alumno");
+  $listado = mysqli_query($conexion, "SELECT ent. FROM entregas ent, ranking r WHERE ent.id_ranking = r.id_r AND r.id_r = $_GET['id_r']");
   //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
 
   // while ($resultado = mysqli_fetch_array($listado)) {

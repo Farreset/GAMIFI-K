@@ -23,7 +23,7 @@ export class RankingAdminComponent implements OnInit {
     this.router = router;
   }
 
-  alumno: Alumno = {
+  alumno:Alumno = {
     id_alumno: 0,
     nick: '',
     fname: "",
@@ -34,6 +34,7 @@ export class RankingAdminComponent implements OnInit {
     psswConf: "",
     avatar: ""
   }
+
 
   profe: Profe = {
     id_profesor: 0,
@@ -57,20 +58,41 @@ export class RankingAdminComponent implements OnInit {
   alumnoArray: [] | any;
   rankingsArray: [] | any;
   entregas: [] | any;
+  alumnoID: number | undefined;
 
   ngOnInit(): void {
+    // this.alumno = {
+    //   id_alumno: Number(this.route.snapshot.paramMap.get('id_alumno')),
+    //    fname: String(this.route.snapshot.paramMap.get('fname')),
+    //    lname: String(this.route.snapshot.paramMap.get('lname')),
+    //    nick: String(this.route.snapshot.paramMap.get('nick')),
+    //    mail: String(this.route.snapshot.paramMap.get('mail')),
+    //    fecha: String(this.route.snapshot.paramMap.get('fecha')),
+    //    pssw: String(this.route.snapshot.paramMap.get('pssw')),
+    //    psswConf: String(this.route.snapshot.paramMap.get('psswConf')),
+    //    avatar: String(this.route.snapshot.paramMap.get('avatar'))
+    //  };
+    console.log("TS_Antes ==>> ", this.alumno);
 
-    this.id_ranking = Number(this.route.snapshot.paramMap.get('id_r'));
-    console.log(this.id_ranking);
+
+    this.id_ranking = Number(this.route.snapshot.paramMap.get('id_r')); //Recomje el id del perfil
+    // console.log(this.id_ranking);
+
     this.serverRankingService.listarAlumnos(this.id_ranking).subscribe(
       (datos: any) => {
         this.alumnoArray = datos;
-        console.log(datos);
+        console.log("id?", this.alumnoArray);
       }
     );
 
-      // FUNCION QUE RECOJA LOS PUNTOS desde el service y php
+    this.serverRankingService.listarAlumnosID(this.id_ranking).subscribe(
+      (datos: any) => {
+        this.alumnoID = datos;
 
+      }
+    );
+
+    console.log("ID Alu", this.alumnoID);
 
 
   }
@@ -91,6 +113,7 @@ export class RankingAdminComponent implements OnInit {
       confirmButtonText: 'Eliminar'
     })
     if(mensaje=="eliminar"){
+      console.log("TS_A ==>> ", this.alumno.id_alumno);
       this.serverRankingService.deleteAlumno(this.alumno.id_alumno,this.id_ranking).subscribe(
         datos => {
           if (datos == 'OK'){

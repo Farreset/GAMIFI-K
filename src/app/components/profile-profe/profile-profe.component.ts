@@ -128,9 +128,10 @@ export class ProfileProfeComponent implements OnInit {
     this.router.navigate(['ranking']);
   };
 
-  verEntrega() {
+  verEntrega(id_r: number) {
+    console.log(id_r);
 
-    this.router.navigate(['']);
+    this.router.navigate(['adminEnt', id_r]);
   }
 
   verAlumno(id_r: number) {

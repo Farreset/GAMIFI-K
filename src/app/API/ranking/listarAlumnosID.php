@@ -8,6 +8,8 @@
 
   require("../db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
+  $codigo = $_GET['id_r'];
+  echo "Codigo: " . $codigo;
 
   $conexion = conexion(); // CREA LA CONEXION
   $json= file_get_contents('php://input');
@@ -16,14 +18,16 @@
 
 
   // REALIZA LA QUERY A LA DB
-  $registros = mysqli_query($conexion, "DELETE FROM r_alumno  WHERE id_alumno = '$_GET[id_alumno]' AND id_r = '$_GET[id_r]'");
+  $registros = mysqli_query($conexion, "SELECT a.id_alumno FROM r_alumno ra , alumnos a , ranking r WHERE ra.id_alumno = a.id_alumno AND  ra.id_r = r.id_r AND ra.id_r = '$codigo'");
 
 
     if($registros){
-      $resultado = 'OK';
+      $resultado = $registros->fetch_assoc();
     }else{
       $resultado = 'NO';
     }
+  echo "Despues de consulta" . $resultado;
+
   header('Content-Type: application/json');
 
   echo json_encode($resultado);
