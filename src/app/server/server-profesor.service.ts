@@ -54,12 +54,12 @@ export class ServerProfesorService {
   //   console.log(ranking);
   //   return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   // }
-  anadirRanking(name_r: any, codigo: number){
-    let ranking: Ranking = {
+  anadirRanking(name_r: any, codigo: number, id_p: number){
+    let ranking: any = {
       id_r: 0,
       name_r: name_r,
       codigo: codigo,
-      cont_r: 0
+      id_p: id_p,
     }
     return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   }
@@ -68,7 +68,7 @@ export class ServerProfesorService {
     let entrega: Entrega = {
       id_ent: 0,
       nombre: nombre,
-      puntos: 0,
+
       id_ranking: ranking,
     }
     console.log(entrega);

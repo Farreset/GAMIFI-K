@@ -38,20 +38,17 @@
                       <table class="table table-striped">
                         <thead>
                           <tr class="mt-4">
-                            <th>Nick</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
+                            <th>Entregas</th>
+                
                             <th>Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let data of alumnoArray;">
-                             <th>{{data.nick}}</th>
-                             <th>{{data.fname}}</th>
-                             <th>{{data.lname}}</th>
-                             
-                     
-                             <th><button class="btn btn-danger" (click)="eliminarEntrega(data.id_r)">Eliminar Alumno</button></th> 
+                          <tr *ngFor="let data of entregas;">
+                             <th>{{data.nombre}}</th>
+ 
+          
+                             <th><button class="btn btn-danger" (click)="eliminarEntrega(data.id_ent,data.nombre)">Eliminar Entregas</button></th> 
                         
                           </tr>
                         </tbody>

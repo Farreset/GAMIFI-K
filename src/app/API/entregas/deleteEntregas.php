@@ -1,8 +1,8 @@
 <?php
-  header('Access-Control-Allow-Origin: *');
-  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-  header('Content-Type: text/html; charset=UTF-8');
-
+ header('Access-Control-Allow-Origin: *');
+ header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+ header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
   global $datos;
 
@@ -16,7 +16,7 @@
  
 
   // REALIZA LA QUERY A LA DB
-  $registros = mysqli_query($conexion, "DELETE FROM entregas  WHERE id_ent = '$delete->id_ent';");
+  $registros = mysqli_query($conexion, "DELETE FROM entregas WHERE id_ent = '$_GET[id_ent]';");
  
   
     if($registros){

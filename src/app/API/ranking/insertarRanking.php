@@ -1,7 +1,8 @@
 <?php
-  header('Access-Control-Allow-Origin: *');
-  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-  header('Content-Type: text/html; charset=UTF-8');
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
 
   global $datos;
@@ -17,16 +18,17 @@
 
   // REALIZA LA QUERY A LA DB
   //$registros = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
-  $registros = mysqli_query($conexion, "INSERT INTO `ranking` (`id_r`, `name_r`, `codigo`) VALUES (NULL,'$unirse->name_r', '$unirse->codigo')");
+  $list = mysqli_query($conexion, "INSERT INTO `ranking` (`id_r`, `name_r`, `codigo`) VALUES (NULL,'$unirse->name_r', '$unirse->codigo')");
  
-  
-  //echo "$registros";
-  
+
+    $registros = mysqli_query($conexion, "INSERT INTO `r_profesor` (`id_profesor`, `id_r`)  VALUES ('$unirse->id_p', (SELECT id_r FROM ranking  WHERE codigo = '$unirse->codigo')) ");
+    //echo "$registros";
     if($registros){
-      $resultado = 'OK';  
+      $resultado = 'OK';
     }else{
       $resultado = 'NO';
     }
+  
   header('Content-Type: application/json');
 
   echo json_encode($resultado); 

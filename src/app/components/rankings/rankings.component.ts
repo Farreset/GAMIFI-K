@@ -40,7 +40,6 @@ export class RankingsComponent implements OnInit {
   entrega: Entrega = {
     id_ent: 0,
     nombre: "",
-    puntos: 0,
     id_ranking: 0,
   }
 

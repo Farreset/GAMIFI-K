@@ -51,13 +51,11 @@ export class ProfileAlumnoComponent implements OnInit {
     id_r: 0,
     name_r: "",
     id_alumno: 0,
-    cont_r: 0,
     codigo: 0
   }
   entrega: Entrega = {
     id_ent: 0,
     nombre: "",
-    puntos: 0,
     id_ranking: 0,
 
   }

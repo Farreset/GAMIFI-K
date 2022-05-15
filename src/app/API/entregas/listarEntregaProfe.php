@@ -3,7 +3,6 @@ header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
-
   global $datos;
 
   require("../db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
@@ -11,13 +10,10 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
   // REALIZA LA QUERY A LA BD
 
-  $listado = mysqli_query($conexion, "SELECT ent.*, r.*, alum.* 
-  FROM entregas ent, ranking r, r_alumno ra, alumnos alum 
-  WHERE r.id_r = ra.id_r 
-  AND ent.id_ranking = r.id_r 
-  AND alum.id_alumno = ra.id_alumno 
-  AND alum.id_alumno = '$_GET[id_alumno]' 
-  AND r.id_r =  '$_GET[id_r]';");
+  $listado = mysqli_query($conexion, "SELECT r.* , ent.* 
+  FROM entregas ent, ranking r 
+  WHERE ent.id_ranking = r.id_r
+  AND ent.id_ranking  = '$_GET[id_r]';");
   //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
 
   // while ($resultado = mysqli_fetch_array($listado)) {

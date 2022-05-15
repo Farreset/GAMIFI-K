@@ -5,8 +5,9 @@
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Headers: Authorization');
     header('Content-Type application/json; charset=utf-8');
+
   $json = file_get_contents('php://input');
-  // $rankingParam = json_decode($json);
+  $unirse = json_decode($json);
   json_decode($json);
 
   // global $datos;
@@ -15,7 +16,7 @@
   $conexion = conexion(); // CREA LA CONEXION
 
   // REALIZA LA QUERY A LA BD
-  $listado = mysqli_query($conexion, "SELECT * FROM ranking");
+  $listado = mysqli_query($conexion, "SELECT r.* , prof.* FROM `r_profesor` rp, profesores prof, ranking r WHERE r.id_r = rp.id_r AND prof.id_profesor = rp.id_profesor AND prof.id_profesor = '$unirse->id_profesor'");
   //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
 
   // while ($resultado = mysqli_fetch_array($listado)) {

@@ -4,6 +4,10 @@ header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Conte
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
+  $json = file_get_contents('php://input');
+  $unirse = json_decode($json);
+  json_decode($json);
+
   global $datos;
 
   require("../db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
@@ -11,14 +15,7 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
   // REALIZA LA QUERY A LA BD
 
-  $listado = mysqli_query($conexion, "SELECT ent.*, r.*, alum.* 
-  FROM entregas ent, ranking r, r_alumno ra, alumnos alum 
-  WHERE r.id_r = ra.id_r 
-  AND ent.id_ranking = r.id_r 
-  AND alum.id_alumno = ra.id_alumno 
-  AND alum.id_alumno = '$_GET[id_alumno]' 
-  AND r.id_r =  '$_GET[id_r]';");
-  //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
+  $listado = mysqli_query($conexion, "SELECT a.*, e.* FROM ranking r, r_alumno ra, alumnos a, entregas e WHERE e.id_ranking = r.id_r AND a.id_alumno=ra.id_alumno AND r.id_r = '$_GET[id_r]';");
 
   // while ($resultado = mysqli_fetch_array($listado)) {
   //   $ranking[] = $resultado;

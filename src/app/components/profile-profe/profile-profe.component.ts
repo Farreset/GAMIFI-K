@@ -85,21 +85,17 @@ export class ProfileProfeComponent implements OnInit {
       avatar: String(this.route.snapshot.paramMap.get('avatar'))
 
     }
-    this.ranking = {
-      name_r: Number(this.route.snapshot.paramMap.get('name_r')),
-      id_r: String(this.route.snapshot.paramMap.get('id_r')),
-      cont_r: String(this.route.snapshot.paramMap.get('cont_r')),
-      codigo: String(this.route.snapshot.paramMap.get('codigo')),
-    }
 
     //Listar Rankings del ARRAY
+    this.ranking.id_profesor = this.profe.id_profesor;
     this.serverRankingService.listarRankingProfe(this.ranking).subscribe(
-      datos => {
+      (datos: any) => {
         this.rankingsArray = datos;
-        console.log(this.rankingsArray);
+        console.log('ranking profe',datos);
       }
     );
 
+  
   }
 
   onSubmit() {
@@ -227,7 +223,7 @@ export class ProfileProfeComponent implements OnInit {
       let codigo = this.randomCodigo();
       console.log(name_r);
       console.log(codigo);
-      this.service.anadirRanking(name_r, Number(codigo)).subscribe(
+      this.service.anadirRanking(name_r, Number(codigo), this.profe.id_profesor).subscribe(
         datos => {
           if (datos == 'OK') {
             Swal.fire(
@@ -317,7 +313,12 @@ export class ProfileProfeComponent implements OnInit {
   verEntrega(id_r: number) {
     console.log(id_r);
 
-    this.router.navigate(['adminEnt', id_r]);
+    this.router.navigate(['adminEnt', id_r, this.profe.id_profesor]);
+  }
+
+  puntuar(id_r: number) {
+    console.log(id_r);
+    this.router.navigate(['punt', id_r]);
   }
 
   verAlumno(id_r: number) {

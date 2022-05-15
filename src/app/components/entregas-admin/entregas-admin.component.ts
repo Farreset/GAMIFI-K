@@ -38,7 +38,6 @@ export class EntregasAdminComponent implements OnInit {
     entrega: Entrega = {
       id_ent: 0,
       nombre: "",
-      puntos: 0,
       id_ranking: 0,
     }
   
@@ -49,13 +48,13 @@ export class EntregasAdminComponent implements OnInit {
     ngOnInit(): void {
    
       this.id_ranking = Number(this.route.snapshot.paramMap.get('id_r'));
-      console.log(this.id_ranking);
-      console.log('aaaaaaaa');
-      this.serverRankingService.listarEntregaAlumno(this.alumno.id_alumno,this.id_ranking).subscribe(
+      console.log('ranking',this.id_ranking);
+
+      this.serverRankingService.listarEntregaProfe(this.id_ranking).subscribe(
         (datos: any) => {
         this.entregas = datos;
      
-          console.log(this.entregas);
+     
         }
       );
     
@@ -63,10 +62,10 @@ export class EntregasAdminComponent implements OnInit {
     }
   
   
-      async eliminarEntrega(fname:string){
+      async eliminarEntrega(id:number,name:string){
         const { value: mensaje } = await Swal.fire({
-          title: 'Estas seguro de eliminar a '+fname+' del ranking?',
-          text: "Para confirmar, escriba eliminar",
+          title: 'Estas seguro de eliminar a '+name+' del ranking?',
+          text: "Para confirmar, escriba eliminar "+ name,
           input: 'text',
           icon: 'warning',
           showCancelButton: true,
@@ -74,8 +73,8 @@ export class EntregasAdminComponent implements OnInit {
           cancelButtonColor: '#d33',
           confirmButtonText: 'Eliminar'
         })
-        if(mensaje=="eliminar"){
-          this.serverRankingService.deleteEntregas(this.entrega.id_ent,this.id_ranking).subscribe(
+        if(mensaje==name){
+          this.serverRankingService.deleteEntregas(id).subscribe(
             datos => {
               if (datos == 'OK'){
                 Swal.fire(
