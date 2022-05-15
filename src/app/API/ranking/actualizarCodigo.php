@@ -26,7 +26,7 @@
 
     // echo($_GET['id_r']);
     
-  $listado = mysqli_query($conexion, "UPDATE ranking SET codigo = $_GET[codigo] WHERE id_r = $_GET[id_r];");
+  $listado = mysqli_query($conexion, "UPDATE ranking SET codigo = '$_GET[codigo]' WHERE id_r = '$_GET[id_r]';");
   // $resultado = $listado->fetch_assoc();
   // $json = json_encode($rankingsArray); 
 

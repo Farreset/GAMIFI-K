@@ -21,7 +21,6 @@ import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edi
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { EntregasAdminComponent } from './components/entregas-admin/entregas-admin.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

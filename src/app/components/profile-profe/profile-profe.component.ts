@@ -128,17 +128,6 @@ export class ProfileProfeComponent implements OnInit {
     this.router.navigate(['ranking']);
   };
 
-  verEntrega(id_r: number) {
-    console.log(id_r);
-
-    this.router.navigate(['adminEnt', id_r]);
-  }
-
-  verAlumno(id_r: number) {
-    console.log(id_r);
-    this.router.navigate(['adminRank', id_r, this.profe]);
-  }
-
   async editarImagen() {
 
     const { value: file } = await Swal.fire({
@@ -236,6 +225,8 @@ export class ProfileProfeComponent implements OnInit {
     })
     if (name_r) {
       let codigo = this.randomCodigo();
+      console.log(name_r);
+      console.log(codigo);
       this.service.anadirRanking(name_r, Number(codigo)).subscribe(
         datos => {
           if (datos == 'OK') {
@@ -323,24 +314,15 @@ export class ProfileProfeComponent implements OnInit {
 
     }
 
-  async eliminarRanking(){
-    Swal.fire({
-      title: 'Estas seguro de eliminar el ranking:'+this.ranking.name_r+'?',
-      text: "Para eliminar, escriba eliminar",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-      }
-    })
+  verEntrega(id_r: number) {
+    console.log(id_r);
+
+    this.router.navigate(['adminEnt', id_r]);
+  }
+
+  verAlumno(id_r: number) {
+    console.log(id_r);
+    this.router.navigate(['adminRank', id_r]);
   }
 
 

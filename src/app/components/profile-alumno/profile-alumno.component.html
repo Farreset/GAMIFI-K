@@ -124,10 +124,10 @@
                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                       class="feather feather-globe mr-2 icon-inline">
                     </svg>
-                    {{data.name_r_a}}
+                    {{data.name_r}}
                   </h6></div>
-                  <div class="col-6 "><div class="d-inline text-danger ">{{numero_entregas}}</div> entrgas  <button class="mr-2" type="button" (click)="listar_entregas()" class="btn btn-primary">VER ENTREGAS</button> </div> 
-                  <div class="col-3"><button type="button" (click)="listar_ranking()" class="btn btn-primary d-flex justify-content-end">VER RANKING</button></div> 
+                  <div class="col-6 "><button class="mr-2" type="button" (click)="listar_entregas(data.id_r)" class="btn btn-primary">VER ENTREGAS</button> </div> 
+                  <div class="col-3"><button type="button" (click)="listar_ranking(data.id_r)" class="btn btn-primary d-flex justify-content-end">VER RANKING</button></div> 
                 </li>
               </ul>
               </div>

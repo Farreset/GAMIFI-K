@@ -16,9 +16,8 @@ export class ServerAlumnoService {
 
 
 
-  listarAlumno(params: any) {
-    console.log("ALUMNO=>",params)
-    return this.http.post(`${this.URL}alumnos/listarAlumnos.php`,JSON.stringify(params));
+  listarAlumno(alumnos: any) {
+    return this.http.post(`${this.URL}alumnos/listarAlumnos.php`,JSON.stringify(alumnos));
   }
 
   // eliminarProfesor(nombreProfesor) {

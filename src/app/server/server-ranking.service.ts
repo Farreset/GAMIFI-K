@@ -19,20 +19,17 @@ export class ServerRankingService {
     return this.http.post(`${this.URL}ranking/listarRankingProfe.php`,JSON.stringify(ranking));
   }
 
-  listarEntregas(id_r: number) {
-    console.log("aaa",id_r);
-    return this.http.get(`${this.URL}entregas/listarEntrega.php?id_r=${id_r}`);
+  // listarEntregas(id_r: number) {
+  //   console.log("aaa",id_r);
+  //   return this.http.get(`${this.URL}entregas/listarEntrega.php?id_r=${id_r}`);
+  // }
+  listarEntregaAlumno(id_alumno: number, id_r: number) {
+    console.log("service:",id_alumno,id_r);
+    return this.http.get(`${this.URL}entregas/listarEntregaAlumno.php?id_alumno=${id_alumno}&id_r=${id_r}`);
   }
-
   listarAlumnos(id_r: number) {
     return this.http.get(`${this.URL}ranking/listarAlumnos.php?id_r=${id_r}`);
   }
-
-  listarAlumnosID(id_r: number) {
-    console.log("En Service",id_r);
-    return this.http.get(`${this.URL}ranking/listarAlumnosID.php?id_r=${id_r}`);
-  }
-
   // listarRanking(){
   //   return this.http.get(`${this.URL}ranking/listarRanking.php`);
   // }
@@ -52,15 +49,12 @@ export class ServerRankingService {
     console.log(ranking);
     return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   }
-
   deleteEntregas(id_ent: any, id_r: any){
     console.log(id_ent);
     return this.http.get(`${this.URL}entregas/deleteEntrega.php?id_ent=${id_ent}&id_r=${id_r}`);
   }
-
   deleteAlumno(id_alumno: any, id_r: any){
-    console.log("SERVICE ==>> ID_A",id_alumno);
-    console.log("SERVICE ==>> ID_R",id_r);
+    console.log(id_alumno);
     return this.http.get(`${this.URL}entregas/eliminarAlumno.php?id_alumno=${id_alumno}&id_r=${id_r}`);
   }
 }

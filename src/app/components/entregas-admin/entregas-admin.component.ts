@@ -17,12 +17,12 @@ export class EntregasAdminComponent implements OnInit {
     name_r = '';
     algo: Object | undefined;
     id_ranking = 0;
-
+  
     constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
       this.route = route;
       this.router = router;
     }
-
+  
     alumno: Alumno = {
       id_alumno: 0,
       nick: '',
@@ -41,26 +41,28 @@ export class EntregasAdminComponent implements OnInit {
       puntos: 0,
       id_ranking: 0,
     }
-
+  
     alumnoArray: [] | any;
     rankingsArray: [] | any;
     entregas: [] | any;
-
+  
     ngOnInit(): void {
-
+   
       this.id_ranking = Number(this.route.snapshot.paramMap.get('id_r'));
       console.log(this.id_ranking);
       console.log('aaaaaaaa');
-      this.serverRankingService.listarEntregas(this.id_ranking).subscribe(
+      this.serverRankingService.listarEntregaAlumno(this.alumno.id_alumno,this.id_ranking).subscribe(
         (datos: any) => {
         this.entregas = datos;
-       console.log(datos)
+     
+          console.log(this.entregas);
         }
       );
-
+    
+      
     }
-
-
+  
+  
       async eliminarEntrega(fname:string){
         const { value: mensaje } = await Swal.fire({
           title: 'Estas seguro de eliminar a '+fname+' del ranking?',
@@ -97,8 +99,8 @@ export class EntregasAdminComponent implements OnInit {
                   'error'
                 )
               }
-
+    
     }
-
-
+  
+  
 }

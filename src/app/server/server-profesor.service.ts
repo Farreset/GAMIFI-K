@@ -15,8 +15,8 @@ export class ServerProfesorService {
 
 
 
-  listarProfesor(profesor: any) {
-    return this.http.post(`${this.URL}profesores/listarProfesor.php`,JSON.stringify(profesor));
+  listarUsuario(profesor: any) {
+    return this.http.post(`${this.URL}profesores/listarUsuarios.php`,JSON.stringify(profesor));
   }
 
 

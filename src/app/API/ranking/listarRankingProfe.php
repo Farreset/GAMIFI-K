@@ -1,10 +1,10 @@
 <?php
-  header('Access-Control-Allow-Origin: *');
-  header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-  header('Content-Type: text/html; charset=UTF-8');
-  header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
-
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Headers: Authorization');
+    header('Content-Type application/json; charset=utf-8');
   $json = file_get_contents('php://input');
   // $rankingParam = json_decode($json);
   json_decode($json);

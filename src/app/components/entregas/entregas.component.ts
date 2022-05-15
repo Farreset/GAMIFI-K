@@ -15,7 +15,8 @@ export class EntregasComponent implements OnInit {
 
   router: Router;
   route: ActivatedRoute;
-  name_r  = '';
+  ranking_id  = 0;
+  alumno_id  = 0;
   algo: Object | undefined;
 
   constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
@@ -58,28 +59,33 @@ export class EntregasComponent implements OnInit {
     nombre: "",
     puntos: 0,
     id_ranking: 0,
-
+  
   }
   rankingsArray: [] | any;
   entregas: [] | any;
 
   ngOnInit(): void {
-
-  this.serverRankingService.listarEntregas(this.entregas ).subscribe(
-    (datos: any) => {
-    this.entregas = datos;
-   console.log(datos)
-    }
-  );
-
+    this.alumno_id = Number(this.route.snapshot.paramMap.get('id_alumno'));
+     this.ranking_id = Number(this.route.snapshot.paramMap.get('id_r'));
+     
+console.log(this.alumno_id,this.ranking_id);
+    this.serverRankingService.listarEntregaAlumno(this.alumno_id,this.ranking_id).subscribe(
+      (datos: any) => {
+        console.log(datos);
+      this.entregas = datos;
+    
+        
+      }
+    );
+ 
   this.serverRankingService.listarRanking(this.ranking ).subscribe(
     (datos: any) => {
     this.rankingsArray = datos;
    console.log(datos)
     }
   );
-
+ 
  }
 
-
+   
 }

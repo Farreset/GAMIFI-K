@@ -86,21 +86,22 @@ export class ProfileAlumnoComponent implements OnInit {
 
     //Listar Rankings del ARRAY
     this.ranking.id_alumno = this.alumno.id_alumno;
+    console.log(this.ranking.id_alumno);
     this.serverRankingService.listarRanking(this.ranking).subscribe(
       (datos: any) => {
       this.rankingsArray = datos;
         console.log(datos);
-        console.log(this.rankingsArray);
       }
     );
 
-    this.serverRankingService.listarEntregas(this.entregas ).subscribe(
-        (datos: any) => {
-        this.entregas = datos;
-        this.numero_entregas = this.entregas.length;
-          console.log(this.entregas);
-        }
-      );
+    // this.serverRankingService.listarEntregas(this.ranking.id_r ).subscribe(
+    //     (datos: any) => {
+    //     console.log(datos);
+    //     this.entregas = datos;
+    //     this.numero_entregas = this.entregas.length;
+    //       console.log(this.entregas);
+    //     }
+    //   );
     }
 
 
@@ -112,19 +113,18 @@ export class ProfileAlumnoComponent implements OnInit {
       _ranking(){
         this.router.navigate(['ranking']);
       }
-      listar_ranking(){
-        this.router.navigate(['ranking',this.alumno]);
+      listar_ranking(id_r: number){
+        console.log(id_r);
+        this.router.navigate(['ranking',id_r]);
       }
-      listar_entregas(){
-        this.router.navigate(['entregas']);
+      listar_entregas(id_r: number){
+        // console.log(id_r)
+        this.router.navigate(['entregas',id_r,this.alumno.id_alumno]);
       }
       editar(){
         this.router.navigate(['editar-alumno', this.alumno]);
       }
-      addRank(){
-
-      }
-
+    
       async editarImagen() {
 
         const { value: file } = await Swal.fire({
@@ -246,8 +246,6 @@ export class ProfileAlumnoComponent implements OnInit {
           }
         }
       }
-
-      
 
 
   }

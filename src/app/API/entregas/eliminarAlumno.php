@@ -12,21 +12,21 @@
   $conexion = conexion(); // CREA LA CONEXION
   $json= file_get_contents('php://input');
   $delete=json_decode($json);
-  // echo $delete;
-
+  // echo $delete; 
+ 
 
   // REALIZA LA QUERY A LA DB
   $registros = mysqli_query($conexion, "DELETE FROM r_alumno  WHERE id_alumno = '$_GET[id_alumno]' AND id_r = '$_GET[id_r]'");
-
-
+ 
+  
     if($registros){
-      $resultado = 'OK';
+      $resultado = 'OK';  
     }else{
       $resultado = 'NO';
     }
   header('Content-Type: application/json');
 
-  echo json_encode($resultado);
+  echo json_encode($resultado); 
 
 
 

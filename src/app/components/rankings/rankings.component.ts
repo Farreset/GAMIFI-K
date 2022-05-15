@@ -60,10 +60,12 @@ export class RankingsComponent implements OnInit {
     );
   }
 
+
   eliminarAlumno(mensaje: string, id_alumno: number) {
     console.log(id_alumno);
     this.serverRankingService.deleteAlumno(id_alumno, mensaje);
   }
+
 
 
 }

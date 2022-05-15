@@ -12,8 +12,9 @@ import { EditProfileAlumnoComponent } from './components/edit-profile-alumno/edi
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { EntregasAdminComponent } from './components/entregas-admin/entregas-admin.component';
 
+
 const routes: Routes = [
-  { path: 'ranking', component: RankingsComponent},
+  { path: 'ranking/:id_r', component: RankingsComponent},
     { path: 'login', component: LoginComponent},
     { path: '', component: HomeComponent},
     { path: 'ralumno', component: RegisterAlumnoComponent},
@@ -22,10 +23,9 @@ const routes: Routes = [
     { path: 'pprofe', component: ProfileProfeComponent},
     { path: 'editar-profe', component: EditProfileProfeComponent},
     { path: 'editar-alumno', component: EditProfileAlumnoComponent},
-    { path: 'entregas', component: EntregasComponent},
+    { path: 'entregas/:id_r/:id_alumno', component: EntregasComponent},
+    { path: 'adminEnt/:id_r', component: EntregasAdminComponent},
   { path: 'adminRank/:id_r', component: RankingAdminComponent},
-  { path: 'adminEnt/:id_r', component: EntregasAdminComponent},
-
   //{ path: '**', redirectTo: '/register' } Dejar la ultima
   ];
 
