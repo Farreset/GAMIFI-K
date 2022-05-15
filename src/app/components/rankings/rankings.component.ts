@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Ranking } from 'src/app/interfaces/interfaz';
+import { Alumno, Entrega, Ranking } from 'src/app/interfaces/interfaz';
+import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
 import { ServerRankingService } from 'src/app/server/server-ranking.service';
 import Swal from 'sweetalert2';
 
@@ -13,63 +14,57 @@ import Swal from 'sweetalert2';
 })
 export class RankingsComponent implements OnInit {
 
-    router: Router;
-    route: ActivatedRoute;
-   
-  
-    ServerRankingService: any;
-    profesorInicio: any;
-    formBuilder: any;
-    rankings: any;
-    constructor(router: Router, route: ActivatedRoute, private service: ServerRankingService) {
-  
-      this.route = route;
-      this.router = router;
-      this.service = service;
-  
-    }
-   
-    addRank: any = {
-      name_r: "",
-      codigo: 0
-    }
-  
-    ranking: Ranking [] | any = {
-      name_r: "",
-      id_r: 0,
-      cont_r: 0,
-      codigo: 0
-    }
-    ngOnInit(): void {
-        this.ranking =  this.formBuilder.group( {
-          name_r:['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z]+$')]]
-         
-      });
-    
-    }
-  
-    onSubmit() {
-      this.registrarRanking();
-  
-    }
-  
-    registrarRanking(){
-      this.service.anadirRanking(this.ranking.idr_r,this.ranking.name_r,this.ranking.codigo,this.ranking.cont_r).subscribe(
-           datos => this.ranking = datos
-      );
-   this.router.navigate(['login']);
-    }
-    get data() { return this.ranking.controls; }
+  router: Router;
+  route: ActivatedRoute;
+  name_r = '';
+  algo: Object | undefined;
+  id_ranking = 0;
 
-    async anadirRanking() {
+  constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
+    this.route = route;
+    this.router = router;
+  }
 
-      const { value: name_r } = await Swal.fire({
-        
-          title: 'Asigne un nombre al ranking',
-          input: 'text',
-          text: ''
-  
-        })
-        console.log(name_r);
+  alumno: Alumno = {
+    id_alumno: 0,
+    nick: '',
+    fname: "",
+    lname: "",
+    mail: "",
+    fecha: "",
+    pssw: "",
+    psswConf: "",
+    avatar: ""
+  }
+
+  entrega: Entrega = {
+    id_ent: 0,
+    nombre: "",
+    id_ranking: 0,
+  }
+
+  alumnoArray: [] | any;
+  rankingsArray: [] | any;
+  entregas: [] | any;
+
+  ngOnInit(): void {
+
+    this.id_ranking = Number(this.route.snapshot.paramMap.get('id_r'));
+    console.log(this.id_ranking);
+    this.serverRankingService.listarAlumnos(this.id_ranking).subscribe(
+      (datos: any) => {
+        this.alumnoArray = datos;
+        console.log(datos);
       }
+    );
+  }
+
+
+  eliminarAlumno(mensaje: string, id_alumno: number) {
+    console.log(id_alumno);
+    this.serverRankingService.deleteAlumno(id_alumno, mensaje);
+  }
+
+
+
 }

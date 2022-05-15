@@ -11,19 +11,33 @@ export class ServerRankingService {
 
   constructor(private http: HttpClient) { }
 
-  listarRanking(id_alumno: Number) {
-    // console.log("Ranking en service: ", ranking);
-    return this.http.get(`${this.URL}ranking/listarRanking.php?id_alumno=${id_alumno}`);
+  listarRanking(ranking: Ranking) {
+    console.log('service',ranking);
+
+    return this.http.post(`${this.URL}ranking/listarRanking.php`,JSON.stringify(ranking));
   }
 
   listarRankingProfe(ranking: Ranking) {
+    console.log('service',ranking);
     return this.http.post(`${this.URL}ranking/listarRankingProfe.php`,JSON.stringify(ranking));
   }
 
-  listarEntregas(entraga: Entrega) {
-    return this.http.post(`${this.URL}entregas/listarEntrega.php`,JSON.stringify(entraga));
+  listarEntregaProfe(id_r: number) {
+    console.log("service",id_r);
+    return this.http.get(`${this.URL}entregas/listarEntregaProfe.php?id_r=${id_r}`);
+  }
+  listarEntregaAlumno(id_alumno: number, id_r: number) {
+    console.log("service:",id_alumno,id_r);
+    return this.http.get(`${this.URL}entregas/listarEntregaAlumno.php?id_alumno=${id_alumno}&id_r=${id_r}`);
+  }
+  listarAlumnoPunt(id_r: number) {
+    console.log("punntuacion",id_r);
+    return this.http.get(`${this.URL}alumnos/listarAlumnoPunt.php?id_r=${id_r}`);
   }
 
+  listarAlumnos(id_r: number) {
+    return this.http.get(`${this.URL}ranking/listarAlumnos.php?id_r=${id_r}`);
+  }
   // listarRanking(){
   //   return this.http.get(`${this.URL}ranking/listarRanking.php`);
   // }
@@ -33,15 +47,23 @@ export class ServerRankingService {
     return this.http.get(`${this.URL}ranking/unirseRanking.php?codigo=${codigo}&id_alumno=${id_alumno}` );
   }
 
-  anadirRanking(id_r: any, name_r: any, codigo: any, cont_r: any){
+  anadirRanking(id_r: any, name_r: any, codigo: any){
     let ranking: Ranking = {
       id_r: id_r,
       name_r: name_r,
       codigo: codigo,
-      cont_r: cont_r
+  
     }
-    // console.log(ranking);
+    console.log(ranking);
     return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   }
-
+  deleteEntregas(id_ent: number){
+    console.log(id_ent);
+    return this.http.get(`${this.URL}entregas/deleteEntrega.php?id_ent=${id_ent}`);
+  }
+  deleteAlumno(id_alumno: any, id_r: any){
+    console.log(id_alumno);
+    return this.http.get(`${this.URL}entregas/eliminarAlumno.php?id_alumno=${id_alumno}&id_r=${id_r}`);
+  }
+  
 }

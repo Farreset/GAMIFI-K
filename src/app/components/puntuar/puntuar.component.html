@@ -29,8 +29,8 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-
-                    <h4>Alumnos Asignados</h4>
+   
+                    <h4>Puntuar Alumnos</h4>
 
                   </div>
                   <div class="card-body p-0">
@@ -41,21 +41,19 @@
                             <th>Nick</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Acciones</th>
+                            <th>Puntos</th>
+                            
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let data of alumnoArray;">
+                          <tr *ngFor="let data of entregas;" >
                              <th>{{data.nick}}</th>
                              <th>{{data.fname}}</th>
                              <th>{{data.lname}}</th>
-
-                            <!-- <th>  <input type="number" id="number" class="form-control w-50" placeholder="{{ alumno.mail }}"
-                            [(ngModel)]="alumno.mail"></th> -->
-                             <!--<th>{{data.puntos}}</th>
-                            <th>{{data.puntos}}</th> -->
-                            <th><button class="btn btn-danger" (click)="eliminarAlumno(data.id_alumno,data.nick)">Eliminar Alumno</button></th>
-
+                             <th><input type="number" id="puntos" class="form-control w-25"
+                                formControlName="puntos" [(ngModel)]="data.puntos"></th>
+                            
+                        
                           </tr>
                         </tbody>
                       </table>

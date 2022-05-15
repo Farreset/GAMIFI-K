@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Alumno, Entrega, Ranking } from 'src/app/interfaces/interfaz';
+import { ServerAlumnoService } from 'src/app/server/server-alumno.service';
+import { ServerRankingService } from 'src/app/server/server-ranking.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ranking-admin',
@@ -7,21 +12,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RankingAdminComponent implements OnInit {
 
-  constructor() { }
+  router: Router;
+  route: ActivatedRoute;
+  name_r = '';
+  algo: Object | undefined;
+  id_ranking = 0;
+  id_alumno = 0;
 
-  ngOnInit(): void {
+  constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
+    this.route = route;
+    this.router = router;
   }
 
-<<<<<<< Updated upstream
-=======
-  // eliminarAlumno(id_alumno: number) {
-  //   console.log(id_alumno);
-  //   this.serverRankingService.deleteAlumnos(id_alumno);
-  // }
+  alumno: Alumno = {
+    id_alumno: 0,
+    nick: '',
+    fname: "",
+    lname: "",
+    mail: "",
+    fecha: "",
+    pssw: "",
+    psswConf: "",
+    avatar: ""
+  }
 
-  async eliminarAlumno(fname:string){
+
+  alumnoArray: [] | any;
+  rankingsArray: [] | any;
+  entregas: [] | any;
+
+  ngOnInit(): void {
+
+    this.id_ranking = Number(this.route.snapshot.paramMap.get('id_r'));
+    console.log("ID_R", this.id_ranking);
+
+    console.log(this.id_ranking);
+    this.serverRankingService.listarAlumnos(this.id_ranking).subscribe(
+      (datos: any) => {
+        this.alumnoArray = datos;
+        console.log(this.alumnoArray);
+
+      }
+    );
+  }
+
+  async eliminarAlumno(id_alu: number, nick: string){
     const { value: mensaje } = await Swal.fire({
-      title: 'Estas seguro de eliminar a '+fname+' del ranking?',
+      title: 'Estas seguro de eliminar a '+ nick +' del ranking?',
       text: "Para confirmar, escriba eliminar",
       input: 'text',
       icon: 'warning',
@@ -31,9 +68,8 @@ export class RankingAdminComponent implements OnInit {
       confirmButtonText: 'Eliminar'
     })
     if(mensaje=="eliminar"){
-      this.serverRankingService.deleteAlumno(this.alumno.id_alumno,this.id_ranking).subscribe(
+      this.serverRankingService.deleteAlumno(id_alu, Number(this.route.snapshot.paramMap.get('id_r'))).subscribe(
         datos => {
-          console.log('========');
           if (datos == 'OK'){
             Swal.fire(
               'Correcto',
@@ -56,6 +92,6 @@ export class RankingAdminComponent implements OnInit {
               'error'
             )
           }
-  }
->>>>>>> Stashed changes
+
+}
 }

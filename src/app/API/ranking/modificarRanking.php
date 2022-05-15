@@ -1,9 +1,11 @@
 
   <?php
-  header('Access-Control-Allow-Origin: *');
-  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-  header('Content-Type: text/html; charset=UTF-8');
-
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Headers: Authorization');
+    header('Content-Type application/json; charset=utf-8');
   require("../db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
   $conexion = conexion(); // CREA LA CONEXION

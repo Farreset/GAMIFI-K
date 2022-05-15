@@ -15,8 +15,8 @@ export class ServerProfesorService {
 
 
 
-  listarProfesor(profesor: any) {
-    return this.http.post(`${this.URL}profesores/listarProfesor.php`,JSON.stringify(profesor));
+  listarUsuario(profesor: any) {
+    return this.http.post(`${this.URL}profesores/listarUsuarios.php`,JSON.stringify(profesor));
   }
 
 
@@ -54,41 +54,37 @@ export class ServerProfesorService {
   //   console.log(ranking);
   //   return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   // }
-  anadirRanking(name_r: any, codigo: number){
-    let ranking: Ranking = {
+  anadirRanking(name_r: any, codigo: number, id_p: number){
+    let ranking: any = {
       id_r: 0,
       name_r: name_r,
       codigo: codigo,
-      cont_r: 0
+      id_p: id_p,
     }
     return this.http.post(`${this.URL}ranking/insertarRanking.php`,JSON.stringify(ranking));
   }
 
-  anadirEntrega(nombre: any){
+  anadirEntrega(nombre: any, ranking: number){
     let entrega: Entrega = {
       id_ent: 0,
       nombre: nombre,
-      puntos: 0
+
+      id_ranking: ranking,
     }
+    console.log(entrega);
     return this.http.post(`${this.URL}entregas/insertarEntrega.php`,JSON.stringify(entrega));
   }
 
+  // modificarProfesorEquipos(nombreProfesor, modoEquipos){
+  //   return this.http.get(`${this.URL}modificarProfesorEquipos.php?nombreProfesor=${nombreProfesor}&modoEquipos=${modoEquipos}`);
 
-  mostrarCodigo(codigo: number, name_r: string){
-   
-    return this.http.get(`${this.URL}ranking/mostrarCodigo.php?codigo=${codigo}&name_r=${name_r}`);
-  }
+  // }
 
   actualizarCodigo(codigo:number, id_r: number){
-     console.log(codigo, id_r);
-    
-    return this.http.get(`${this.URL}ranking/actualizarCodigo.php?codigo=${codigo}&id_r=${id_r}`);
-  }
-
- deleteRanking(id_r: any, id_profesor: any){
-  console.log(id_profesor);
-  return this.http.get(`${this.URL}ranking/eliminarRanking.php?id_r=${id_r}&id_profesor=${id_profesor}`);
-}
+    console.log(codigo, id_r);
+   
+   return this.http.get(`${this.URL}ranking/actualizarCodigo.php?codigo=${codigo}&id_r=${id_r}`);
+ }
 
 
 }

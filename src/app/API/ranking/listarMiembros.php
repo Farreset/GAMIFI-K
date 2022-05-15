@@ -1,13 +1,12 @@
 <?php
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-    header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Allow-Headers: Authorization');
-    header('Content-Type application/json; charset=utf-8');
+  header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+  header('Content-Type: text/html; charset=UTF-8');
+  header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
 
   $json = file_get_contents('php://input');
-  $unirse = json_decode($json);
+  // $rankingParam = json_decode($json);
   json_decode($json);
 
   // global $datos;
@@ -16,7 +15,7 @@
   $conexion = conexion(); // CREA LA CONEXION
 
   // REALIZA LA QUERY A LA BD
-  $listado = mysqli_query($conexion, "SELECT r.* , prof.* FROM `r_profesor` rp, profesores prof, ranking r WHERE r.id_r = rp.id_r AND prof.id_profesor = rp.id_profesor AND prof.id_profesor = '$unirse->id_profesor'");
+  $listado = mysqli_query($conexion, "SELECT * FROM alumnos");
   //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
 
   // while ($resultado = mysqli_fetch_array($listado)) {
@@ -24,14 +23,14 @@
   // }
 
   while ($resultadoArray = mysqli_fetch_array($listado)) {
-    $rankingsArray[] = $resultadoArray;
+    $miebrosArray[] = $resultadoArray;
   }
 
 
   // RECORRE EL RESULTADO Y LO GUARDA EN UN ARRAY
   $resultado = $listado->fetch_assoc();
 
-  $json = json_encode($rankingsArray); // GENERA EL JSON CON LOS DATOS OBTENIDOS
+  $json = json_encode($miebrosArray); // GENERA EL JSON CON LOS DATOS OBTENIDOS
 
   header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
 

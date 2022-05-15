@@ -15,7 +15,6 @@ export class ProfileAlumnoComponent implements OnInit {
   route: ActivatedRoute;
   name_r  = '';
   algo: Object | undefined;
-  rankingTodo: any;
 
 
   constructor(router: Router, route: ActivatedRoute, private service: ServerAlumnoService, private serverRankingService: ServerRankingService) {
@@ -35,6 +34,7 @@ export class ProfileAlumnoComponent implements OnInit {
     psswConf: "",
     avatar: ""
   }
+
   modificarAlumno: any = {
     id_alumno: 0,
     nick: '',
@@ -51,24 +51,19 @@ export class ProfileAlumnoComponent implements OnInit {
     id_r: 0,
     name_r: "",
     id_alumno: 0,
-    cont_r: 0,
     codigo: 0
   }
   entrega: Entrega = {
     id_ent: 0,
     nombre: "",
-    puntos: 0,
+    id_ranking: 0,
 
   }
   // rankingList: Ranking[] = [];
 
-
-  ranking_=['Queso','Macarrones','Tomate','Virria'];
-  // ListRanking = [this.ranking.name_r, 'name_r', 'cont_r',];
-  ListRanking = ['id_r', 'name_r', 'cont_r',];
-
   rankingsArray: [] | any;
   entregas: [] | any;
+  numero_entregas = 0;
 
   ngOnInit(): void {
     this.alumno = {
@@ -85,23 +80,27 @@ export class ProfileAlumnoComponent implements OnInit {
           console.log(this.alumno);
 
 
-          this.serverRankingService.listarRanking(this.alumno.id_alumno).subscribe(
-            (datos: any) => {
-              console.log("lISTAR ORIGINAL",this.ranking);// NO llega
-              this.rankingsArray = datos;
-            }
-          );
 
-    this.serverRankingService.listarEntregas(this.entregas ).subscribe(
+
+    //Listar Rankings del ARRAY
+    this.ranking.id_alumno = this.alumno.id_alumno;
+    console.log(this.ranking.id_alumno);
+    this.serverRankingService.listarRanking(this.ranking).subscribe(
       (datos: any) => {
-      this.entregas = datos;
-        console.log(this.ranking);
+      this.rankingsArray = datos;
+        console.log(datos);
       }
     );
 
-
+    // this.serverRankingService.listarEntregas(this.ranking.id_r ).subscribe(
+    //     (datos: any) => {
+    //     console.log(datos);
+    //     this.entregas = datos;
+    //     this.numero_entregas = this.entregas.length;
+    //       console.log(this.entregas);
+    //     }
+    //   );
     }
-
 
 
 
@@ -112,17 +111,20 @@ export class ProfileAlumnoComponent implements OnInit {
       _ranking(){
         this.router.navigate(['ranking']);
       }
-      listar_ranking(){
-        this.router.navigate(['ranking']);
+      listar_ranking(id_r: number){
+        console.log(id_r);
+        this.router.navigate(['ranking',id_r]);
+      }
+      listar_entregas(id_r: number){
+        // console.log(id_r)
+        this.router.navigate(['entregas',id_r,this.alumno.id_alumno]);
       }
       editar(){
         this.router.navigate(['editar-alumno', this.alumno]);
       }
-      addRank(){
-
-      }
-
+    
       async editarImagen() {
+
         const { value: file } = await Swal.fire({
           title: 'Select image',
           input: 'file',
@@ -190,7 +192,7 @@ export class ProfileAlumnoComponent implements OnInit {
                 }else{
                   Swal.fire(
                     'Error',
-                    'No se ha podido unir.',
+                    'Ya perteneces a ese ranking.',
                     'error'
                   )
                 }
@@ -242,7 +244,6 @@ export class ProfileAlumnoComponent implements OnInit {
           }
         }
       }
-      
 
 
   }

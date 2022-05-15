@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
   ranking: Ranking = {
     id_r: 0,
     name_r: "",
-    cont_r: 0,
     codigo: 0
   }
 
@@ -119,14 +118,14 @@ export class LoginComponent implements OnInit {
   //   }
 
   //Funcion para conectar con el php
-  listarProfesor(){
+  listarUsuario(){
 
     this.profesorInicio.mail =  this.profes.mail;
     this.profesorInicio.pssw = this.profes.pssw;
 
 
 
-    this.serverProfesorService.listarProfesor(this.profesorInicio).subscribe(
+    this.serverProfesorService.listarUsuario(this.profesorInicio).subscribe(
       datos  => {
         this.datosUsuario = datos;
         if(this.datosUsuario.centro){
@@ -137,33 +136,10 @@ export class LoginComponent implements OnInit {
         }
       }
   )
-      // this.serverRankingService.listarRanking(this.ranking).subscribe(
-      //   datos => {
-      //     this.router.navigate(['palumno',datos]);
-      //   }
-      // );
+
 
   }
-  listarAlumno(){
-
-    this.alumnoInicio.mail =  this.alumnos.mail;
-    this.alumnoInicio.pssw = this.alumnos.pssw;
-
-    this.serverAlumnoService.listarAlumno(this.alumnoInicio).subscribe(
-      datos  => {
-        this.router.navigate(['palumno', datos]);
-      }
-    );
-
-  }
-
-  listarRanking(){/////////////////////////////////////
-    this.serverRankingService.listarRanking(this.alumnos.id_alumno).subscribe(
-        datos => {
-          this.router.navigate(['palumno',datos]);
-        }
-      );
-  }
+  
 
 
   volver(){

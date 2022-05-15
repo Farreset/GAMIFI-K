@@ -18,44 +18,33 @@
   <!-- Core theme CSS (includes Bootstrap)-->
 
 </head>
-<section class="vh-100 gradient-custom bg-primary">
+<section class="vh-100 gradient-custom bg-danger">
   <div class="container bg-light rounded-bottom ">
     <div class="main-body">
-
       <div class="row gutters-sm">
         <div class="mt-3 mb-3">
           <div class="card">
             <div class="row">
               <div class="col-12">
                 <div class="card">
-                  <div class="card-header">
-
-                    <h4>Alumnos Asignados</h4>
-
-                  </div>
+          
+                    <h4>Entregas</h4>
+         
                   <div class="card-body p-0">
                     <div class="table-responsive">
                       <table class="table table-striped">
                         <thead>
                           <tr class="mt-4">
                             <th>Nick</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Acciones</th>
+                            <th>Nombre Entrega</th>
+                            <th>Puntuacion</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let data of alumnoArray;">
-                             <th>{{data.nick}}</th>
-                             <th>{{data.fname}}</th>
-                             <th>{{data.lname}}</th>
-
-                            <!-- <th>  <input type="number" id="number" class="form-control w-50" placeholder="{{ alumno.mail }}"
-                            [(ngModel)]="alumno.mail"></th> -->
-                             <!--<th>{{data.puntos}}</th>
-                            <th>{{data.puntos}}</th> -->
-                            <th><button class="btn btn-danger" (click)="eliminarAlumno(data.id_alumno,data.nick)">Eliminar Alumno</button></th>
-
+                          <tr *ngFor="let data of entregas;">
+                            <th>{{data.nick}}</th>
+                            <th>{{data.nombre}}</th>
+                            <th>{{data.puntos}}</th>
                           </tr>
                         </tbody>
                       </table>

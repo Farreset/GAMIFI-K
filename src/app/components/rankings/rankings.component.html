@@ -18,7 +18,7 @@
   <!-- Core theme CSS (includes Bootstrap)-->
 
 </head>
-<section class="vh-100 gradient-custom bg-primary">
+<section class="vh-100 gradient-custom bg-danger">
   <div class="container bg-light rounded-bottom ">
     <div class="main-body">
 
@@ -29,38 +29,34 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Advanced Table</h4>
-                    <div class="card-header-form">
-                      <form>
-                        <div class="input-group">
-                          <input type="text" class="form-control" placeholder="Search">
-                          <div class="input-group-btn">
-                            <button class="btn btn-primary">BUSCAR</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
+                    <h4>Ranking</h4>
+                  
                   </div>
                   <div class="card-body p-0">
                     <div class="table-responsive">
                       <table class="table table-striped">
-                        <tr class="mr-">
-                          
-                          <th>Nick</th>
-                          <!-- <th>Nombre y apellido</th>
-         
-                          <th>Fecha nacimiento</th> -->
-                          <th>Puntos</th>
-                        </tr>
-                        <tr>
-                            <td>Carlos</td>
-                          
-                          <td></td>
-                          
-                          <!-- <td>0000-00-00</td> -->
-                          
-                          <!-- <td><a href="#" class="btn btn-secondary">Detail</a></td> -->
-                        
+                        <thead>
+                          <tr class="mt-4">
+                            <th>Nick</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Puntos</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of alumnoArray;">
+                             <th>{{data.nick}}</th>
+                             <th>{{data.fname}}</th>
+                             <th>{{data.lname}}</th>
+
+                            <!-- <th>  <input type="number" id="number" class="form-control w-50" placeholder="{{ alumno.mail }}"
+                            [(ngModel)]="alumno.mail"></th> -->
+                             <!--<th>{{data.puntos}}</th>
+                            <th>{{data.puntos}}</th> -->
+                            <th>{{data.puntos}}</th>
+
+                          </tr>
+                        </tbody>
                       </table>
                     </div>
                   </div>

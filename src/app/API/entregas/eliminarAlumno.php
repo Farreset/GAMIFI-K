@@ -11,16 +11,16 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
   $conexion = conexion(); // CREA LA CONEXION
   $json= file_get_contents('php://input');
-  $unirse=json_decode($json);
-  // echo $unirse; 
+  $delete=json_decode($json);
+  // echo $delete; 
  
 
   // REALIZA LA QUERY A LA DB
-  $registros = mysqli_query($conexion, "INSERT INTO `entregas` (`id_ent`,`nombre`,`id_ranking`) VALUES (NULL,'$unirse->nombre','$unirse->id_ranking')");
+  $registros = mysqli_query($conexion, "DELETE FROM r_alumno  WHERE id_alumno = '$_GET[id_alumno]' AND id_r = '$_GET[id_r]'");
  
-  
+
     if($registros){
-      $resultado = 'OK';  
+      $resultado = 'OK';
     }else{
       $resultado = 'NO';
     }

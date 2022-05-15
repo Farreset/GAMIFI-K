@@ -15,8 +15,7 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
   // REALIZA LA QUERY A LA BD
 
-  $listado = mysqli_query($conexion, "SELECT ent.* FROM entregas ent, ranking r WHERE ent.id_ranking = r.id_r AND r.id_r = '$_GET[id_r]'");
-  //$listado = mysqli_query($conexion, "SELECT name_r FROM ranking WHERE codigo ='$unirse->codigo';");
+  $listado = mysqli_query($conexion, "SELECT a.*, e.* FROM ranking r, r_alumno ra, alumnos a, entregas e WHERE e.id_ranking = r.id_r AND a.id_alumno=ra.id_alumno AND r.id_r = '$_GET[id_r]';");
 
   // while ($resultado = mysqli_fetch_array($listado)) {
   //   $ranking[] = $resultado;

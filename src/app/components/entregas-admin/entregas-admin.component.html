@@ -29,8 +29,8 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-
-                    <h4>Alumnos Asignados</h4>
+   
+                    <h4>Entregas Creadas</h4>
 
                   </div>
                   <div class="card-body p-0">
@@ -38,24 +38,18 @@
                       <table class="table table-striped">
                         <thead>
                           <tr class="mt-4">
-                            <th>Nick</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
+                            <th>Entregas</th>
+                
                             <th>Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let data of alumnoArray;">
-                             <th>{{data.nick}}</th>
-                             <th>{{data.fname}}</th>
-                             <th>{{data.lname}}</th>
-
-                            <!-- <th>  <input type="number" id="number" class="form-control w-50" placeholder="{{ alumno.mail }}"
-                            [(ngModel)]="alumno.mail"></th> -->
-                             <!--<th>{{data.puntos}}</th>
-                            <th>{{data.puntos}}</th> -->
-                            <th><button class="btn btn-danger" (click)="eliminarAlumno(data.id_alumno,data.nick)">Eliminar Alumno</button></th>
-
+                          <tr *ngFor="let data of entregas;">
+                             <th>{{data.nombre}}</th>
+ 
+          
+                             <th><button class="btn btn-danger" (click)="eliminarEntrega(data.id_ent,data.nombre)">Eliminar Entregas</button></th> 
+                        
                           </tr>
                         </tbody>
                       </table>

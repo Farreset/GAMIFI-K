@@ -6,8 +6,6 @@ import { FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ServerRankingService } from 'src/app/server/server-ranking.service';
 
-
-
 @Component({
   selector: 'app-profile-profe',
   templateUrl: './profile-profe.component.html',
@@ -23,7 +21,6 @@ export class ProfileProfeComponent implements OnInit {
   profesorInicio: any;
   formBuilder: any;
   rankings: any;
-  
   constructor(router: Router, route: ActivatedRoute, private service: ServerProfesorService, private serverRankingService: ServerRankingService) {
 
     this.route = route;
@@ -41,8 +38,8 @@ export class ProfileProfeComponent implements OnInit {
     pssw: "",
     psswConf: "",
     avatar: ""
-
   }
+
   modificarProfesor: any = {
     id_profesor: 0,
     nick: '',
@@ -54,19 +51,20 @@ export class ProfileProfeComponent implements OnInit {
     psswConf: "",
     avatar: ""
   }
+
   addRank: any = {
     name_r: "",
     codigo: 0
   }
 
-  ranking: Ranking [] | any = {
+  ranking: Ranking[] | any = {
     name_r: "",
     id_r: 0,
     cont_r: 0,
     codigo: 0
   }
 
-  entrega: Entrega [] | any = {
+  entrega: Entrega[] | any = {
     id: 0,
     nombre: "",
     puntos: 0
@@ -87,30 +85,17 @@ export class ProfileProfeComponent implements OnInit {
       avatar: String(this.route.snapshot.paramMap.get('avatar'))
 
     }
-    this.ranking = {
-      name_r: String(this.route.snapshot.paramMap.get('name_r')),
-      id_r: Number(this.route.snapshot.paramMap.get('id_r')),
-      cont_r: Number(this.route.snapshot.paramMap.get('cont_r')),
-      codigo: Number(this.route.snapshot.paramMap.get('codigo')),
-     
-
-    }
-    console.log(this.ranking.codigo);
 
     //Listar Rankings del ARRAY
+    this.ranking.id_profesor = this.profe.id_profesor;
     this.serverRankingService.listarRankingProfe(this.ranking).subscribe(
-      datos => {
-      this.rankingsArray = datos;
-      console.log(this.rankingsArray);
-      }
-    );
-    this.serverProfesorService.mostrarCodigo(this.ranking.codigo).subscribe(
-      (        datos: any) => {
-      this.ranking.codigo = datos;
-      console.log(this.ranking);
+      (datos: any) => {
+        this.rankingsArray = datos;
+        console.log('ranking profe',datos);
       }
     );
 
+  
   }
 
   onSubmit() {
@@ -118,11 +103,11 @@ export class ProfileProfeComponent implements OnInit {
 
   }
 
-  registrarRanking(){
+  registrarRanking() {
     this.serverProfesorService.insertarProfesor(this.ranking.name_r).subscribe(
-      (         datos: any) => this.rankings = datos
+      (datos: any) => this.rankings = datos
     );
- this.router.navigate(['login']);
+    this.router.navigate(['login']);
   }
   get data() { return this.ranking.controls; }
 
@@ -130,9 +115,14 @@ export class ProfileProfeComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['']);
   }
+
   editar() {
     this.router.navigate(['editar-profe', this.profe]);
   }
+
+  verMiembros(){
+    this.router.navigate(['ranking']);
+  };
 
   async editarImagen() {
 
@@ -198,11 +188,11 @@ export class ProfileProfeComponent implements OnInit {
     })
     if (formValues) {
       if (formValues[0] != this.profe.pssw) {
-        console.log('contraseña actual no coincide');
+        console.log('contrasenia actual no coinside');
 
       }
       else if (formValues[1] != formValues[2]) {
-        console.log('contraseña nueva no coincide');
+        console.log('contrasenia nueva no coinside');
 
       }
       else {
@@ -211,7 +201,7 @@ export class ProfileProfeComponent implements OnInit {
           (datos) => {
             if (datos == 'OK') {
               console.log('ok');
-            }else{
+            } else {
               console.log('nooo');
             }
           }
@@ -224,132 +214,117 @@ export class ProfileProfeComponent implements OnInit {
 
     const { value: name_r } = await Swal.fire({
 
-        title: 'Asigne un nombre al ranking',
-        input: 'text',
-        text: ''
-
-      })
-      if(name_r){
-        let codigo = this.randomCodigo();
-        this.service.anadirRanking(name_r, Number(codigo)).subscribe(
-          datos => {
-            if (datos == 'OK') {
-              Swal.fire(
-                'Correcto',
-              )
-            } else {
-              Swal.fire(
-                'Error',
-              )
-            }
-          }
-          )}
-      }
-    
-  async anadirEntrega() {
-
-      const { value: nombre } = await Swal.fire({
-  
-          title: 'Asigne un nombre a la entrega',
-          input: 'text',
-          text: ''
-  
-        })
-        if(nombre){
-        
-          this.service.anadirEntrega(nombre).subscribe(
-            datos => {
-              if (datos == 'OK') {
-                console.log(nombre);
-                Swal.fire(
-                  'Correcto',
-                )
-              } else {
-                Swal.fire(
-                  'Error',
-                )
-              }
-            }
-            )}
-        }
-
-
-randomCodigo() {
-  let numero = '';
-  const characters = '0123456789';
-  const charactersLength = characters.length;
-  for (let i = 0; i < charactersLength; i++) {
-    numero += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  this.ranking.codigo = numero;
-  return numero;
-
-}
-  mostrar_codigo(name_r: string){
-    console.log(this.ranking.codigo);
-  }
-
-<<<<<<< Updated upstream
- codigoRanking(id_r: number) {
-  let numero = '';
-  const characters = '0123456789';
-  const charactersLength = characters.length;
-  for (let i = 0; i < 5; i++) {
-    numero += characters.charAt(Math.floor(Math.random() * charactersLength));
-=======
-  async eliminarRanking(name_r:string){
-    const { value: mensaje } = await Swal.fire({
-      title: 'Estas seguro de eliminar el ranking '+name_r+'?',
-      text: "Para confirmar, escriba eliminar",
+      title: 'Asigne un nombre al ranking',
       input: 'text',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar'
+      text: ''
+
     })
-    if(mensaje=="eliminar"){
-      this.serverProfesorService.deleteRanking(this.ranking.id_r,this.profe.id_profesor).subscribe(
-        (        datos: string) => {
-          if (datos == 'OK'){
+    if (name_r) {
+      let codigo = this.randomCodigo();
+      console.log(name_r);
+      console.log(codigo);
+      this.service.anadirRanking(name_r, Number(codigo), this.profe.id_profesor).subscribe(
+        datos => {
+          if (datos == 'OK') {
             Swal.fire(
               'Correcto',
-              'Eliminado correctamente.',
-              'success'
             )
-          }else if (datos == 'No esta'){
+          } else {
             Swal.fire(
               'Error',
-              'Este ranking no existe.',
-              'error'
-            )
-            }
-      }
-    );
-    }else{
-            Swal.fire(
-              'Error',
-              'No se ha podido eliminar.',
-              'error'
             )
           }
->>>>>>> Stashed changes
-  }
-
-  console.log(Number(numero), id_r);
-  
-  this.service.actualizarCodigo(Number(numero), id_r).subscribe(
-    (datos: any) => {
-      if (datos == 'OK') {
-        console.log('ok');
-        
-      }else{
-        console.log('nooo');
-      }
-      window.location.reload();
+        }
+      )
     }
-  );
-
   }
-}
 
+  async anadirEntrega(id: number) {
+
+    const { value: nombre } = await Swal.fire({
+
+      title: 'Asigne un nombre a la entrega',
+      input: 'text',
+      text: ''
+
+    })
+    if (nombre) {
+      console.log(id);
+      this.service.anadirEntrega(nombre, id).subscribe(
+
+        datos => {
+          if (datos == 'OK') {
+            console.log(nombre);
+
+            Swal.fire(
+              'Correcto',
+            )
+          } else {
+            Swal.fire(
+              'Error',
+            )
+          }
+        }
+      )
+    }
+  }
+
+
+    randomCodigo() {
+      let numero = '';
+      const characters = '0123456789';
+      const charactersLength = characters.length;
+      for (let i = 0; i < charactersLength; i++) {
+        numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      this.ranking.codigo = numero;
+      return numero;
+
+    }
+
+    mostrar_codigo(name_r: string){
+      console.log(this.ranking.codigo);
+    }
+
+   codigoRanking(id_r: number) {
+    let numero = '';
+    const characters = '0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < 5; i++) {
+      numero += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    console.log(Number(numero), id_r);
+
+    this.service.actualizarCodigo(Number(numero), id_r).subscribe(
+      (datos: any) => {
+        if (datos == 'OK') {
+          console.log('ok');
+
+        }else{
+          console.log('nooo');
+        }
+        window.location.reload();
+      }
+    );
+
+    }
+
+  verEntrega(id_r: number) {
+    console.log(id_r);
+
+    this.router.navigate(['adminEnt', id_r, this.profe.id_profesor]);
+  }
+
+  puntuar(id_r: number) {
+    console.log(id_r);
+    this.router.navigate(['punt', id_r]);
+  }
+
+  verAlumno(id_r: number) {
+    console.log(id_r);
+    this.router.navigate(['adminRank', id_r]);
+  }
+
+
+}
